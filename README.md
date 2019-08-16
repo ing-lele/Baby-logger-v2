@@ -143,3 +143,5 @@ and enable autorun with
 sudo systemctl enable button.service
 ```
 and you're done. Hopefully nothing went horribly wrong in the process. And if it did, a quick Google was able to save you.
+
+Almost forgot. If you do want to use a NeoPixel to give some visual feedback on which exact button was pushed - you'll have to [install Adafruit python libraries for it](https://learn.adafruit.com/adafruit-neopixel-uberguide/python-circuitpython) and uncomment the relevant lines in the python script. We found it quite useful.
