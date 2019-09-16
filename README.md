@@ -3,7 +3,7 @@ Logs bodily functions and displays them on a webpage.
 
 The project was forked from [tenmonkeys' Babby-logger project](https://github.com/tenmonkeys/Baby-logger).
 
-**Hardware**
+##Hardware##
 
 * 1 - [Pi Zero W](https://www.amazon.com/Raspberry-Pi-Zero-Wireless-model/dp/B06XFZC3BX/ref=as_li_ss_tl?keywords=Pi+Zero+W&qid=1568671481&sr=8-3&linkCode=ll1&tag=neoduxcom-20&linkId=57dd1953d211a431ff6ac29425d3023c&language=en_US)
 * 1 - [8+Gb microSD card](https://www.amazon.com/Sandisk-Ultra-Micro-UHS-I-Adapter/dp/B073K14CVB/ref=as_li_ss_tl?ie=UTF8&linkCode=ll1&tag=neoduxcom-20&linkId=58785ae4e36c928c594fe4e413d5cd1a&language=en_US)
@@ -21,7 +21,7 @@ I connected the buttons to pins 13, 19, 26, and a common ground using jumper wir
 
 I configured my pi to run headless since it does not require any rich, graphical user feedback. I installed a red 5mm LED on pin 16 with a 220-ohm resistor inline to act as a status light. It gives the user feedback as to which event was logged and could be setup to alert the user if there was an error. I did all my setup through ssh over a wireless connection. There are plenty of online tutorials for how to accomplish this by putting files in the /boot directory on the SD card.
 
-**Updating OS and installing necessary packages.**
+##Updating OS and installing necessary packages##
 
 Run
 ```
@@ -39,7 +39,7 @@ Using PIP, install the Python 3 MySQL library.
 sudo pip3 install pymysql
 ```
 
-**Creating a MySQL database.**
+##Creating a MySQL database##
 
 Log into your MySQL dashboard, then create a database with your user interface or issue the SQL command below.
 ```
@@ -64,7 +64,7 @@ quit
 ```
 Now you have a MySQL database setup, all that's left is to populate it.
 
-**Setting up the python script.**
+##Setting up the Python Script##
 
 Now either copy the python script to your Pi, or create one and copypaste the code by hand. Create a nice and neat folder for the project (who knows, maybe you'll expand it later on).
 ```
@@ -87,7 +87,7 @@ Push any of your buttons, if you don't get any error messages - CTRL-C to end th
 Then open up your MySQL database again and check if anything has been written to the database.
 Hopefully it will now show you the date, time, and which button has been pressed. Now you can close the MySQL interface and move on to setting up the webpage.
 
-**Webpage.**
+##Webpage##
 
 On your webhost, create a subdirectory for your project. 
 ```
@@ -111,7 +111,7 @@ At this point you should be greeted with a webpage with a table whenever you go 
 
 If everything is working well, there's one more thing to do.
 
-**Making sure it runs in the background on Pi startup**
+##Autorun on Pi startup##
 
 If you want to have it automatically run itself whenever your Pi starts up, you can create a SystemD service file.
 Create an empty file with your editor of choice:
