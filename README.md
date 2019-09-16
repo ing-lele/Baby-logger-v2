@@ -1,7 +1,9 @@
 # Baby-logger
-Logs bodily functions and displays them on a webpage.
+Logs baby's bodily functions and displays them on a webpage. Many pediatricians recommend tracking your baby's feeding patterns, wet and dirty diapers to help know if he/she are eating enough. This is valuable information if there is a problem early on. The doctor can use this information to help with a diagnosis. Some parents track diapers and feedings for the first year, some parents do not track anything. There are several low tech ways to do this and now there are apps than help with this. For the techy/geek parents, there are projects like this! :sunglasses:
 
-The project was forked from [tenmonkeys' Babby-logger project](https://github.com/tenmonkeys/Baby-logger).
+Pictures of my first build are posted on Imgur: https://imgur.com/gallery/4pIUqwL
+
+[The project was forked from [tenmonkeys' Babby-logger project](https://github.com/tenmonkeys/Baby-logger).]
 
 ## Hardware
 
