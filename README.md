@@ -94,6 +94,7 @@ Hopefully it will now show you the date, time, and which button has been pressed
 On your webhost, create a subdirectory for your project. 
 ```
 mkdir babylogger
+cd babylogger
 ```
 Now you can either copy the index.php page directly into the folder or with your editor of choice manually copy-paste it in.
 ```
@@ -128,7 +129,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /home/pi/Logger/buttons_script.py
+ExecStart=/usr/bin/python3 /home/pi/Logger/babylogger.py
 User=pi
 Restart=always
 
