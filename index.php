@@ -1,14 +1,14 @@
 <?php
 // Settings
-// host, user and password settings
-$host = "mysql.webserver.com";
-$user = "logger";
-$password = "password";
-$database = "babylogger";
+// host, user, and password settings
+$db_host = "mysql.webserver.com";
+$db_user = "logger";
+$db_pass = "password";
+$db_name = "babylogger";
 
 // Make connection to database
-$connectdb = mysqli_connect($host,$user,$password)or die ("Cannot reach database");
-mysqli_select_db($connectdb,$database) or die ("Cannot select database");
+$connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("Cannot reach database");
+mysqli_select_db($connectdb,$db_name) or die ("Cannot select database");
 
 // show queries from the current date and the day before
 if(!isset($_POST['days'])){
@@ -23,7 +23,7 @@ if(isset($_POST['type']) && in_array($_POST['type'], ["pee", "poo", "fed"])){
 	$sql = "SELECT * FROM babylogger WHERE tdate >= CURDATE() - INTERVAL ".($days-1)." day ORDER BY tdate DESC, ttime DESC;";
 }
 
-$results = mysqli_query($connectdb,$sql);
+$results = mysqli_query($connectdb, $sql);
 ?>
 
 <html>
@@ -64,10 +64,10 @@ td{
 <form method='POST'>
 <center>
 <?php
-	if ($days > 1)
-		print "Baby's vital functions for the last $days days.";
-	else
-		print "Baby's vital functions for the last $days day.";
+if ($days > 1)
+    print "Baby's vital functions for the last $days days.";
+else
+    print "Baby's vital functions for the last $days day.";
 ?>
 <hr width='200' size=1>
 Show 
