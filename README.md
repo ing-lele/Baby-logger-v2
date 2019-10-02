@@ -163,3 +163,15 @@ sudo journalctl -u babylogger.status
 ```
 
 This should have you up and running. Issue a graceful reboot and your system should come back up with your ```babylogger``` service running
+
+## Read-only
+
+It might be a good idea to also set your Pi to be read-only. So long as you're logging all data elsewhere, there isn't much (anything) *on* the Pi that needs to be stored. Making your Pi read-only helps ensure you don't have any SD card corruption or OS problems from unexpected shutdowns. I used the Adafruit guide for setting up a [Read-only Raspberry Pi](https://learn.adafruit.com/read-only-raspberry-pi/).  
+I used GPIO 21 as my read/write jumper pin setting - this is why I left GPIO21 alone when assigning my pins before. *Be sure to give yourself a read/write jumper option!* Later on, you may want to go back and alter your MySQL server, password, or an LED blinking pattern or whatever. If you don't give yourself a way to still write to the SD card, you're painting yourself in a corner. _Create a read/write option._
+
+I ran into one hiccup with this Adafruit setup. For some reason the script they provide goofed up the ntp daemon so my Pi wasn't pulling the correct time. (Glad I have the read/write option.) I ran the following command and that seemed to restart my ntp client.
+```
+sudo \etc\init.d\ntp start
+```
+
+Check your OS time with the ```date``` command. If the time is off, the time and date of an event your logging will also be off.
