@@ -174,4 +174,4 @@ I ran into one hiccup with this Adafruit setup. For some reason the script they 
 sudo \etc\init.d\ntp start
 ```
 
-Check your OS time with the ```date``` command. If the time is off, the time and date of an event your logging will also be off.
+Check your OS time with the ```date``` command. If the time is off, the time and date of an event you're logging will also be off.
