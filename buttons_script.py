@@ -1,3 +1,12 @@
+### IngLele Fork at 26 Jun 2022 from https://github.com/tommygober/Baby-logger
+# =========================================================
+# Changes: 
+# * Updated 3 colored switches
+# * Use RGB LED for confirmation
+# * Record ON / OFF time for the switches
+# * [TO DO] Pi Camera v1.1 screenshot during every switch
+# =========================================================
+
 #! /usr/bin/python3
 #IMPORT STATEMENTS
 import RPi.GPIO as GPIO
