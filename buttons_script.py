@@ -9,6 +9,7 @@
 
 #! /usr/bin/python3
 #IMPORT STATEMENTS
+from turtle import end_fill
 import RPi.GPIO as GPIO
 import os
 import sys
@@ -20,10 +21,13 @@ import MySQLdb
 
 #----------------------------------------------------------
 #CONFIGURATION SETTINGS, edit these to reflect your project
-led_pin = 16
-pee_pin = 13
-poo_pin = 19
-fed_pin = 26
+pee_led_pin = 12        #Green LED
+fed_led_pin = 16        #Blue LED
+poo_led_pin = 20        #Red LED
+
+pee_switch_pin = 13     #Green LED
+fed_switch_pin = 19     #Blue LED
+poo_switch_pin = 26     #Red LED
 
 db_host = "mysql.webserver.com"
 db_user = "logger"
@@ -37,109 +41,85 @@ curs = db.cursor()
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(pee_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(poo_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(fed_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(led_pin, GPIO.OUT)
+#Setup Switch - PullDown configuration
+# Switch OFF = GND  
+# Switch ON = +3.3V
+# Info https://electrosome.com/using-switch-raspberry-pi/
+GPIO.setup(pee_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+GPIO.setup(fed_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(poo_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+#Setup LED
+GPIO.setup(pee_led_pin, GPIO.OUT)
+GPIO.setup(fed_led_pin, GPIO.OUT)
+GPIO.setup(poo_led_pin, GPIO.OUT)
 
 #----------------------------------------------------------
+# Control RGB LED 
 
-def blink(sec):
-    p = GPIO.PWM(led_pin, 1000)
-    p.start(50)
-    time.sleep(sec)
-    p.stop()
-    time.sleep(.1)
-    
-#---------------------------------------------------------
-
-def fade(dir=1):
-    p = GPIO.PWM(led_pin, 1000)
-    p.start(100)
-    if (dir > 0):
-        for duty in range(75, -1, -3):
-            p.ChangeDutyCycle(duty)
-            time.sleep(.05)
+def show_led(input_type): #### --- TO BE UPDATED
+    if (input_type == pee_led_pin):
+        GPIO.output(pee_led_pin, GPIO.LOW)
+    elif (input_type == fed_led_pin):
+        GPIO.output(fed_led_pin, GPIO.LOW)
+    elif (input_type == poo_led_pin):
+        GPIO.output(poo_led_pin, GPIO.LOW)
     else:
-        for duty in range(0, 75, 3):
-            p.ChangeDutyCycle(duty)
-            time.sleep(.05)
+        #Flash Error!
+        GPIO.output(pee_led_pin, GPIO.LOW)
+        GPIO.output(fed_led_pin, GPIO.LOW)
+        GPIO.output(poo_led_pin, GPIO.LOW)  
 
-    p.stop()
+    time.sleep(.1)
+
     
 #---------------------------------------------------------
 
 time.sleep(1.0)
-#STATUS LED:
-#blinks .-. = R in Morse Code ("Ready")
-blink(.1)
-blink(.3)
-blink(.1)
 print("Baby Logger running...")
     
 while True:
-    input_state1 = GPIO.input(13) #PEE
-    input_state2 = GPIO.input(19) #POO
-    input_state3 = GPIO.input(26) #FED
+    input_state_pee = GPIO.input(pee_switch_pin) #PEE
+    input_state_fed = GPIO.input(fed_switch_pin) #FED
+    input_state_poo = GPIO.input(poo_switch_pin) #POO
 
-#CHECK FOR SHUTDOWN REQ - press all three buttons to trigger clean shutdown
-    if ((input_state1 == False) and (input_state2 == False) and (input_state3 == False)):
-        #STATUS LED:
-        # blinks for 5 seconds then stays on. Turns off when shutdown is complete.
-        blink(1)
-        blink(1)
-        blink(1)
-        blink(1)
-        blink(1)
-        GPIO.output(led_pin, GPIO.HIGH)
-        os.system("sudo shutdown -h now")
+    curr_date = datetime.datetime.now().strftime("%Y-%m-%d")
+    curr_time = datetime.datetime.now().strftime("%H:%M:%S")
+
 #PEE
-    elif input_state1 == False:
-        curr_date = datetime.datetime.now().strftime("%Y-%m-%d")
-        curr_time = datetime.datetime.now().strftime("%H:%M:%S")
+    if input_state_pee == GPIO.HIGH:
+
         print(curr_date + " " + curr_time + " - Event logged: Pee")
         try:
             curs.execute("""INSERT INTO babylogger (tdate, ttime, type) VALUES (%s, %s, 'pee')""", (curr_date, curr_time))
             #STATUS LED:
-            # blinks .--. = P in Morse Code ("Pee")
-            blink(.1)
-            blink(.3)
-            blink(.3)
-            blink(.1)
+            show_led(pee_led_pin)
             db.commit()
         except Exception as ex:
             print(ex)
-#POO
-    elif input_state2 == False:
-        curr_date = datetime.datetime.now().strftime("%Y-%m-%d")
-        curr_time = datetime.datetime.now().strftime("%H:%M:%S")
-        print(curr_date + " " + curr_time + " - Event logged: Poo")
-        try:
-            curs.execute("""INSERT INTO babylogger (tdate, ttime, type) VALUES (%s, %s, 'poo')""", (curr_date, curr_time))
-            #STATUS LED:
-            # blinks --- = O in Morse Code ("pOop")
-            blink(.3)
-            blink(.3)
-            blink(.3)
-            db.commit()
-        except:
-            print("Error: the database is being rolled back")
+            print("Error: the database is being rolled back --- PEE @ curr_date, curr_time ")
 
 #FED
-    elif input_state3 == False:
-        curr_date = datetime.datetime.now().strftime("%Y-%m-%d")
-        curr_time = datetime.datetime.now().strftime("%H:%M:%S")
+    elif input_state3 == GPIO.HIGH:
         print(curr_date + " " + curr_time + " - Event logged: Fed")
         try:
             curs.execute("""INSERT INTO babylogger (tdate, ttime, type) VALUES (%s, %s, 'fed')""", (curr_date, curr_time))
             #STATUS LED:
-            # fades to bright then back to dim ("F for fade?")
-            fade(-1)
-            fade(1)
+            show_led(fed_led_pin)
+        except:
+            print("Error: the database is being rolled back --- FED @ curr_date, curr_time ")
+            sys.exit(0)
+
+#POO
+    elif input_state2 == GPIO.HIGH:
+        print(curr_date + " " + curr_time + " - Event logged: Poo")
+        try:
+            curs.execute("""INSERT INTO babylogger (tdate, ttime, type) VALUES (%s, %s, 'poo')""", (curr_date, curr_time))
+            show_led(poo_led_pin)   #Show LED
             db.commit()
         except:
-            print("Error: the database is being rolled back")
-            sys.exit(0)
+            print("Error: the database is being rolled back --- FED @ curr_date, curr_time ")
+
+
 
     time.sleep(0.1)
 db.close()
