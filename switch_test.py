@@ -1,6 +1,7 @@
 print('Import library')
 import RPi.GPIO as GPIO          #Import GPIO library
 import time                      #Import time library
+import datetime
 
 #----------------------------------------------------------
 #CONFIGURATION SETTINGS
