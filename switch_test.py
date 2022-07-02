@@ -21,7 +21,7 @@ poo_switch_pin = 4     #Red Switch
 #SETUP GPIO
 print('setup GPIO')
 
-GPIO.cleanup()
+GPIO.cleanup()  #cleanup any previous config 
 #GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 # Setup Switch - PullUp configuration
@@ -41,6 +41,10 @@ GPIO.setup(poo_led_pin, GPIO.OUT)
 print('Test Switch')
 
 while True:
+    print('GPIO.input(pee_switch_pin)')
+    print('GPIO.input(fee_switch_pin)')
+    print('GPIO.input(poo_switch_pin)')
+    
     input_state_pee = GPIO.input(pee_switch_pin) #PEE
     input_state_fed = GPIO.input(fed_switch_pin) #FED
     input_state_poo = GPIO.input(poo_switch_pin) #POO
