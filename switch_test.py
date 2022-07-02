@@ -41,9 +41,9 @@ GPIO.setup(poo_led_pin, GPIO.OUT)
 print('Test Switch')
 
 while True:
-    print('GPIO.input(pee_switch_pin)')
-    print('GPIO.input(fee_switch_pin)')
-    print('GPIO.input(poo_switch_pin)')
+    print('Pee switch: ',GPIO.input(pee_switch_pin))
+    print('Fee switch: ',GPIO.input(fee_switch_pin))
+    print('Poo switch: ',GPIO.input(poo_switch_pin))
     
     input_state_pee = GPIO.input(pee_switch_pin) #PEE
     input_state_fed = GPIO.input(fed_switch_pin) #FED
