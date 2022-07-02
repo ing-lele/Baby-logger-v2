@@ -22,12 +22,13 @@ import MySQLdb
 #----------------------------------------------------------
 #CONFIGURATION SETTINGS, edit these to reflect your project
 pee_led_pin = 12        #Green LED
+#             34        #GND
 fed_led_pin = 16        #Blue LED
 poo_led_pin = 20        #Red LED
 
-pee_switch_pin = 13     #Green LED
-fed_switch_pin = 19     #Blue LED
-poo_switch_pin = 26     #Red LED
+pee_switch_pin = 2     #Green Switch
+fed_switch_pin = 3     #Blue Switch
+poo_switch_pin = 4     #Red Switch
 
 db_host = "mysql.webserver.com"
 db_user = "logger"
@@ -41,13 +42,13 @@ curs = db.cursor()
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-#Setup Switch - PullDown configuration
+# Setup Switch - PullUp configuration
 # Switch OFF = GND  
 # Switch ON = +3.3V
 # Info https://electrosome.com/using-switch-raspberry-pi/
-GPIO.setup(pee_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
-GPIO.setup(fed_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(poo_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(pee_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
+GPIO.setup(fed_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(poo_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 #Setup LED
 GPIO.setup(pee_led_pin, GPIO.OUT)
 GPIO.setup(fed_led_pin, GPIO.OUT)
@@ -86,7 +87,7 @@ while True:
     curr_time = datetime.datetime.now().strftime("%H:%M:%S")
 
 #PEE
-    if input_state_pee == GPIO.HIGH:
+    if input_state_pee == GPIO.LOW:
 
         print(curr_date + " " + curr_time + " - Event logged: Pee")
         try:
@@ -97,9 +98,9 @@ while True:
         except Exception as ex:
             print(ex)
             print("Error: the database is being rolled back --- PEE @ curr_date, curr_time ")
-
+            sys.exit(0)
 #FED
-    elif input_state3 == GPIO.HIGH:
+    elif input_state3 == GPIO.LOW:
         print(curr_date + " " + curr_time + " - Event logged: Fed")
         try:
             curs.execute("""INSERT INTO babylogger (tdate, ttime, type) VALUES (%s, %s, 'fed')""", (curr_date, curr_time))
@@ -110,7 +111,7 @@ while True:
             sys.exit(0)
 
 #POO
-    elif input_state2 == GPIO.HIGH:
+    elif input_state2 == GPIO.LOW:
         print(curr_date + " " + curr_time + " - Event logged: Poo")
         try:
             curs.execute("""INSERT INTO babylogger (tdate, ttime, type) VALUES (%s, %s, 'poo')""", (curr_date, curr_time))
@@ -118,7 +119,7 @@ while True:
             db.commit()
         except:
             print("Error: the database is being rolled back --- FED @ curr_date, curr_time ")
-
+            sys.exit(0)
 
 
     time.sleep(0.1)
