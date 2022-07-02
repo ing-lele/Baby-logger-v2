@@ -39,6 +39,12 @@ GPIO.setup(poo_led_pin, GPIO.OUT)
 #----------------------------------------------------------
 # Test LED
 
+# clean up
+GPIO.output(pee_led_pin, GPIO.LOW)
+GPIO.output(fed_led_pin, GPIO.LOW)
+GPIO.output(poo_led_pin, GPIO.LOW)
+
+# test on
 GPIO.output(pee_led_pin, GPIO.HIGH)
 time.sleep(3)
 GPIO.output(fed_led_pin, GPIO.HIGH)
@@ -46,6 +52,7 @@ time.sleep(3)
 GPIO.output(poo_led_pin, GPIO.HIGH)
 time.sleep(3)
 
+# clean up
 GPIO.output(pee_led_pin, GPIO.LOW)
 GPIO.output(fed_led_pin, GPIO.LOW)
 GPIO.output(poo_led_pin, GPIO.LOW)
