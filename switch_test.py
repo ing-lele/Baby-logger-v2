@@ -37,6 +37,20 @@ GPIO.setup(fed_led_pin, GPIO.OUT)
 GPIO.setup(poo_led_pin, GPIO.OUT)
 
 #----------------------------------------------------------
+# Test LED
+
+GPIO.output(pee_led_pin, GPIO.HIGH)
+time.sleep(3)
+GPIO.output(fed_led_pin, GPIO.HIGH)
+time.sleep(3)
+GPIO.output(poo_led_pin, GPIO.HIGH)
+time.sleep(3)
+
+GPIO.output(pee_led_pin, GPIO.LOW)
+GPIO.output(pee_led_pin, GPIO.LOW)
+GPIO.output(pee_led_pin, GPIO.LOW)
+
+#----------------------------------------------------------
 # Test Switch -> LED
 print('Test Switch')
 
@@ -65,5 +79,8 @@ while True:
         GPIO.output(poo_led_pin, GPIO.HIGH)
 
     time.sleep(0.3)           #Delay of 1s
+
+
+
 
 GPIO.cleanup()
