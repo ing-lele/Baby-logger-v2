@@ -47,8 +47,8 @@ GPIO.output(poo_led_pin, GPIO.HIGH)
 time.sleep(3)
 
 GPIO.output(pee_led_pin, GPIO.LOW)
-GPIO.output(pee_led_pin, GPIO.LOW)
-GPIO.output(pee_led_pin, GPIO.LOW)
+GPIO.output(fed_led_pin, GPIO.LOW)
+GPIO.output(poo_led_pin, GPIO.LOW)
 
 #----------------------------------------------------------
 # Test Switch -> LED
@@ -67,15 +67,15 @@ while True:
     curr_time = datetime.datetime.now().strftime("%H:%M:%S")
 
     if (input_state_pee == GPIO.LOW):
-        print('PEE Switch - curr_date @ curr_time')     #Print 'PEE Switch'
+        print('PEE Switch - ', curr_date , curr_time)     #Print 'PEE Switch'
         GPIO.output(pee_led_pin, GPIO.HIGH)        
 
     elif (input_state_fed == GPIO.LOW):
-        print('FED Switch - curr_date @ curr_time')     #Print 'FED Switch'
+        print('FED Switch - ', curr_date, curr_time)     #Print 'FED Switch'
         GPIO.output(fed_led_pin, GPIO.HIGH)
 
     elif (input_state_poo == GPIO.LOW):
-        print('POO Switch - curr_date @ curr_time')     #Print 'POO Switch'
+        print('POO Switch - ', curr_date, curr_time)     #Print 'POO Switch'
         GPIO.output(poo_led_pin, GPIO.HIGH)
 
     time.sleep(0.3)           #Delay of 1s
