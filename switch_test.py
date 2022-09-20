@@ -7,10 +7,10 @@ import datetime
 #CONFIGURATION SETTINGS (via GPIO number)
 print('Config Settings')
 
-pee_led_pin = 12        #Green LED
+pee_led_pin = 20        #Green LED
 #         PIN#34        #GND
 fed_led_pin = 16        #Blue LED
-poo_led_pin = 20        #Red LED
+poo_led_pin = 12        #Red LED
 
 #            PIN#9      GND
 pee_switch_pin = 17     #Green Switch
