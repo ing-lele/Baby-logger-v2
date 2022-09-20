@@ -50,7 +50,7 @@ GPIO.output(fed_led_pin, GPIO.LOW)
 GPIO.output(poo_led_pin, GPIO.LOW)
 
 # test PEE
-print('Test RED')
+print('Test GREEN')
 GPIO.output(pee_led_pin, GPIO.HIGH)
 time.sleep(5)
 GPIO.output(pee_led_pin, GPIO.LOW)
@@ -62,7 +62,7 @@ time.sleep(5)
 GPIO.output(fed_led_pin, GPIO.LOW)
 
 # test POO
-print('Test GREEN')
+print('Test RED')
 GPIO.output(poo_led_pin, GPIO.HIGH)
 time.sleep(5)
 GPIO.output(poo_led_pin, GPIO.LOW)
