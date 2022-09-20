@@ -24,13 +24,13 @@ print('setup GPIO')
 GPIO.cleanup()  #cleanup any previous config 
 #GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-# Setup Switch - PullUp configuration
-# Switch OFF = +3.3V  
-# Switch ON = GND
+# Setup Switch - PullDown configuration
+# Switch Closed = +3.3V (VCC)
+# Switch Open = Float (GND via PullDown)
 # Info https://electrosome.com/using-switch-raspberry-pi/
-GPIO.setup(pee_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
-GPIO.setup(fed_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(poo_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(pee_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+GPIO.setup(fed_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(poo_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 #Setup LED
 GPIO.setup(pee_led_pin, GPIO.OUT)
 GPIO.setup(fed_led_pin, GPIO.OUT)
