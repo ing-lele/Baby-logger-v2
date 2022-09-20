@@ -12,11 +12,11 @@ pee_led_pin = 12        #Green LED
 fed_led_pin = 16        #Blue LED
 poo_led_pin = 20        #Red LED
 
-#            PIN#1      VCC +3.3V
-pee_switch_pin = 2      #Green Switch
-fed_switch_pin = 3      #Blue Switch
-poo_switch_pin = 4      #Red Switch
 #            PIN#9      GND
+pee_switch_pin = 17     #Green Switch
+fed_switch_pin = 27     #Blue Switch
+poo_switch_pin = 22     #Red Switch
+#            PIN#17     VCC +3.3V
 
 #----------------------------------------------------------
 #SETUP GPIO
