@@ -85,18 +85,23 @@ GPIO.output(poo_led_pin, GPIO.LOW)
 #----------------------------------------------------------
 # FUNCTION: Flash RGB LED
 def flash_led(category, state):
-    if(debug_on): print("DEBUG - Flash RGB LED - Category: ", category.upper(), " State:", state.upper())    # DEBUG - Print Flash LED
+    if(debug_on): print("DEBUG - Flash RGB LED - Category:", category.upper(), "-", state.upper())    # DEBUG - Print Flash LED
 
     # pee
-    if (category=="pee", state=="start"): GPIO.output(pee_led_pin, GPIO.HIGH)
-    elif (category=="pee", state=="stop"): GPIO.output(pee_led_pin, GPIO.LOW)
+    if (category=="pee" and state=="start"):
+        GPIO.output(pee_led_pin, GPIO.HIGH)
+    elif (category=="pee" and state=="stop"):
+        GPIO.output(pee_led_pin, GPIO.LOW)
     # fed
-    elif (category=="fed", state=="start"): GPIO.output(fed_led_pin, GPIO.HIGH)
-    elif (category=="fed", state=="stop"): GPIO.output(fed_led_pin, GPIO.LOW)
+    elif (category=="fed" and state=="start"):
+        GPIO.output(fed_led_pin, GPIO.HIGH)
+    elif (category=="fed" and state=="stop"):
+        GPIO.output(fed_led_pin, GPIO.LOW)
     #poo
-    elif (category=="poo", state=="start"): GPIO.output(poo_led_pin, GPIO.HIGH)
-    elif (category=="poo", state=="stop"): GPIO.output(poo_led_pin, GPIO.LOW)
-
+    elif (category=="poo" and state=="start"):
+        GPIO.output(poo_led_pin, GPIO.HIGH)
+    elif (category=="poo" and state=="stop"):
+        GPIO.output(poo_led_pin, GPIO.LOW)
     else:
         #Flash loop for startup / error / other
         n = 0
@@ -129,9 +134,9 @@ def write_event(category, state):
     try:
         curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES (%s,%s)""", (category, state))
         db.commit()
-        flash_led(category, state)
+        flash_led(category.lower(), state.lower())
     except Exception as ex:
-        print("ERROR - Database is being rolled back --- Category:", category.upper(), "State:", state.upper(), "@", now)
+        print("ERROR - Database is being rolled back --- Category:", category.upper(), "-", state.upper(), "at", now)
         print(ex)
         #Flash LED
         flash_led("Error writing DB","")
@@ -154,42 +159,42 @@ while True:
     #---------------------------------------------------------
     #PEE - START
     if (GPIO.input(pee_switch_pin) == GPIO.LOW & (start_state_pee == 0)):
-        print("LOG - Event logged - PEE - Start at ", now)
+        print("LOG - Event logged - PEE - Start at", now)
         start_state_pee = 1         # Update Start State
         write_event("pee","start")  # Write DB + Flash LED
         
     #---------------------------------------------------------
     #PEE - Stop
     elif (GPIO.input(pee_switch_pin) == GPIO.HIGH & (start_state_pee == 1)):
-        print("LOG - Event logged: PEE - Stop at ", now)
+        print("LOG - Event logged: PEE - Stop at", now)
         start_state_pee = 0         # Start flag - OFF
         write_event("pee","stop")   # Write DB + Flash LED
 
     #---------------------------------------------------------
     #FED - START
     if (GPIO.input(fed_switch_pin) == GPIO.LOW & (start_state_fed == 0)):
-        print("LOG - Event logged: FED - Start at ", now)
+        print("LOG - Event logged: FED - Start at", now)
         start_state_fed = 1         # Update Start State
         write_event("fed","start")  # Write DB + Flash LED
 
     #---------------------------------------------------------
     #FED - STOP
     if (GPIO.input(fed_switch_pin) == GPIO.HIGH & (start_state_fed == 1)):
-        print("LOG - Event logged: FED - Stop at ", now)
+        print("LOG - Event logged: FED - Stop at", now)
         start_state_fed = 0         # Update Start State
         write_event("fed","stop")   # Write DB + Flash LED
 
     #---------------------------------------------------------
     #POO - START
     if (GPIO.input(poo_switch_pin) == GPIO.LOW & (start_state_poo == 0)):
-        print("LOG - Event logged: POO - Start at ", now)
+        print("LOG - Event logged: POO - Start at", now)
         start_state_poo = 1         # Update Start State
         write_event("poo","start")  # Write DB + Flash LED
 
     #---------------------------------------------------------
     #POO - STOP
     if (GPIO.input(poo_switch_pin) == GPIO.HIGH & (start_state_poo == 1)):
-        print("LOG - Event logged: POO - Stop at ", now)
+        print("LOG - Event logged: POO - Stop at", now)
         start_state_poo = 0        # Update Start State
         write_event("poo","stop")  # Write DB + Flash LED
 
