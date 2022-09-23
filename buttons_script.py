@@ -15,10 +15,11 @@ import RPi.GPIO as GPIO
 import os
 import sys
 import time
-import pymysql
 import datetime
+import pymysql
 pymysql.install_as_MySQLdb()
 import MySQLdb
+#import mariadb
 import mysql_variables          #Import MySQL variable
 
 #----------------------------------------------------------
@@ -44,8 +45,13 @@ poo_switch_pin = 22     #Red Switch
 
 #----------------------------------------------------------
 #SETUP
-db = MySQLdb.connect(mysql_variables.db_host, mysql_variables.db_user, mysql_variables.db_pass, mysql_variables.db_name)
-curs = db.cursor()
+print(mysql_variables.db_host, mysql_variables.db_user, mysql_variables.db_pass, mysql_variables.db_name)
+try:
+    db = MySQLdb.connect(host=mysql_variables.db_host, user=mysql_variables.db_user, password=mysql_variables.db_pass, database=mysql_variables.db_name)
+    curs = db.cursor()
+except MySQLdb.Error as er:
+        print("Error connecting to MariaDB Platform: {e}")
+        sys.exit(1)
 
 GPIO.setwarnings(False)
 GPIO.cleanup()
