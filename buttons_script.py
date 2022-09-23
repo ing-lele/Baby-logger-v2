@@ -159,42 +159,42 @@ while True:
     
     #---------------------------------------------------------
     #PEE - START
-    if (GPIO.input(pee_switch_pin) == GPIO.LOW & (start_state_pee == 0)):
+    if (GPIO.input(pee_switch_pin) == GPIO.LOW and (start_state_pee == 0)):
         print("LOG - Event logged - PEE - Start at", now)
         start_state_pee = 1         # Update Start State
         write_event("pee","start")  # Write DB + Flash LED
         
     #---------------------------------------------------------
     #PEE - Stop
-    elif (GPIO.input(pee_switch_pin) == GPIO.HIGH & (start_state_pee == 1)):
+    elif (GPIO.input(pee_switch_pin) == GPIO.HIGH and (start_state_pee == 1)):
         print("LOG - Event logged: PEE - Stop at", now)
         start_state_pee = 0         # Start flag - OFF
         write_event("pee","stop")   # Write DB + Flash LED
 
     #---------------------------------------------------------
     #FED - START
-    if (GPIO.input(fed_switch_pin) == GPIO.LOW & (start_state_fed == 0)):
+    if (GPIO.input(fed_switch_pin) == GPIO.LOW and (start_state_fed == 0)):
         print("LOG - Event logged: FED - Start at", now)
         start_state_fed = 1         # Update Start State
         write_event("fed","start")  # Write DB + Flash LED
 
     #---------------------------------------------------------
     #FED - STOP
-    if (GPIO.input(fed_switch_pin) == GPIO.HIGH & (start_state_fed == 1)):
+    if (GPIO.input(fed_switch_pin) == GPIO.HIGH and (start_state_fed == 1)):
         print("LOG - Event logged: FED - Stop at", now)
         start_state_fed = 0         # Update Start State
         write_event("fed","stop")   # Write DB + Flash LED
 
     #---------------------------------------------------------
     #POO - START
-    if (GPIO.input(poo_switch_pin) == GPIO.LOW & (start_state_poo == 0)):
+    if (GPIO.input(poo_switch_pin) == GPIO.LOW and (start_state_poo == 0)):
         print("LOG - Event logged: POO - Start at", now)
         start_state_poo = 1         # Update Start State
         write_event("poo","start")  # Write DB + Flash LED
 
     #---------------------------------------------------------
     #POO - STOP
-    if (GPIO.input(poo_switch_pin) == GPIO.HIGH & (start_state_poo == 1)):
+    if (GPIO.input(poo_switch_pin) == GPIO.HIGH and (start_state_poo == 1)):
         print("LOG - Event logged: POO - Stop at", now)
         start_state_poo = 0        # Update Start State
         write_event("poo","stop")  # Write DB + Flash LED
