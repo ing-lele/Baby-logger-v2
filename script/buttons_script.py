@@ -4,12 +4,11 @@
 # * Updated 3 colored switches
 # * Use RGB LED for confirmation
 # * Record ON / OFF time for the switches
-# * [TO DO] Pi Camera v1.1 screenshot during every switch
+#
 # =========================================================
 
 #! /usr/bin/python3
-#IMPORT STATEMENTS
-# from asyncio.windows_events import NULL
+# IMPORT STATEMENTS
 from turtle import end_fill
 import RPi.GPIO as GPIO
 import os
@@ -127,6 +126,13 @@ flash_led("starting","")
 
 #---------------------------------------------------------
 # FUNCTION: Write to DB
+# Table structure: CREATE TABLE buttondata(
+#	id INT PRIMARY KEY auto_increment,
+#	created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+#	category TEXT,
+#	state TEXT); 
+#
+#---------------------------------------------------------
 def write_event(category, state):
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
