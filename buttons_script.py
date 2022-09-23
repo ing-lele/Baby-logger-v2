@@ -114,7 +114,7 @@ def write_event(category, state):
 
     print("Creating new entry in DB: ", category.upper() , " - ", state.upper()," at ", now)
     try:
-        curs.execute("""INSERT INTO babylogger (category, state) VALUES ('%s','%s')""", (category.lower(), state.lower()))
+        curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('%s','%s')""", (category.lower(), state.lower()))
         #Set LED
         flash_led(category, state)
         db.commit()
