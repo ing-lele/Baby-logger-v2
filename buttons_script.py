@@ -141,8 +141,6 @@ start_state_poo = 0 #POO
 
 while True:
     now = datetime.datetime.now()           # Update NOW
-
-    if(debug_on): print("DEBUG - ", now)    # DEBUG - print time
     
     #---------------------------------------------------------
     #PEE - START
