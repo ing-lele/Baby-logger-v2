@@ -66,7 +66,7 @@ GPIO.setup(poo_led_pin, GPIO.OUT)
 
 
 #----------------------------------------------------------
-# Flash RGB LED
+# Flash RGB LED function
 def flash_led(category, state):
     # pee
     if (category=="pee", state=="start"): GPIO.output(pee_led_pin, GPIO.HIGH)
@@ -102,9 +102,11 @@ def flash_led(category, state):
 flash_led("starting","")
 
 #---------------------------------------------------------
-# Write DB information
+# Write DB info function
 def write_event(category, state):
-    print("Event logged: ", category.upper() , " - ", state.upper()," at ", datetime.datetime.now())
+    now = datetime.datetime.now()
+
+    print("Creating new entry in DB: ", category.upper() , " - ", state.upper()," at ", now)
     try:
         curs.execute("""INSERT INTO babylogger (category, state) VALUES ('%s','%s')""", (category.lower(), state.lower()))
         #Set LED
@@ -112,7 +114,7 @@ def write_event(category, state):
         db.commit()
     except Exception as ex:
         print(ex)
-        print("Error: the database is being rolled back --- ", category.upper(), " ", state.upper(), " @ " datetime.datetime.now())
+        print("Error: the database is being rolled back --- ", category.upper(), " ", state.upper(), " @ ", now)
         #Set LED
         flash_led("Error writing DB","")
         sys.exit(0)
@@ -123,8 +125,10 @@ time.sleep(1)
 print("Baby Logger running...")
 
 while True:
+    now = datetime.datetime.now()
+
     # DEBUG - print value
-    print(datetime.datetime.now())
+    print(now)
     input_state_pee = GPIO.input(pee_switch_pin) #PEE
     input_state_fed = GPIO.input(fed_switch_pin) #FED
     input_state_poo = GPIO.input(poo_switch_pin) #POO
@@ -137,9 +141,11 @@ while True:
     #---------------------------------------------------------
     #PEE - START
     if (input_state_pee == GPIO.LOW):
-        print('Event logged: PEE - Start at ' datetime.datetime.now())
+        print("Event logged: PEE - Start at ", now)
+        # Write DB
         write_event("pee","start")
-
+        # Flash LED
+        flash_led("pee","start")
         #/try:
         #    curs.execute("""INSERT INTO babylogger (category, state) VALUES ('pee','start')""")
         #    #STATUS LED:
@@ -147,78 +153,78 @@ while True:
         #    db.commit()
         #except Exception as ex:
         #    print(ex)
-        #    print("Error: the database is being rolled back --- PEE START @ " datetime.datetime.now())
+        #    print("Error: the database is being rolled back --- PEE START @ " now)
         #    reset_led()
         #    sys.exit(0)
         #
     #---------------------------------------------------------
     #PEE - Stop
     elif (input_state_pee == GPIO.HIGH):
-        print('Event logged: PEE - Stop at ' datetime.datetime.now())
+        print("Event logged: PEE - Stop at ", now)
         try:
             curs.execute("""INSERT INTO babylogger (category, state) VALUES ('pee','stop')""")
             GPIO.output(pee_led_pin, GPIO.LOW)
             db.commit()
         except Exception as ex:
             print(ex)
-            print("Error: the database is being rolled back --- PEE STOP @ " datetime.datetime.now())
-            reset_led()
+            print("Error: the database is being rolled back --- PEE STOP @ ", now)
+            flash_led("Error writing DB","")
             sys.exit(0)
 
     #---------------------------------------------------------
     #FED - START
     if (input_state_fed == GPIO.LOW):
-        print('Event logged: FED - Start at ' datetime.datetime.now())
+        print("Event logged: FED - Start at ", now)
         try:
             curs.execute("""INSERT INTO babylogger (category, state) VALUES ('fed','start')""")
             GPIO.output(fed_led_pin, GPIO.HIGH)
             db.commit()
         except:
             print(ex)
-            print("Error: the database is being rolled back --- FED START @ " datetime.datetime.now())
-            reset_led()
+            print("Error: the database is being rolled back --- FED START @ ", now)
+            flash_led("Error writing DB","")
             sys.exit(0)
 
     #---------------------------------------------------------
     #FED - STOP
     if (input_state_fed == GPIO.HIGH):
-        print('Event logged: FED - Stop at ' datetime.datetime.now())
+        print("Event logged: FED - Stop at ", now)
         try:
             curs.execute("""INSERT INTO babylogger (category, state) VALUES ('fed','stop')""")
             GPIO.output(fed_led_pin, GPIO.LOW)
             db.commit()
         except:
             print(ex)
-            print("Error: the database is being rolled back --- FED STOP @ " datetime.datetime.now())
-            reset_led()
+            print("Error: the database is being rolled back --- FED STOP @ ", now)
+            flash_led("Error writing DB","")
             sys.exit(0)
 
     #---------------------------------------------------------
     #POO - START
     if (input_state_poo == GPIO.LOW):
-        print('Event logged: POO - Start at ' datetime.datetime.now())
+        print("Event logged: POO - Start at ", now)
         try:
             curs.execute("""INSERT INTO babylogger (category, state) VALUES ('poo','start')""")
             GPIO.output(poo_led_pin, GPIO.HIGH)
             db.commit()
         except:
             print(ex)
-            print("Error: the database is being rolled back --- POO START @ " datetime.datetime.now())
-            reset_led()
+            print("Error: the database is being rolled back --- POO START @ ", now)
+            flash_led("Error writing DB","")
             sys.exit(0)
 
     #---------------------------------------------------------
-    #POD - STOP
+    #POO - STOP
     if (input_state_poo == GPIO.HIGH):
-        print('Event logged: POO - Stop at ' datetime.datetime.now())
+        print("Event logged: POO - Stop at ", now)
         try:
             curs.execute("""INSERT INTO babylogger (category, state) VALUES ('poo','stop')""")
             GPIO.output(poo_led_pin, GPIO.LOW)
             db.commit()
         except:
             print(ex)
-            print("Error: the database is being rolled back --- POO STOP @ " datetime.datetime.now())
-            reset_led()
+            print("Error: the database is being rolled back --- POO STOP @ ", now)
+            flash_led("Error writing DB","")
             sys.exit(0)
 
     time.sleep(0.1)
