@@ -93,6 +93,7 @@ def flash_led(category, state):
         #Flash loop for startup / error / other
         n = 5
         while n>0:
+            n = n-1
             GPIO.output(pee_led_pin, GPIO.HIGH)
             time.sleep(1)
             GPIO.output(pee_led_pin, GPIO.LOW)
@@ -106,7 +107,6 @@ def flash_led(category, state):
             GPIO.output(poo_led_pin, GPIO.LOW)
 
             time.sleep(1)
-            n = n-1
 
 #Start up of LED
 flash_led("starting","")
