@@ -1,3 +1,10 @@
+### IngLele Fork at 26 Jun 2022 from https://github.com/tommygober/Baby-logger
+# =========================================================
+# Scope:
+# -- Basic LED and Switch script to verify wires are connected to correct PIN#
+# 
+# =========================================================
+
 print('Import library')
 import RPi.GPIO as GPIO          #Import GPIO library
 import time                      #Import time library
@@ -22,14 +29,14 @@ poo_switch_pin = 22     #Red Switch
 #SETUP GPIO
 print('setup GPIO')
 
-GPIO.cleanup()  #cleanup any previous config 
 #GPIO.setwarnings(False)
+GPIO.cleanup()  #cleanup any previous config 
 
 GPIO.setmode(GPIO.BCM) #setup via GPIO pin number
 
-# Setup Switch - PullDown configuration
-# Switch Closed = +3.3V (VCC)
-# Switch Open = 0V (GND via PullDown)
+# Setup Switch (normally closed) - PullDown configuration
+# Switch Open = GPIO.HIGH = +3.3V (VCC)
+# Switch Closed = GPIO.LOW = 0V (GND via PullDown)
 # Info https://electrosome.com/using-switch-raspberry-pi/
 GPIO.setup(pee_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 GPIO.setup(fed_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -72,10 +79,10 @@ GPIO.output(poo_led_pin, GPIO.LOW)
 print('Test Switch')
 
 while True:
-    # Print current status
-    print('Pee switch: ',GPIO.input(pee_switch_pin))
-    print('Fed switch: ',GPIO.input(fed_switch_pin))
-    print('Poo switch: ',GPIO.input(poo_switch_pin))
+    # print value
+    input_state_pee = GPIO.input(pee_switch_pin) #PEE
+    input_state_fed = GPIO.input(fed_switch_pin) #FED
+    input_state_poo = GPIO.input(poo_switch_pin) #POO
     
     # read value
     input_state_pee = GPIO.input(pee_switch_pin) #PEE
@@ -88,7 +95,7 @@ while True:
 
     # Active switch
     if (input_state_pee == GPIO.LOW):
-        print('PEE Active - ', curr_date , curr_time)     #Print 'PEE Active'
+        print('PEE Active - ', curr_date, curr_time)     #Print 'PEE Active'
         GPIO.output(pee_led_pin, GPIO.HIGH)
 
     if (input_state_fed == GPIO.LOW):
@@ -101,7 +108,7 @@ while True:
     
     # Clear switch
     if (input_state_pee == GPIO.HIGH):
-        print('PEE Clear - ', curr_date , curr_time)     #Print 'PEE Clear'
+        print('PEE Clear - ', curr_date, curr_time)     #Print 'PEE Clear'
         GPIO.output(pee_led_pin, GPIO.LOW)
 
     if (input_state_fed == GPIO.HIGH):
