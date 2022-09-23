@@ -116,13 +116,13 @@ flash_led("starting","")
 def write_event(category, state):
     now = datetime.datetime.now()
 
-    if(debug_on): print("DEBUG - Creating new entry in DB: ", category.upper() , " - ", state.upper()," at ", now)      # DEBUG - Print DB info
+    if(debug_on): print("DEBUG - Creating new entry in DB:", category.upper(), "-", state.upper(),"at", now)      # DEBUG - Print DB info
 
     try:
-        curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('%s','%s')""", (category.lower(), state.lower()))
+        curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('%s','%s')""", (category, state))
         db.commit()
     except Exception as ex:
-        print("ERROR - Database is being rolled back --- Category: ", category.upper(), " State: ", state.upper(), " @ ", now)
+        print("ERROR - Database is being rolled back --- Category:", category.upper(), "State:", state.upper(), "@", now)
         print(ex)
         #Flash LED
         flash_led("Error writing DB","")
