@@ -21,11 +21,11 @@ if(!isset($_POST['days'])){
 }else{
 	$days = intval($_POST['days']);
 }
-if(isset($_POST['type']) && in_array($_POST['type'], ["pee", "poo", "fed"])){
-	$type = $_POST['type'];
-	$sql = "SELECT * FROM babylogger WHERE type = '$type' AND tdate >= CURDATE() - INTERVAL ".($days-1)." day ORDER BY tdate DESC, ttime DESC;";
+if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo", "fed"])){
+	$type = $_POST['category'];
+	$sql = "SELECT * FROM buttondata WHERE category = '$type' AND created >= CURDATE() - INTERVAL ".($days-1)." day ORDER BY created DESC;";
 }else{
-	$sql = "SELECT * FROM babylogger WHERE tdate >= CURDATE() - INTERVAL ".($days-1)." day ORDER BY tdate DESC, ttime DESC;";
+	$sql = "SELECT * FROM buttondata WHERE created >= CURDATE() - INTERVAL ".($days-1)." day ORDER BY created DESC;";
 }
 
 $results = mysqli_query($connectdb, $sql);
