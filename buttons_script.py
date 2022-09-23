@@ -46,7 +46,7 @@ poo_switch_pin = 22     #Red Switch
 
 #----------------------------------------------------------
 #Setup DB
-if(debug_on): print("DB Connection settings:", mysql_variables.db_host, mysql_variables.db_user, mysql_variables.db_pass, mysql_variables.db_name)     # DEBUG - Print DB info
+if(debug_on): print("DEBUG - DB Connection settings:", mysql_variables.db_host, mysql_variables.db_user, mysql_variables.db_pass, mysql_variables.db_name)     # DEBUG - Print DB info
 
 try:
     db = MySQLdb.connect(host=mysql_variables.db_host, user=mysql_variables.db_user, password=mysql_variables.db_pass, database=mysql_variables.db_name)
@@ -65,16 +65,19 @@ GPIO.setmode(GPIO.BCM)
 # Switch Open = GPIO.HIGH = +3.3V (VCC) = End event
 # Switch Closed = GPIO.LOW = 0V (GND via PullDown) = Active event
 # Info https://electrosome.com/using-switch-raspberry-pi/
+if(debug_on): print("DEBUG - Set INPUT GPIO")
 GPIO.setup(pee_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
 GPIO.setup(fed_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(poo_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #Setup LED
+if(debug_on): print("DEBUG - Setup LED GPIO")
 GPIO.setup(pee_led_pin, GPIO.OUT)
 GPIO.setup(fed_led_pin, GPIO.OUT)
 GPIO.setup(poo_led_pin, GPIO.OUT)
 
 #Reset LED
+if(debug_on): print("DEBUG - Reset LED GPIO")
 GPIO.output(pee_led_pin, GPIO.LOW)
 GPIO.output(fed_led_pin, GPIO.LOW)
 GPIO.output(poo_led_pin, GPIO.LOW)
