@@ -121,6 +121,7 @@ def write_event(category, state):
     try:
         curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES (%s,%s)""", (category, state))
         db.commit()
+        flash_led(category, state)
     except Exception as ex:
         print("ERROR - Database is being rolled back --- Category:", category.upper(), "State:", state.upper(), "@", now)
         print(ex)
@@ -146,106 +147,43 @@ while True:
     #PEE - START
     if (GPIO.input(pee_switch_pin) == GPIO.LOW & (start_state_pee == 0)):
         print("LOG - Event logged - PEE - Start at ", now)
+        start_state_pee = 1         # Update Start State
+        write_event("pee","start")  # Write DB + Turn LED
         
-        start_state_pee = 1         # Start flag - ON
-
-        write_event("pee","start")  # Write DB
-        flash_led("pee","start")    # Turn LED - ON
-        #/try:
-        #    curs.execute("""INSERT INTO babylogger (category, state) VALUES ('pee','start')""")
-        #    #STATUS LED:
-        #    GPIO.output(pee_led_pin, GPIO.HIGH)
-        #    db.commit()
-        #except Exception as ex:
-        #    print(ex)
-        #    print("Error: the database is being rolled back --- PEE START @ " now)
-        #    reset_led()
-        #    sys.exit(0)
-        #
     #---------------------------------------------------------
     #PEE - Stop
     elif (GPIO.input(pee_switch_pin) == GPIO.HIGH & (start_state_pee == 1)):
         print("LOG - Event logged: PEE - Stop at ", now)
-
-        start_state_pee = 0                 # Start flag - OFF
-
-        try:
-            curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('pee','stop')""")   # Write DB
-            db.commit()
-            GPIO.output(pee_led_pin, GPIO.LOW)  # Turn LED - OFF
-        except Exception as ex:
-            print(ex)
-            print("Error: the database is being rolled back --- PEE STOP @ ", now)
-            flash_led("Error writing DB","")
-            sys.exit(0)
+        start_state_pee = 0         # Start flag - OFF
+        write_event("pee","stop")   # Write DB + Flash LED
 
     #---------------------------------------------------------
     #FED - START
     if (GPIO.input(fed_switch_pin) == GPIO.LOW & (start_state_fed == 0)):
         print("LOG - Event logged: FED - Start at ", now)
-
-        start_state_fed = 1                 # Start flag - ON
-
-        try:
-            curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('fed','start')""")
-            GPIO.output(fed_led_pin, GPIO.HIGH)
-            db.commit()
-        except:
-            print(ex)
-            print("Error: the database is being rolled back --- FED START @ ", now)
-            flash_led("Error writing DB","")
-            sys.exit(0)
+        start_state_fed = 1         # Update Start State
+        write_event("fed","start")  # Write DB + Turn LED
 
     #---------------------------------------------------------
     #FED - STOP
     if (GPIO.input(fed_switch_pin) == GPIO.HIGH & (start_state_fed == 1)):
         print("LOG - Event logged: FED - Stop at ", now)
-        
-        start_state_fed = 0                 # Start flag - OFF
-
-        try:
-            curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('fed','stop')""")
-            GPIO.output(fed_led_pin, GPIO.LOW)
-            db.commit()
-        except:
-            print(ex)
-            print("Error: the database is being rolled back --- FED STOP @ ", now)
-            flash_led("Error writing DB","")
-            sys.exit(0)
+        start_state_fed = 0         # Update Start State
+        write_event("fed","stop")   # Write DB + Turn LED
 
     #---------------------------------------------------------
     #POO - START
     if (GPIO.input(poo_switch_pin) == GPIO.LOW & (start_state_poo == 0)):
         print("LOG - Event logged: POO - Start at ", now)
-
-        start_state_poo = 1                 # Start flag - ON
-
-        try:
-            curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('poo','start')""")
-            GPIO.output(poo_led_pin, GPIO.HIGH)
-            db.commit()
-        except:
-            print(ex)
-            print("Error: the database is being rolled back --- POO START @ ", now)
-            flash_led("Error writing DB","")
-            sys.exit(0)
+        start_state_poo = 1         # Update Start State
+        write_event("poo","start")  # Write DB + Turn LED
 
     #---------------------------------------------------------
     #POO - STOP
     if (GPIO.input(poo_switch_pin) == GPIO.HIGH & (start_state_poo == 1)):
         print("LOG - Event logged: POO - Stop at ", now)
-        
-        start_state_poo = 0                 # Start flag - OFF
-        
-        try:
-            curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('poo','stop')""")
-            GPIO.output(poo_led_pin, GPIO.LOW)
-            db.commit()
-        except:
-            print(ex)
-            print("Error: the database is being rolled back --- POO STOP @ ", now)
-            flash_led("Error writing DB","")
-            sys.exit(0)
+        start_state_poo = 0        # Update Start State
+        write_event("poo","stop")  # Write DB + Turn LED
 
     time.sleep(0.1)
 
