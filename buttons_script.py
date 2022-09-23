@@ -74,6 +74,11 @@ GPIO.setup(pee_led_pin, GPIO.OUT)
 GPIO.setup(fed_led_pin, GPIO.OUT)
 GPIO.setup(poo_led_pin, GPIO.OUT)
 
+#Reset LED
+GPIO.output(pee_led_pin, GPIO.LOW)
+GPIO.output(fed_led_pin, GPIO.LOW)
+GPIO.output(poo_led_pin, GPIO.LOW)
+
 #----------------------------------------------------------
 # FUNCTION: Flash RGB LED
 def flash_led(category, state):
@@ -91,9 +96,9 @@ def flash_led(category, state):
 
     else:
         #Flash loop for startup / error / other
-        n = 5
-        while n>0:
-            n = n-1
+        n = 0
+        while n<5:
+            n += 1
             GPIO.output(pee_led_pin, GPIO.HIGH)
             time.sleep(1)
             GPIO.output(pee_led_pin, GPIO.LOW)
