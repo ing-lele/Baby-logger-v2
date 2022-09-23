@@ -114,7 +114,7 @@ flash_led("starting","")
 #---------------------------------------------------------
 # FUNCTION: Write to DB
 def write_event(category, state):
-    now = datetime.datetime.now()
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     if(debug_on): print("DEBUG - Creating new entry in DB:", category.upper(), "-", state.upper(),"at", now)      # DEBUG - Print DB info
 
