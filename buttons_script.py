@@ -116,7 +116,7 @@ flash_led("starting","")
 def write_event(category, state):
     now = datetime.datetime.now()
 
-    if(debug_on): print("Creating new entry in DB: ", category.upper() , " - ", state.upper()," at ", now)      # DEBUG - Print DB info
+    if(debug_on): print("DEBUG - Creating new entry in DB: ", category.upper() , " - ", state.upper()," at ", now)      # DEBUG - Print DB info
 
     try:
         curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('%s','%s')""", (category.lower(), state.lower()))
@@ -142,12 +142,12 @@ start_state_poo = 0 #POO
 while True:
     now = datetime.datetime.now()           # Update NOW
 
-    if(debug_on): print("Debug - ", now)    # DEBUG - print time
+    if(debug_on): print("DEBUG - ", now)    # DEBUG - print time
     
     #---------------------------------------------------------
     #PEE - START
     if (GPIO.input(pee_switch_pin) == GPIO.LOW & (start_state_pee == 0)):
-        if(debug_on): print("DEBUG - Event logged - PEE - Start at ", now)
+        print("LOG - Event logged - PEE - Start at ", now)
         
         start_state_pee = 1         # Start flag - ON
 
@@ -167,7 +167,7 @@ while True:
     #---------------------------------------------------------
     #PEE - Stop
     elif (GPIO.input(pee_switch_pin) == GPIO.HIGH & (start_state_pee == 1)):
-        if(debug_on): print("Event logged: PEE - Stop at ", now)
+        print("LOG - Event logged: PEE - Stop at ", now)
 
         start_state_pee = 0                 # Start flag - OFF
 
@@ -184,7 +184,7 @@ while True:
     #---------------------------------------------------------
     #FED - START
     if (GPIO.input(fed_switch_pin) == GPIO.LOW & (start_state_fed == 0)):
-        if(debug_on): print("Event logged: FED - Start at ", now)
+        print("LOG - Event logged: FED - Start at ", now)
 
         start_state_fed = 1                 # Start flag - ON
 
@@ -201,7 +201,7 @@ while True:
     #---------------------------------------------------------
     #FED - STOP
     if (GPIO.input(fed_switch_pin) == GPIO.HIGH & (start_state_fed == 1)):
-        if(debug_on): print("Event logged: FED - Stop at ", now)
+        print("LOG - Event logged: FED - Stop at ", now)
         
         start_state_fed = 0                 # Start flag - OFF
 
@@ -218,7 +218,7 @@ while True:
     #---------------------------------------------------------
     #POO - START
     if (GPIO.input(poo_switch_pin) == GPIO.LOW & (start_state_poo == 0)):
-        if(debug_on): print("Event logged: POO - Start at ", now)
+        print("LOG - Event logged: POO - Start at ", now)
 
         start_state_poo = 1                 # Start flag - ON
 
@@ -235,7 +235,7 @@ while True:
     #---------------------------------------------------------
     #POO - STOP
     if (GPIO.input(poo_switch_pin) == GPIO.HIGH & (start_state_poo == 1)):
-        if(debug_on): print("Event logged: POO - Stop at ", now)
+        print("LOG - Event logged: POO - Stop at ", now)
         
         start_state_poo = 0                 # Start flag - OFF
         
