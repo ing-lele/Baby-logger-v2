@@ -1,6 +1,5 @@
 <?php
-// Settings
-// host, user, and password settings
+// DB Connection settings
 //$db_host
 //$db_user
 //$db_pass
@@ -8,8 +7,13 @@
 include(mysql_variables.php)
 
 // Make connection to database
-$connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("Cannot reach database");
-mysqli_select_db($connectdb,$db_name) or die ("Cannot select database");
+$connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("ERROR - Cannot reach database");
+mysqli_select_db($connectdb,$db_name) or die ("ERROR - Cannot select database");
+// TABLE buttondata(
+//	id INT PRIMARY KEY auto_increment,
+//	created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+//	category TEXT,
+//	state TEXT); 
 
 // show queries from the current date and the day before
 if(!isset($_POST['days'])){
@@ -97,9 +101,10 @@ events for past <select name='days'>
 
 <table width="600" border="1" cellpadding="1" cellspacing="1" align="center">
 <tr>
-<th width='200px'>Date</th>
-<th width='200px'>Time</th>
-<th width='200px'>Event</th>
+<th width='50px'>ID</th>
+<th width='300px'>Date & Time</th>
+<th width='50px'>Category</th>
+<th width='200px'>State</th>
 <tr>
 <?php
 $event_count = 0;
@@ -108,8 +113,9 @@ while($event = mysqli_fetch_assoc($results)){
 	$event_count++;
 	echo "<tr>";
 	if ($event['type'] == "fed"){
-		echo "<td class='fed'>". date("M d y", strtotime($event['tdate'])) ."</td>";
-		echo "<td class='fed'>". date("g:i a", strtotime($event['ttime'])) ."</td>";
+		echo "<td class='fed'>". date("M d y g:i a", strtotime($event['timestamp'])) ."</td>";
+		echo "<td class='fed'>". $event['category'])) ."</td>";
+		echo "<td class='fed'>". $event['state'])) ."</td>";
 		echo "<td class='fed'><center>&#x1f37c;</center></td>";
 	}else if ($event['type'] == "pee"){
 		echo "<td class='pee'>". date("M d y", strtotime($event['tdate'])) ."</td>";
