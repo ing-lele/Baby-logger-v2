@@ -36,7 +36,7 @@ $results = mysqli_query($connectdb, $sql);
 <title>Baby Logger &#x1F476;</title>
 <style>
 body{
-	background-color: #e6f2ff;
+	background-color: #fff3f5; /* pink background */
 }
 table{
 	background-color: white;
@@ -112,22 +112,25 @@ $event_count = 0;
 while($event = mysqli_fetch_assoc($results)){
 	$event_count++;
 	echo "<tr>";
-	if ($event['type'] == "fed"){
+	if ($event['category'] == "fed"){
+		echo "<td class='fed'>". $event['id'] ."</td>";
 		echo "<td class='fed'>". date("M d y g:i a", strtotime($event['timestamp'])) ."</td>";
-		echo "<td class='fed'>". $event['category'])) ."</td>";
-		echo "<td class='fed'>". $event['state'])) ."</td>";
-		echo "<td class='fed'><center>&#x1f37c;</center></td>";
-	}else if ($event['type'] == "pee"){
-		echo "<td class='pee'>". date("M d y", strtotime($event['tdate'])) ."</td>";
-		echo "<td class='pee'>". date("g:i a", strtotime($event['ttime'])) ."</td>";
-		echo "<td class='pee'><center>&#128166;</center></td>";
-	}else if ($event['type'] == "poo"){
-		echo "<td class='poo'>". date("M d y", strtotime($event['tdate'])) ."</td>";
-		echo "<td class='poo'>". date("g:i a", strtotime($event['ttime'])) ."</td>";
-		echo "<td class='poo'><center>&#128169;</center></td>";
+		echo "<td class='fed'>". $event['state'] ."</td>";
+		echo "<td class='fed'><center>&#x1f37c;</center></td>"; //Show baby bottle emoji
+	}else if ($event['category'] == "pee"){
+		echo "<td class='pee'>". $event['id'] ."</td>";
+		echo "<td class='pee'>". date("M d y g:i a", strtotime($event['timestamp'])) ."</td>";
+		echo "<td class='pee'>". $event['state'] ."</td>";
+		echo "<td class='pee'><center>&#128166;</center></td>";  //Show pee emoji
+	}else if ($event['category'] == "poo"){
+		echo "<td class='poo'>". $event['id'] ."</td>";
+		echo "<td class='poo'>". date("M d y g:i a", strtotime($event['timestamp'])) ."</td>";
+		echo "<td class='poo'>". $event['state'] ."</td>";
+		echo "<td class='poo'><center>&#128169;</center></td>";  //Show poop emoji
 	}else{
-		echo "<td>". date("M d y", strtotime($event['tdate'])) ."</td>";
-		echo "<td>". date("g:i a", strtotime($event['ttime'])) ."</td>";
+		echo "<td>". $event['id'] ."</td>";
+		echo "<td>". date("M d y g:i a", strtotime($event['timestamp'])) ."</td>";
+		echo "<td>". $event['state'] ."</td>";
 		echo "<td style='background-color: red;'><center><b>Error</b></center></td>";
 	}
 	
