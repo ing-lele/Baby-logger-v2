@@ -9,6 +9,7 @@ include(mysql_variables.php)
 // Make connection to database
 $connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("ERROR - Cannot reach database");
 mysqli_select_db($connectdb,$db_name) or die ("ERROR - Cannot select database");
+
 // TABLE buttondata(
 //	id INT PRIMARY KEY auto_increment,
 //	created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -27,6 +28,7 @@ if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo", "fed
 	print($sql);
 }else{
 	$sql = "SELECT * FROM buttondata WHERE created >= CURDATE() - INTERVAL ".($days-1)." day ORDER BY created DESC;";
+	print(sql)
 }
 
 $results = mysqli_query($connectdb, $sql);
