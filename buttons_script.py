@@ -107,19 +107,20 @@ def flash_led(category, state):
         n = 0
         while n<5:
             n += 1
-            GPIO.output(pee_led_pin, GPIO.HIGH)
-            time.sleep(1)
-            GPIO.output(pee_led_pin, GPIO.LOW)
-
-            GPIO.output(fed_led_pin, GPIO.HIGH)
-            time.sleep(1)
-            GPIO.output(fed_led_pin, GPIO.LOW)
 
             GPIO.output(poo_led_pin, GPIO.HIGH)
-            time.sleep(1)
+            time.sleep(.1)
             GPIO.output(poo_led_pin, GPIO.LOW)
 
-            time.sleep(1)
+            GPIO.output(fed_led_pin, GPIO.HIGH)
+            time.sleep(.1)
+            GPIO.output(fed_led_pin, GPIO.LOW)
+
+            GPIO.output(pee_led_pin, GPIO.HIGH)
+            time.sleep(.1)
+            GPIO.output(pee_led_pin, GPIO.LOW)
+
+            time.sleep(.1)
 
 #Start up of LED
 flash_led("starting","")
