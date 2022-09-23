@@ -168,7 +168,7 @@ while True:
     elif (input_state_pee == GPIO.HIGH):
         print("Event logged: PEE - Stop at ", now)
         try:
-            curs.execute("""INSERT INTO babylogger (category, state) VALUES ('pee','stop')""")
+            curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('pee','stop')""")
             GPIO.output(pee_led_pin, GPIO.LOW)
             db.commit()
         except Exception as ex:
@@ -182,7 +182,7 @@ while True:
     if (input_state_fed == GPIO.LOW):
         print("Event logged: FED - Start at ", now)
         try:
-            curs.execute("""INSERT INTO babylogger (category, state) VALUES ('fed','start')""")
+            curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('fed','start')""")
             GPIO.output(fed_led_pin, GPIO.HIGH)
             db.commit()
         except:
@@ -196,7 +196,7 @@ while True:
     if (input_state_fed == GPIO.HIGH):
         print("Event logged: FED - Stop at ", now)
         try:
-            curs.execute("""INSERT INTO babylogger (category, state) VALUES ('fed','stop')""")
+            curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('fed','stop')""")
             GPIO.output(fed_led_pin, GPIO.LOW)
             db.commit()
         except:
@@ -210,7 +210,7 @@ while True:
     if (input_state_poo == GPIO.LOW):
         print("Event logged: POO - Start at ", now)
         try:
-            curs.execute("""INSERT INTO babylogger (category, state) VALUES ('poo','start')""")
+            curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('poo','start')""")
             GPIO.output(poo_led_pin, GPIO.HIGH)
             db.commit()
         except:
@@ -224,7 +224,7 @@ while True:
     if (input_state_poo == GPIO.HIGH):
         print("Event logged: POO - Stop at ", now)
         try:
-            curs.execute("""INSERT INTO babylogger (category, state) VALUES ('poo','stop')""")
+            curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('poo','stop')""")
             GPIO.output(poo_led_pin, GPIO.LOW)
             db.commit()
         except:
