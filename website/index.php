@@ -1,10 +1,11 @@
 <?php
 // Settings
 // host, user, and password settings
-$db_host = "mysql.webserver.com";
-$db_user = "logger";
-$db_pass = "password";
-$db_name = "babylogger";
+//$db_host
+//$db_user
+//$db_pass
+//$db_name
+include(mysql_variables.php)
 
 // Make connection to database
 $connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("Cannot reach database");
