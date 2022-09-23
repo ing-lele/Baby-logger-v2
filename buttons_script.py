@@ -19,40 +19,44 @@ import datetime
 import pymysql
 pymysql.install_as_MySQLdb()
 import MySQLdb
-#import mariadb
 import mysql_variables          #Import MySQL variable
 
+debug_on = 1            #DEBUG - Enable debug print
+
 #----------------------------------------------------------
-#CONFIGURATION SETTINGS (via GPIO number)
-print('Config Settings')
+#GPIO PIN CONFIGURATION (via GPIO number)
+if(debug_on): print('DEBUG - Set GPIO PIN configuration')
 
 pee_led_pin = 20        #Green LED
 #         PIN#34        #GND
 fed_led_pin = 16        #Blue LED
 poo_led_pin = 12        #Red LED
 
-#            PIN#9      GND
+#             PIN#9     GND
 pee_switch_pin = 17     #Green Switch
 fed_switch_pin = 27     #Blue Switch
 poo_switch_pin = 22     #Red Switch
 #            PIN#17     VCC +3.3V
 
-# MySQL variable are defined in MySQLdb.py module
+# MySQL variable are defined in mysql_variables.py module
 # MySQLdb.db_host 
 # MySQLdb.db_user 
 # MySQLdb.db_pass 
 # MySQLdb.db_name 
 
 #----------------------------------------------------------
-#SETUP
-print(mysql_variables.db_host, mysql_variables.db_user, mysql_variables.db_pass, mysql_variables.db_name)
+#Setup DB
+if(debug_on): print("DB Connection settings:", mysql_variables.db_host, mysql_variables.db_user, mysql_variables.db_pass, mysql_variables.db_name)     # DEBUG - Print DB info
+
 try:
     db = MySQLdb.connect(host=mysql_variables.db_host, user=mysql_variables.db_user, password=mysql_variables.db_pass, database=mysql_variables.db_name)
     curs = db.cursor()
 except MySQLdb.Error as er:
-        print("Error connecting to MariaDB Platform: {e}")
+        print("ERROR - Error connecting to MariaDB Platform: {e}")
         sys.exit(1)
 
+#----------------------------------------------------------
+#Setup GPIO
 GPIO.setwarnings(False)
 GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
@@ -70,10 +74,11 @@ GPIO.setup(pee_led_pin, GPIO.OUT)
 GPIO.setup(fed_led_pin, GPIO.OUT)
 GPIO.setup(poo_led_pin, GPIO.OUT)
 
-
 #----------------------------------------------------------
-# Flash RGB LED function
+# FUNCTION: Flash RGB LED
 def flash_led(category, state):
+    if(debug_on): print("DEBUG - Flash RGB LED - Category: ", category.upper(), " State:", state.upper())    # DEBUG - Print Flash LED
+
     # pee
     if (category=="pee", state=="start"): GPIO.output(pee_led_pin, GPIO.HIGH)
     elif (category=="pee", state=="stop"): GPIO.output(pee_led_pin, GPIO.LOW)
@@ -85,8 +90,7 @@ def flash_led(category, state):
     elif (category=="poo", state=="stop"): GPIO.output(poo_led_pin, GPIO.LOW)
 
     else:
-        #Flash loop
-        print("Flash RGB LED: ", category)
+        #Flash loop for startup / error / other
         n = 5
         while n:
             GPIO.output(pee_led_pin, GPIO.HIGH)
@@ -108,50 +112,47 @@ def flash_led(category, state):
 flash_led("starting","")
 
 #---------------------------------------------------------
-# Write DB info function
+# FUNCTION: Write to DB
 def write_event(category, state):
     now = datetime.datetime.now()
 
-    print("Creating new entry in DB: ", category.upper() , " - ", state.upper()," at ", now)
+    if(debug_on): print("Creating new entry in DB: ", category.upper() , " - ", state.upper()," at ", now)      # DEBUG - Print DB info
+
     try:
         curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('%s','%s')""", (category.lower(), state.lower()))
-        #Set LED
-        flash_led(category, state)
         db.commit()
     except Exception as ex:
+        print("ERROR - Database is being rolled back --- Category: ", category.upper(), " State: ", state.upper(), " @ ", now)
         print(ex)
-        print("Error: the database is being rolled back --- ", category.upper(), " ", state.upper(), " @ ", now)
-        #Set LED
+        #Flash LED
         flash_led("Error writing DB","")
         sys.exit(0)
 
 #---------------------------------------------------------
 
 time.sleep(1)
-print("Baby Logger running...")
+
+if(debug_on): print("DEBUG - Baby Logger running...")
+
+# Reset start status
+start_state_pee = 0 #PEE
+start_state_fed = 0 #FED
+start_state_poo = 0 #POO
 
 while True:
-    now = datetime.datetime.now()
+    now = datetime.datetime.now()           # Update NOW
 
-    # DEBUG - print value
-    print(now)
-    input_state_pee = GPIO.input(pee_switch_pin) #PEE
-    input_state_fed = GPIO.input(fed_switch_pin) #FED
-    input_state_poo = GPIO.input(poo_switch_pin) #POO
-
-    # read value
-    input_state_pee = GPIO.input(pee_switch_pin) #PEE
-    input_state_fed = GPIO.input(fed_switch_pin) #FED
-    input_state_poo = GPIO.input(poo_switch_pin) #POO
+    if(debug_on): print("Debug - ", now)    # DEBUG - print time
     
     #---------------------------------------------------------
     #PEE - START
-    if (input_state_pee == GPIO.LOW):
-        print("Event logged: PEE - Start at ", now)
-        # Write DB
-        write_event("pee","start")
-        # Flash LED
-        flash_led("pee","start")
+    if (GPIO.input(pee_switch_pin) == GPIO.LOW & (start_state_pee == 0)):
+        if(debug_on): print("DEBUG - Event logged - PEE - Start at ", now)
+        
+        start_state_pee = 1         # Start flag - ON
+
+        write_event("pee","start")  # Write DB
+        flash_led("pee","start")    # Turn LED - ON
         #/try:
         #    curs.execute("""INSERT INTO babylogger (category, state) VALUES ('pee','start')""")
         #    #STATUS LED:
@@ -165,12 +166,15 @@ while True:
         #
     #---------------------------------------------------------
     #PEE - Stop
-    elif (input_state_pee == GPIO.HIGH):
-        print("Event logged: PEE - Stop at ", now)
+    elif (GPIO.input(pee_switch_pin) == GPIO.HIGH & (start_state_pee == 1)):
+        if(debug_on): print("Event logged: PEE - Stop at ", now)
+
+        start_state_pee = 0                 # Start flag - OFF
+
         try:
-            curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('pee','stop')""")
-            GPIO.output(pee_led_pin, GPIO.LOW)
+            curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('pee','stop')""")   # Write DB
             db.commit()
+            GPIO.output(pee_led_pin, GPIO.LOW)  # Turn LED - OFF
         except Exception as ex:
             print(ex)
             print("Error: the database is being rolled back --- PEE STOP @ ", now)
@@ -179,8 +183,11 @@ while True:
 
     #---------------------------------------------------------
     #FED - START
-    if (input_state_fed == GPIO.LOW):
-        print("Event logged: FED - Start at ", now)
+    if (GPIO.input(fed_switch_pin) == GPIO.LOW & (start_state_fed == 0)):
+        if(debug_on): print("Event logged: FED - Start at ", now)
+
+        start_state_fed = 1                 # Start flag - ON
+
         try:
             curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('fed','start')""")
             GPIO.output(fed_led_pin, GPIO.HIGH)
@@ -193,8 +200,11 @@ while True:
 
     #---------------------------------------------------------
     #FED - STOP
-    if (input_state_fed == GPIO.HIGH):
-        print("Event logged: FED - Stop at ", now)
+    if (GPIO.input(fed_switch_pin) == GPIO.HIGH & (start_state_fed == 1)):
+        if(debug_on): print("Event logged: FED - Stop at ", now)
+        
+        start_state_fed = 0                 # Start flag - OFF
+
         try:
             curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('fed','stop')""")
             GPIO.output(fed_led_pin, GPIO.LOW)
@@ -207,8 +217,11 @@ while True:
 
     #---------------------------------------------------------
     #POO - START
-    if (input_state_poo == GPIO.LOW):
-        print("Event logged: POO - Start at ", now)
+    if (GPIO.input(poo_switch_pin) == GPIO.LOW & (start_state_poo == 0)):
+        if(debug_on): print("Event logged: POO - Start at ", now)
+
+        start_state_poo = 1                 # Start flag - ON
+
         try:
             curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('poo','start')""")
             GPIO.output(poo_led_pin, GPIO.HIGH)
@@ -221,8 +234,11 @@ while True:
 
     #---------------------------------------------------------
     #POO - STOP
-    if (input_state_poo == GPIO.HIGH):
-        print("Event logged: POO - Stop at ", now)
+    if (GPIO.input(poo_switch_pin) == GPIO.HIGH & (start_state_poo == 1)):
+        if(debug_on): print("Event logged: POO - Stop at ", now)
+        
+        start_state_poo = 0                 # Start flag - OFF
+        
         try:
             curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES ('poo','stop')""")
             GPIO.output(poo_led_pin, GPIO.LOW)
