@@ -121,22 +121,22 @@ while($event = mysqli_fetch_assoc($results)){
 	echo "<tr>";
 	if ($event['category'] == "fed"){
 		echo "<td class='fed'><center>". $event['id'] ."</center></td>";
-		echo "<td class='fed'><center>". date("M d y g:i a", ($event['timestamp'])) ."</center></td>";
+		echo "<td class='fed'><center>". date("M d y g:i a", ($event['created'])) ."</center></td>";
 		echo "<td class='fed'><center>&#x1f37c;</center></td>"; //Show baby bottle emoji
 		echo "<td class='fed'><center>". $event['state'] ."</center></td>";		
 	}else if ($event['category'] == "pee"){
 		echo "<td class='pee'><center>". $event['id'] ."</center></td>";
-		echo "<td class='pee'><center>". date("M d y g:i a", ($event['timestamp'])) ."</center></td>";
+		echo "<td class='pee'><center>". date("M d y g:i a", ($event['created'])) ."</center></td>";
 		echo "<td class='pee'><center>&#128166;</center></td>";  //Show pee emoji
 		echo "<td class='pee'><center>". $event['state'] ."</center></td>";		
 	}else if ($event['category'] == "poo"){
 		echo "<td class='poo'><center>". $event['id'] ."</center></td>";
-		echo "<td class='poo'><center>". date("M d y g:i a", ($event['timestamp'])) ."</center></td>";
+		echo "<td class='poo'><center>". date("M d y g:i a", ($event['created'])) ."</center></td>";
 		echo "<td class='poo'><center>&#128169;</center></td>";  //Show poop emoji
 		echo "<td class='poo'><center>". $event['state'] ."</center></td>";		
 	}else{
 		echo "<td><center>". $event['id'] ."</center></td>";
-		echo "<td><center>". date("M d y g:i a", ($event['timestamp'])) ."</center></td>";
+		echo "<td><center>". date("M d y g:i a", ($event['created'])) ."</center></td>";
 		echo "<td style='background-color: red;'><center><b>Error</b></center></td>";
 		echo "<td><center>". $event['state'] ."</center></td>";
 	}
