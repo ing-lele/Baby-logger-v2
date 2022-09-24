@@ -67,7 +67,7 @@ td{
 }
 
 .fed{
-	background-color: #ffffff;
+	background-color: #add8e6;
 }
 </style>
 </head>
@@ -81,7 +81,7 @@ if ($days > 1)
 else
     print "Baby's vital functions for the last $days day.";
 ?>
-<hr width='200' size=1>
+<hr width='500px' size=1>
 Show 
 <select name='category'>
 <option value='all'>All</option>
@@ -106,12 +106,12 @@ events for past <select name='days'>
 </center>
 </form>
 
-<table width="600" border="1" cellpadding="1" cellspacing="1" align="center">
+<table width="500px" border="1" cellpadding="1" cellspacing="1" align="center">
 <tr>
 <th width='50px'>ID</th>
 <th width='300px'>Date & Time</th>
-<th width='50px'>Category</th>
-<th width='200px'>State</th>
+<th width='100px'>Category</th>
+<th width='50px'>State</th>
 <tr>
 <?php
 $event_count = 0;
@@ -120,31 +120,31 @@ while($event = mysqli_fetch_assoc($results)){
 	$event_count++;
 	echo "<tr>";
 	if ($event['category'] == "fed"){
-		echo "<td class='fed'>". $event['id'] ."</td>";
-		echo "<td class='fed'>". date("M d y g:i a", strtotime($event['timestamp'])) ."</td>";
-		echo "<td class='fed'>". $event['state'] ."</td>";
+		echo "<td class='fed'><center>". $event['id'] ."</center></td>";
+		echo "<td class='fed'><center>". date("M d y g:i a", ($event['timestamp'])) ."</center></td>";
 		echo "<td class='fed'><center>&#x1f37c;</center></td>"; //Show baby bottle emoji
+		echo "<td class='fed'><center>". $event['state'] ."</center></td>";		
 	}else if ($event['category'] == "pee"){
-		echo "<td class='pee'>". $event['id'] ."</td>";
-		echo "<td class='pee'>". date("M d y g:i a", strtotime($event['timestamp'])) ."</td>";
-		echo "<td class='pee'>". $event['state'] ."</td>";
+		echo "<td class='pee'><center>". $event['id'] ."</center></td>";
+		echo "<td class='pee'><center>". date("M d y g:i a", ($event['timestamp'])) ."</center></td>";
 		echo "<td class='pee'><center>&#128166;</center></td>";  //Show pee emoji
+		echo "<td class='pee'><center>". $event['state'] ."</center></td>";		
 	}else if ($event['category'] == "poo"){
-		echo "<td class='poo'>". $event['id'] ."</td>";
-		echo "<td class='poo'>". date("M d y g:i a", strtotime($event['timestamp'])) ."</td>";
-		echo "<td class='poo'>". $event['state'] ."</td>";
+		echo "<td class='poo'><center>". $event['id'] ."</center></td>";
+		echo "<td class='poo'><center>". date("M d y g:i a", ($event['timestamp'])) ."</center></td>";
 		echo "<td class='poo'><center>&#128169;</center></td>";  //Show poop emoji
+		echo "<td class='poo'><center>". $event['state'] ."</center></td>";		
 	}else{
-		echo "<td>". $event['id'] ."</td>";
-		echo "<td>". date("M d y g:i a", strtotime($event['timestamp'])) ."</td>";
-		echo "<td>". $event['state'] ."</td>";
+		echo "<td><center>". $event['id'] ."</center></td>";
+		echo "<td><center>". date("M d y g:i a", ($event['timestamp'])) ."</center></td>";
 		echo "<td style='background-color: red;'><center><b>Error</b></center></td>";
+		echo "<td><center>". $event['state'] ."</center></td>";
 	}
 	
 	echo "<tr>\n";
 }
 echo "</table>\n";
-echo "Event count: $event_count<br>";
+echo "<center>Event count: $event_count<br></center>";
 
 ?>
 </body>
