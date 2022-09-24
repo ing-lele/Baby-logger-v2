@@ -1,4 +1,11 @@
 <?php
+ini_set("display_error", "stderr");
+ini_set("display_startup_errors", 1);
+ini_set("log_errors", 1);
+ini_set("html_errors", 1);
+ini_set("error_log", "~/Baby-logger/website/php-error.log");
+error_log( "Hello, errors!" );
+
 // DB Connection settings
 //$db_host
 //$db_user
