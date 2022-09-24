@@ -4,7 +4,7 @@
 //$db_user
 //$db_pass
 //$db_name
-include(mysql_variables.php)
+include(mysql_variables.php);
 
 // Make connection to database
 $connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("ERROR - Cannot reach database");
@@ -24,7 +24,7 @@ if(!isset($_POST['days'])){
 }
 if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo", "fed"])){
 	$type = $_POST['category'];
-	$sql = "SELECT * FROM buttondata WHERE category = '$type' AND created >= NOW() - INTERVAL ".($days-1)." day ORDER BY created DESC;";
+	$sql = "SELECT * FROM buttondata WHERE category = "$type" AND created >= NOW() - INTERVAL ".($days-1)." day ORDER BY created DESC;";
 	print($sql);
 }else{
 	$sql = "SELECT * FROM buttondata WHERE created >= NOW() - INTERVAL ".($days-1)." day ORDER BY created DESC;";
