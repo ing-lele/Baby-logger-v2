@@ -34,8 +34,8 @@ if(!isset($_POST['days'])){
 	$days = intval($_POST['days']);
 }
 if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo", "fed"])){
-	$type = $_POST['category'];
-	$sql = "SELECT * FROM buttondata WHERE category = ".($type)." AND created >= NOW() - INTERVAL ".($days-1)." day ORDER BY created DESC;";
+	$category = $_POST['category'];
+	$sql = "SELECT * FROM buttondata WHERE category = '$category' AND created >= NOW() - INTERVAL ".($days-1)." day ORDER BY created DESC;";
 	error_log($sql);
 }else{
 	$sql = "SELECT * FROM buttondata WHERE created >= NOW() - INTERVAL ".($days-1)." day ORDER BY created DESC;";
