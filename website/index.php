@@ -6,13 +6,13 @@
 //$db_name
 include(mysql_variables.php);
 
-print_r("DEBUG - " + get_defined_vars())
+print_r("DEBUG - " + get_defined_vars());
 
 // Make connection to database
 $connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("ERROR - Cannot reach database");
 mysqli_select_db($connectdb,$db_name) or die ("ERROR - Cannot select database");
 
-print_r("DEBUG - " + get_defined_vars())
+print_r("DEBUG - " + get_defined_vars());
 
 // TABLE buttondata(
 //	id INT PRIMARY KEY auto_increment,
