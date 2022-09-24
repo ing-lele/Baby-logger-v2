@@ -1,10 +1,11 @@
 <?php
-ini_set("display_error", "stderr");
-ini_set("display_startup_errors", 1);
-ini_set("log_errors", 1);
-ini_set("html_errors", 1);
+// For debug, enable the following
+// ini_set("display_error", "stderr");
+// ini_set("display_startup_errors", 1);
+// ini_set("log_errors", 1);
+// ini_set("html_errors", 1);
 
-// DB Connection settings
+// DB Connection settings - mysql_variables.php
 //$db_host
 //$db_user
 //$db_pass
@@ -30,10 +31,8 @@ if(!isset($_POST['days'])){
 if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo", "fed"])){
 	$category = $_POST['category'];
 	$sql = "SELECT * FROM buttondata WHERE category = '$category' AND created >= NOW() - INTERVAL ".($days-1)." day ORDER BY created DESC;";
-	error_log($sql);
 }else{
 	$sql = "SELECT * FROM buttondata WHERE created >= NOW() - INTERVAL ".($days-1)." day ORDER BY created DESC;";
-	error_log(sql);
 }
 
 $results = mysqli_query($connectdb, $sql);
