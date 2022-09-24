@@ -3,23 +3,17 @@ ini_set("display_error", "stderr");
 ini_set("display_startup_errors", 1);
 ini_set("log_errors", 1);
 ini_set("html_errors", 1);
-ini_set("error_log", "~/Baby-logger/website/php-error.log");
-error_log( "Hello, errors!" );
 
 // DB Connection settings
 //$db_host
 //$db_user
 //$db_pass
 //$db_name
-include(mysql_variables.php);
-
-print_r("DEBUG - " + get_defined_vars());
+include 'mysql_variables.php';
 
 // Make connection to database
 $connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("ERROR - Cannot reach database");
 mysqli_select_db($connectdb,$db_name) or die ("ERROR - Cannot select database");
-
-print_r("DEBUG - " + get_defined_vars());
 
 // TABLE buttondata(
 //	id INT PRIMARY KEY auto_increment,
