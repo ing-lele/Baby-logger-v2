@@ -225,7 +225,7 @@ try:
             # Set table and file name
             table_name = "buttondata"
             last_backup = datetime.date.today()
-            file_name = table_name + "_" + last_backup.strftime("%Y-%m-%d")  + ".csv"
+            file_name = current_path + table_name + "_" + last_backup.strftime("%Y-%m-%d")  + ".csv"
 
             if(debug_on): print("DEBUG - File:", file_name)
 
