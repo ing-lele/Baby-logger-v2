@@ -7,6 +7,7 @@
 
 # IMPORT STATEMENTS
 from turtle import end_fill
+import sys
 import csv
 import time
 import datetime
@@ -50,9 +51,12 @@ def write_sql_to_file(file_name, sql, with_header=True, delimiter=',',quotechar=
 
     cur = db.cursor(pymysql.cursors.SSCursor) if con_sscursor else db.cursor()
     cur.execute(sql)
-    header= [field[0] for field in cur.description]
+    header = [field[0] for field in cur.description]
+    
+    # CSV functions - https://docs.python.org/3/library/csv.html
     ofile = open(file_name,'wb')
     csv_writer = csv.writer(ofile, delimiter=delimiter, quotechar=quotechar,quoting=quoting)
+    
     if with_header:
         csv_writer.writerow(header)
     if con_sscursor:
@@ -71,10 +75,10 @@ def write_sql_to_file(file_name, sql, with_header=True, delimiter=',',quotechar=
 #---------------------------------------------------------
 
 # Set filename, SQL query
-file_name = "button-data_", datetime.datetime.now().strftime("%Y-%m-%d") ,".csv"; 
+file_name = "~/Baby-logger/button-data_", datetime.datetime.now().strftime("%Y-%m-%d") ,".csv"; 
 sql = "SELECT * FROM buttondata ORDER BY id DESC"
 
-if(debug_on): print("DEBUG - File name:", file_name, "SQL function:", sql)
+if(debug_on): print("DEBUG - File:", file_name, "SQL function:", sql)
 
 # Call write function
 write_sql_to_file(file_name,sql)
