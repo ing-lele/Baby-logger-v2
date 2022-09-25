@@ -7,10 +7,6 @@
 #
 # =========================================================
 
-#! /usr/bin/python3
-current_path = "/home/pi/Baby-logger/script/"
-sys.path.insert(0, current_path)    # Add script folder to default import search
-
 # IMPORT STATEMENTS
 from turtle import end_fill
 import RPi.GPIO as GPIO
@@ -19,6 +15,11 @@ import importlib
 import sys
 import time
 import datetime
+
+#! /usr/bin/python3
+current_path = "/home/pi/Baby-logger/script/"
+sys.path.insert(0, current_path)    # Add script folder to default import search
+
 import pymysql
 pymysql.install_as_MySQLdb()
 import MySQLdb
