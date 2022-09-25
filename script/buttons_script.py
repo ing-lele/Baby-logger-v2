@@ -18,10 +18,11 @@ import datetime
 import pymysql
 pymysql.install_as_MySQLdb()
 import MySQLdb
-import mysql_variables  #Import MySQL variable
-import export_data      #Import Export to CSV functions
+import mysql_variables      #Import MySQL variable
+from export_data import *   #Import Export to CSV functions
 
-debug_on = 1            #DEBUG - Enable debug print
+#DEBUG - Enable debug print
+debug_on = 1
 
 #----------------------------------------------------------
 #GPIO PIN CONFIGURATION (via GPIO number)
