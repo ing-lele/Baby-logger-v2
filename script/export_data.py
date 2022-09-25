@@ -75,7 +75,7 @@ def write_sql_to_file(file_name, sql, with_header=True, delimiter=',',quotechar=
 #---------------------------------------------------------
 
 # Set filename, SQL query
-file_name = "~/Baby-logger/button-data_", datetime.datetime.now().strftime("%Y-%m-%d") ,".csv"; 
+file_name = "~/Baby-logger/" + "button-data_" + datetime.datetime.now().strftime("%Y-%m-%d") + ".csv";
 sql = "SELECT * FROM buttondata ORDER BY id DESC"
 
 if(debug_on): print("DEBUG - File:", file_name, "SQL function:", sql)
