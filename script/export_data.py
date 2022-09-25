@@ -7,6 +7,7 @@
 
 # IMPORT STATEMENTS
 from turtle import end_fill
+import os
 import sys
 import csv
 import time
@@ -53,24 +54,33 @@ def write_sql_to_file(file_name, sql, with_header=True, delimiter=',',quotechar=
     cur.execute(sql)
     header = [field[0] for field in cur.description]
     
-    # CSV functions - https://docs.python.org/3/library/csv.html
-    ofile = open(file_name,'wb')
-    csv_writer = csv.writer(ofile, delimiter=delimiter, quotechar=quotechar,quoting=quoting)
-    
-    if with_header:
-        csv_writer.writerow(header)
-    if con_sscursor:
-         while True:
-            x = cur.fetchone()
-            if x:
+    # Open function - https://www.w3schools.com/python/python_file_handling.asp
+    if (os.path.exists(file_name):                   # Check if file exist
+        ofile = open(file_name,'wb')                 # Open file in Write + Binary mode
+    else
+        ofile = open(file_name,'x')                  # Create file
+        ofile.close()
+        ofile = open(file_name,'wb')                 # Open file in Write + Binary mode
+
+    try:
+        # CSV functions - https://docs.python.org/3/library/csv.html
+        csv_writer = csv.writer(ofile, delimiter=delimiter, quotechar=quotechar,quoting=quoting)
+
+        if with_header:
+            csv_writer.writerow(header)
+        if con_sscursor:
+            while True:
+                x = cur.fetchone()
+                if x:
+                    csv_writer.writerow(x)
+                else:
+                    break
+        else:
+            for x in cur.fetchall():
                 csv_writer.writerow(x)
-            else:
-                break
-    else:
-        for x in cur.fetchall():
-            csv_writer.writerow(x)
-    cur.close()     # close cursor
-    ofile.close()   # close file
+    finally:
+        cur.close()     # close cursor
+        ofile.close()   # close file
 
 #---------------------------------------------------------
 
