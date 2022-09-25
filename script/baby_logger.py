@@ -8,10 +8,14 @@
 # =========================================================
 
 #! /usr/bin/python3
+current_path = "/home/pi/Baby-logger/script/"
+sys.path.insert(0, current_path)    # Add script folder to default import search
+
 # IMPORT STATEMENTS
 from turtle import end_fill
 import RPi.GPIO as GPIO
 import os
+import importlib
 import sys
 import time
 import datetime
@@ -20,6 +24,7 @@ pymysql.install_as_MySQLdb()
 import MySQLdb
 import mysql_variables      #Import MySQL variable
 from export_data import *   #Import Export to CSV functions
+
 
 #DEBUG - Enable debug print
 debug_on = 1
