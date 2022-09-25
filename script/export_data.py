@@ -57,7 +57,7 @@ def write_sql_to_file(file_name, sql, with_header=True, delimiter=',',quotechar=
     # Open function - https://www.w3schools.com/python/python_file_handling.asp
     if (os.path.exists(file_name)):                  # Check if file exist
         ofile = open(file_name,'wb')                 # Open file in Write + Binary mode
-    else
+    else:
         ofile = open(file_name,'x')                  # Create file
         ofile.close()
         ofile = open(file_name,'wb')                 # Open file in Write + Binary mode
