@@ -10,7 +10,7 @@
 //$db_user
 //$db_pass
 //$db_name
-include 'mysql_variables.php';
+include_once 'mysql_variables.php';
 
 // Make connection to database
 $connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("ERROR - Cannot reach database");

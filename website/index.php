@@ -147,7 +147,7 @@ echo "</table>\n";
 echo "<p align='center'>Event count: $event_count<br></p>";
 
 // add export link
-echo "<p align='center'><a href='export_data.php'>Export Data</a></p>"
+echo "<p align='center'><a href='export_data.php'>Export all data from DB</a></p>"
 
 ?>
 </body>
