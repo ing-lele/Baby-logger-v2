@@ -214,10 +214,10 @@ try:
         #---------------------------------------------------------
         # Daily export at midnight
         #---------------------------------------------------------
-        if (last_backup < datetime.datetime.now().strftime("%Y-%m-%d")):
+        if (last_backup < datetime.date.today()):
             # Set table and file name
             table_name = "buttondata"
-            last_backup = datetime.datetime.now().strftime("%Y-%m-%d")
+            last_backup = datetime.date.today()
             file_name = table_name + "_" + last_backup + ".csv"
 
             if(debug_on): print("DEBUG - File:", file_name)
