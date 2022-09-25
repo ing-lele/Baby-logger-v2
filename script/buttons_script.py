@@ -161,6 +161,9 @@ start_state_pee = 0 #PEE
 start_state_fed = 0 #FED
 start_state_poo = 0 #POO
 
+# Reset last backup
+last_backup = None
+
 try: 
     while True:
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
