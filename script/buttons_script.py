@@ -162,7 +162,7 @@ start_state_fed = 0 #FED
 start_state_poo = 0 #POO
 
 # Reset last backup
-last_backup = None
+last_backup = datetime.date(2000,1,1)
 
 try: 
     while True:
