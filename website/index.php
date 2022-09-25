@@ -81,7 +81,7 @@ if ($days > 1)
 else
     print "Baby's vital functions for the last $days day.";
 ?>
-<hr width='600px' size=1>
+<hr width='500px' size=1>
 Show 
 <select name='category'>
 <option value='all'>All</option>
@@ -106,10 +106,10 @@ events for past <select name='days'>
 </center>
 </form>
 
-<table width="600px" border="1" cellpadding="1" cellspacing="1" align="center">
+<table width="500px" border="1" cellpadding="1" cellspacing="1" align="center">
 <tr>
 <th width='50px'>ID</th>
-<th width='400px'>Date & Time</th>
+<th width='300px'>Date & Time</th>
 <th width='100px'>Category</th>
 <th width='50px'>State</th>
 <tr>
