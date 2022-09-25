@@ -10,7 +10,7 @@
 //$db_user
 //$db_pass
 //$db_name
-include 'mysql_variables.php';
+include_once 'mysql_variables.php';
 
 // Make connection to database
 $connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("ERROR - Cannot reach database");
@@ -144,7 +144,10 @@ while($event = mysqli_fetch_assoc($results)){
 	echo "<tr>\n";
 }
 echo "</table>\n";
-echo "<center>Event count: $event_count<br></center>";
+echo "<p align='center'>Event count: $event_count<br></p>";
+
+// add export link
+echo "<p align='center'><a href='export_data.php'>Export Data</a></p>"
 
 ?>
 </body>
