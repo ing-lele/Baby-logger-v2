@@ -36,6 +36,9 @@ debug_on = 1            #DEBUG - Enable debug print
 #
 #---------------------------------------------------------
 def fetch_table_data(table_name):
+    
+    if(debug_on): print("DEBUG - Query SQL function")
+
     #Connect to DB
     try:
         db = MySQLdb.connect(host=mysql_variables.db_host, user=mysql_variables.db_user, password=mysql_variables.db_pass, database=mysql_variables.db_name)
@@ -47,7 +50,7 @@ def fetch_table_data(table_name):
     try:
         # Set and execute query
         sql = "SELECT * FROM " + table_name + " ORDER BY id DESC"
-        if(debug_on): print("DEBUG - ", sql)
+        if(debug_on): print("DEBUG -", sql)
         curs.execute(sql)
 
         # Get header
@@ -92,7 +95,7 @@ def export_file(table_name, file_name):
 #---------------------------------------------------------
 
 # Set table and file name
-table_name = "button-data"
+table_name = "buttondata"
 file_name = table_name + "_" + datetime.datetime.now().strftime("%Y-%m-%d") + ".csv";
 
 if(debug_on): print("DEBUG - File:", file_name)
