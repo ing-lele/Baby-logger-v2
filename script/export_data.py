@@ -90,19 +90,6 @@ def export_file(table_name, file_name):
         # Close file
         ofile.close()
 
-    if(debug_on): print(str(len(rows)) + ' rows written successfully to ' + ofile.name)
+    print("LOG -" + str(len(rows)) + " rows written successfully to " + ofile.name)
 
 #---------------------------------------------------------
-
-# Set table and file name
-table_name = "buttondata"
-file_name = table_name + "_" + datetime.datetime.now().strftime("%Y-%m-%d") + ".csv";
-
-if(debug_on): print("DEBUG - File:", file_name)
-
-# Call write function
-export_file(table_name, file_name)
-
-time.sleep(1)
-
-

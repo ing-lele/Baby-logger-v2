@@ -18,7 +18,8 @@ import datetime
 import pymysql
 pymysql.install_as_MySQLdb()
 import MySQLdb
-import mysql_variables          #Import MySQL variable
+import mysql_variables  #Import MySQL variable
+import export_data      #Import Export to CSV functions
 
 debug_on = 1            #DEBUG - Enable debug print
 
@@ -160,55 +161,76 @@ start_state_pee = 0 #PEE
 start_state_fed = 0 #FED
 start_state_poo = 0 #POO
 
-while True:
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
-    #---------------------------------------------------------
-    #PEE - START
-    if (GPIO.input(pee_switch_pin) == GPIO.LOW and (start_state_pee == 0)):
-        print("LOG - Event logged - PEE - Start at", now)
-        start_state_pee = 1         # Update Start State
-        write_event("pee","start")  # Write DB + Flash LED
+try: 
+    while True:
+        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
+        #---------------------------------------------------------
+        #PEE - START
+        if (GPIO.input(pee_switch_pin) == GPIO.LOW and (start_state_pee == 0)):
+            print("LOG - Event logged - PEE - Start at", now)
+            start_state_pee = 1         # Update Start State
+            write_event("pee","start")  # Write DB + Flash LED
+            
+        #---------------------------------------------------------
+        #PEE - Stop
+        elif (GPIO.input(pee_switch_pin) == GPIO.HIGH and (start_state_pee == 1)):
+            print("LOG - Event logged: PEE - Stop at", now)
+            start_state_pee = 0         # Start flag - OFF
+            write_event("pee","stop")   # Write DB + Flash LED
+
+        #---------------------------------------------------------
+        #FED - START
+        if (GPIO.input(fed_switch_pin) == GPIO.LOW and (start_state_fed == 0)):
+            print("LOG - Event logged: FED - Start at", now)
+            start_state_fed = 1         # Update Start State
+            write_event("fed","start")  # Write DB + Flash LED
+
+        #---------------------------------------------------------
+        #FED - STOP
+        if (GPIO.input(fed_switch_pin) == GPIO.HIGH and (start_state_fed == 1)):
+            print("LOG - Event logged: FED - Stop at", now)
+            start_state_fed = 0         # Update Start State
+            write_event("fed","stop")   # Write DB + Flash LED
+
+        #---------------------------------------------------------
+        #POO - START
+        if (GPIO.input(poo_switch_pin) == GPIO.LOW and (start_state_poo == 0)):
+            print("LOG - Event logged: POO - Start at", now)
+            start_state_poo = 1         # Update Start State
+            write_event("poo","start")  # Write DB + Flash LED
+
+        #---------------------------------------------------------
+        #POO - STOP
+        if (GPIO.input(poo_switch_pin) == GPIO.HIGH and (start_state_poo == 1)):
+            print("LOG - Event logged: POO - Stop at", now)
+            start_state_poo = 0        # Update Start State
+            write_event("poo","stop")  # Write DB + Flash LED
+
+
+        #---------------------------------------------------------
+        # Daily export at midnight
+        #---------------------------------------------------------
+        if (last_backup < datetime.datetime.now().strftime("%Y-%m-%d")):
+            # Set table and file name
+            table_name = "buttondata"
+            last_backup = datetime.datetime.now().strftime("%Y-%m-%d")
+            file_name = table_name + "_" + last_backup + ".csv"
+
+            if(debug_on): print("DEBUG - File:", file_name)
+
+            # Call write function
+            print("LOG - Backup to" + file_name)
+            export_file(table_name, file_name)
+
+            time.sleep(1)
+
+        time.sleep(0.1)
     #---------------------------------------------------------
-    #PEE - Stop
-    elif (GPIO.input(pee_switch_pin) == GPIO.HIGH and (start_state_pee == 1)):
-        print("LOG - Event logged: PEE - Stop at", now)
-        start_state_pee = 0         # Start flag - OFF
-        write_event("pee","stop")   # Write DB + Flash LED
 
-    #---------------------------------------------------------
-    #FED - START
-    if (GPIO.input(fed_switch_pin) == GPIO.LOW and (start_state_fed == 0)):
-        print("LOG - Event logged: FED - Start at", now)
-        start_state_fed = 1         # Update Start State
-        write_event("fed","start")  # Write DB + Flash LED
+finally:
+    # Close DB connection
+    db.close()
 
-    #---------------------------------------------------------
-    #FED - STOP
-    if (GPIO.input(fed_switch_pin) == GPIO.HIGH and (start_state_fed == 1)):
-        print("LOG - Event logged: FED - Stop at", now)
-        start_state_fed = 0         # Update Start State
-        write_event("fed","stop")   # Write DB + Flash LED
-
-    #---------------------------------------------------------
-    #POO - START
-    if (GPIO.input(poo_switch_pin) == GPIO.LOW and (start_state_poo == 0)):
-        print("LOG - Event logged: POO - Start at", now)
-        start_state_poo = 1         # Update Start State
-        write_event("poo","start")  # Write DB + Flash LED
-
-    #---------------------------------------------------------
-    #POO - STOP
-    if (GPIO.input(poo_switch_pin) == GPIO.HIGH and (start_state_poo == 1)):
-        print("LOG - Event logged: POO - Stop at", now)
-        start_state_poo = 0        # Update Start State
-        write_event("poo","stop")  # Write DB + Flash LED
-
-    time.sleep(0.1)
-
-# Close DB connection
-db.close()
-
-# Clean up GPIO configuration
-GPIO.cleanup()
+    # Clean up GPIO configuration
+    GPIO.cleanup()
