@@ -54,13 +54,8 @@ def write_sql_to_file(file_name, sql, with_header=True, delimiter=',',quotechar=
     cur.execute(sql)
     header = [field[0] for field in cur.description]
     
-    # Open function - https://www.w3schools.com/python/python_file_handling.asp
-    if (os.path.exists(file_name)):                  # Check if file exist
-        ofile = open(file_name,'wb')                 # Open file in Write + Binary mode
-    else:
-        ofile = open(file_name,'x')                  # Create file
-        ofile.close()
-        ofile = open(file_name,'wb')                 # Open file in Write + Binary mode
+    # Open function - https://docs.python.org/3/library/functions.html#open
+    ofile = open(file_name,'ab')                 # Open file for Write (and create if needed) + Binary mode
 
     try:
         # CSV functions - https://docs.python.org/3/library/csv.html
