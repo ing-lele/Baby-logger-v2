@@ -155,7 +155,7 @@ def write_event(category, state):
 
 time.sleep(1)
 
-if(debug_on): print("DEBUG - Baby Logger running...")
+print("LOG - Baby Logger running...")
 
 # Reset start status
 start_state_pee = 0 #PEE
@@ -224,7 +224,7 @@ try:
             if(debug_on): print("DEBUG - File:", file_name)
 
             # Call write function
-            print("LOG - Backup to" + file_name)
+            print("LOG - Backup to", file_name)
             export_file(table_name, file_name)
 
             time.sleep(1)

@@ -16,7 +16,8 @@ pymysql.install_as_MySQLdb()
 import MySQLdb
 import mysql_variables  #Import MySQL variable
 
-debug_on = 1            #DEBUG - Enable debug print
+# DEBUG - Enable debug print
+debug_on = 0
 
 #----------------------------------------------------------
 # MySQL variable are defined in mysql_variables.py module
@@ -90,6 +91,6 @@ def export_file(table_name, file_name):
         # Close file
         ofile.close()
 
-    print("LOG -" + str(len(rows)) + " rows written successfully to " + ofile.name)
+    print("LOG - " + str(len(rows)) + " rows written successfully to " + ofile.name)
 
 #---------------------------------------------------------
