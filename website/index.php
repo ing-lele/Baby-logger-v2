@@ -73,15 +73,29 @@ td{
 </head>
 
 <body>
+<hr width='500px' size=1>
+
+<table border="0" align="center">
+	<!-- add export link -->
+	<tr>
+		<td><p align='center'><a href='export_data.php'>Export all data from DB</a></p></td>
+		<td><p align='center'><a href='off.php'>Turn off Raspberry PI</a></p></td>
+	</tr>
+
+</table>
+
+<hr width='500px' size=1>
+
 <form method='POST'>
 <center>
+
 <?php
 if ($days > 1)
     print "Baby's vital functions for the last $days days.";
 else
     print "Baby's vital functions for the last $days day.";
 ?>
-<hr width='500px' size=1>
+
 Show 
 <select name='category'>
 <option value='all'>All</option>
@@ -145,9 +159,6 @@ while($event = mysqli_fetch_assoc($results)){
 }
 echo "</table>\n";
 echo "<p align='center'>Event count: $event_count<br></p>";
-
-// add export link
-echo "<p align='center'><a href='export_data.php'>Export all data from DB</a></p>"
 
 ?>
 </body>
