@@ -75,11 +75,11 @@ td{
 <body>
 <hr width='500px' size=1>
 
-<table border="0" align="center">
+<table width="500px" border="0" cellpadding="1" cellspacing="1" align="center">
 	<!-- add export link -->
 	<tr>
-		<td><p align='center'><a href='export_data.php'>Export all data from DB</a></p></td>
-		<td><p align='center'><a href='off.php'>Turn off Raspberry PI</a></p></td>
+		<th><a href='export_data.php'>Export all data from DB</a></th>
+		<th><a href='off.php'>Turn off Raspberry PI</a></th>
 	</tr>
 
 </table>
