@@ -1,6 +1,7 @@
 <?php 
 // Shutdown page for Raspberry PI using Python and NGINX
 // =========================================================
+// https://www.pihome.eu/2017/10/11/enable-rebootshutdown-rpi-web/
 //
 ?>
 
@@ -13,20 +14,11 @@
             //Execute Shutdown
             print("Shutdown using exec");
             try {
-                exec('sudo shutdown -h now');
+                exec("python /var/www/shutdown.py");
                 }
             catch(Exception $e) {
                 print("Failed to shutdown with exec: <br>". $e->getMessage());
             }
-
-            //Execute Shutdown
-            print("Shutdown using system");
-            try {
-                system('sudo shutdown -h now');
-                }
-            catch(Exception $e) {
-                print("Failed to shutdown with system: <br>". $e->getMessage());
-                }
         ?>
     </body>
 </html>
