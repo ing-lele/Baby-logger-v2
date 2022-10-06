@@ -17,6 +17,7 @@ import time
 import datetime
 
 #! /usr/bin/python3
+table_name = "buttondata"
 backup_path = "/home/pi/Baby-logger/backup/"
 current_path = "/home/pi/Baby-logger/script/"
 sys.path.insert(0, current_path)    # Add script folder to default import search
@@ -224,8 +225,6 @@ try:
         #---------------------------------------------------------
         if (last_backup < datetime.date.today()):
             # Set table and file name
-            table_name = "buttondata"
-            last_backup = datetime.date.today()
             file_name = backup_path + table_name + "_" + last_backup.strftime("%Y-%m-%d")  + ".csv"
 
             if(debug_on): print("DEBUG - File:", file_name)
@@ -233,6 +232,8 @@ try:
             # Call write function
             print("LOG - Backup to", file_name)
             export_file(table_name, file_name)
+
+            last_backup = datetime.date.today()
 
             time.sleep(1)
 
