@@ -17,6 +17,7 @@ import time
 import datetime
 
 #! /usr/bin/python3
+backup_path = "/home/pi/Baby-logger/script/"
 current_path = "/home/pi/Baby-logger/script/"
 sys.path.insert(0, current_path)    # Add script folder to default import search
 
@@ -225,7 +226,7 @@ try:
             # Set table and file name
             table_name = "buttondata"
             last_backup = datetime.date.today()
-            file_name = current_path + table_name + "_" + last_backup.strftime("%Y-%m-%d")  + ".csv"
+            file_name = backup_path + table_name + "_" + last_backup.strftime("%Y-%m-%d")  + ".csv"
 
             if(debug_on): print("DEBUG - File:", file_name)
 

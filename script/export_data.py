@@ -15,10 +15,6 @@ import pymysql
 pymysql.install_as_MySQLdb()
 import MySQLdb
 
-#! /usr/bin/python3
-current_path = "/home/pi/Baby-logger/script/"
-sys.path.insert(0, current_path)    # Add script folder to default import search
-
 import mysql_variables  #Import MySQL variable
 
 # DEBUG - Enable debug print

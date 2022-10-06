@@ -1,0 +1,1 @@
+rclone sync -v /home/pi/Baby-logger/backup "onedrive:Documents/Baby-logger/Backup"
