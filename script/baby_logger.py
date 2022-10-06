@@ -228,7 +228,6 @@ try:
             last_backup = datetime.date.today()
             file_name = backup_path + table_name + "_" + last_backup.strftime("%Y-%m-%d")  + ".csv"
             
-
             if(debug_on): print("DEBUG - File:", file_name)
 
             # Call write function
