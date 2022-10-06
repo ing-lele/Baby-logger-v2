@@ -224,16 +224,15 @@ try:
         # Daily export at midnight
         #---------------------------------------------------------
         if (last_backup < datetime.date.today()):
-            # Set table and file name
+            # Set file name
             file_name = backup_path + table_name + "_" + last_backup.strftime("%Y-%m-%d")  + ".csv"
+            last_backup = datetime.date.today()
 
             if(debug_on): print("DEBUG - File:", file_name)
 
             # Call write function
             print("LOG - Backup to", file_name)
             export_file(table_name, file_name)
-
-            last_backup = datetime.date.today()
 
             time.sleep(1)
 
