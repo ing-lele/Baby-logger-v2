@@ -17,7 +17,7 @@ import time
 import datetime
 
 #! /usr/bin/python3
-backup_path = "/home/pi/Baby-logger/script/"
+backup_path = "/home/pi/Baby-logger/backup/"
 current_path = "/home/pi/Baby-logger/script/"
 sys.path.insert(0, current_path)    # Add script folder to default import search
 
