@@ -79,7 +79,7 @@ td{
 	<!-- add export link -->
 	<tr>
 		<th><a href='export_data.php'>Export all data from DB</a></th>
-		<th><a href='off.php' target='_blank'>Turn off Raspberry PI</a></th>
+		<th><a href='stat.php'>View statistic</a></th>
 	</tr>
 
 </table>
@@ -161,5 +161,8 @@ echo "</table>\n";
 echo "<p align='center'>Event count: $event_count<br></p>";
 
 ?>
+
+<p align='center'><a href='off.php' target='_blank'>Turn off Raspberry PI</a></p>
+
 </body>
 </html>
