@@ -15,7 +15,7 @@
             <?php 
             // Try via PHP
             try {
-                exec("/usr/bin/sudo /sbin/shutdown -h now". $output);
+                exec("/usr/bin/sudo /sbin/shutdown -h now", $output);
                 print("Result:". $output);
                 }
             catch(Exception $e) {
