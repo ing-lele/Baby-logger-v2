@@ -79,7 +79,7 @@ td{
 	<!-- add export link -->
 	<tr>
 		<th><a href='export_data.php'>Export all data from DB</a></th>
-		<th><a href='off.php'>Turn off Raspberry PI</a></th>
+		<th><a href='off.php' target='_blank'>Turn off Raspberry PI</a></th>
 	</tr>
 
 </table>
