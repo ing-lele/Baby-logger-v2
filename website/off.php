@@ -12,7 +12,14 @@
     <body>
         <?php 
             //Execute Shutdown
-            print("Shutdown using exec");
+            print("Shutdown using php");
+            
+            // Try via PHP
+            exec('/usr/bin/sudo /sbin/shutdown -h now', $output);
+            print("Result:", $output);
+
+            // Try via Python
+            print("Shutdown using python script");
             try {
                 exec("python /var/www/shutdown.py");
                 }
