@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Shutdown page for Raspberry PI using Python and NGINX
 // =========================================================
 // https://www.pihome.eu/2017/10/11/enable-rebootshutdown-rpi-web/
