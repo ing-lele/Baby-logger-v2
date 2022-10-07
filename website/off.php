@@ -10,19 +10,6 @@
     </head>
     <body>
 
-        <p>Shutdown using php</p>
-        <p>Result:</p>
-            <?php 
-            // Try via PHP
-            try {
-                exec("/usr/bin/sudo /sbin/shutdown -h now", $output, $status);
-                print("Result:". $status);
-                }
-            catch(Exception $e) {
-                print("Failed to shutdown via PHP: <br>". $e->getMessage());
-                }
-            ?>
-
         <p>Shutdown using python</p>
         <p>Result:</p>
     
