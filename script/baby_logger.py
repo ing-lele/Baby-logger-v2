@@ -29,11 +29,11 @@ import mysql_variables      #Import MySQL variable
 from export_data import *   #Import Export to CSV functions
 
 # MySQL variable are defined in mysql_variables.py module
-# MySQLdb.db_host 
-# MySQLdb.db_user 
-# MySQLdb.db_pass 
-# MySQLdb.db_name 
-# MySQLdb.db_table
+# mysql_variables.db_host 
+# mysql_variables.db_user 
+# mysql_variables.db_pass 
+# mysql_variables.db_name 
+# mysql_variables.db_table
 
 #DEBUG - Enable debug print
 debug_on = 1
@@ -229,13 +229,13 @@ try:
         if (last_backup < datetime.date.today()):
             # Update names and variables
             last_backup = datetime.date.today()
-            file_name = backup_path + MySQLdb.db_table + "_" + last_backup.strftime("%Y-%m-%d")  + ".csv"
+            file_name = backup_path + mysql_variables.db_table + "_" + last_backup.strftime("%Y-%m-%d")  + ".csv"
             
             if(debug_on): print("DEBUG - File:", file_name)
 
             # Call write function
             print("LOG - Backup to", file_name)
-            export_file(MySQLdb.db_table, file_name)
+            export_file(mysql_variables.db_table, file_name)
 
             time.sleep(1)
 
