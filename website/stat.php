@@ -28,23 +28,38 @@ include_once 'mysql_variables.php';
 $connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("ERROR - Cannot reach database");
 mysqli_select_db($connectdb,$db_name) or die ("ERROR - Cannot select database");
 
-// TABLE buttondata(
-//	id INT PRIMARY KEY auto_increment,
-//	created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-//	category TEXT,
-//	state TEXT); 
+//
+// https://www.techrepublic.com/article/10-tips-for-sorting-grouping-and-summarizing-sql-data
+// 
+// 
 
-// show queries from the current date and the day before
-if(!isset($_POST['days'])){
-	$days = 7;
+// 
+// Summary Table (
+//	created TIMESTAMP,
+//	pee_count INT,
+//	poo_count INT,
+//	fee_count INT,
+//	fee_time TIMESTAMP)
+
+// Querie stat from the current date
+if(!isset($_POST['month'])){
+	$month = 0.5;
 }else{
-	$days = intval($_POST['days']);
+	$month = intval($_POST['month']);
 }
-if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo", "fed"])){
+if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo"])){
+	// Poo + Pee stats
 	$category = $_POST['category'];
-	$sql = "SELECT * FROM buttondata WHERE category = '$category' AND created >= CURRENT_DATE() - INTERVAL ".($days-1)." day ORDER BY id DESC;";
-}else{
-	$sql = "SELECT * FROM buttondata WHERE created >= CURRENT_DATE() - INTERVAL ".($days-1)." day ORDER BY id DESC;";
+	$sql = "SELECT DATE(created) as day, COUNT(*) as ".$category."_count FROM buttondata WHERE category = '$category' AND state='start' AND created >= CURRENT_DATE() - INTERVAL '$month' MONTH GROUP BY day DESC;"
+}
+elseif(isset($_POST['category']) && in_array($_POST['category'], ["fed"])){
+	// Fee stats
+	$category = $_POST['category'];
+	$sql = "SELECT DATE(created) as day, COUNT(*) as ".$category."_count FROM buttondata WHERE category = '$category' AND state='start' AND created >= CURRENT_DATE() - INTERVAL '$month' MONTH GROUP BY day DESC;"
+}
+else{
+	// All stats
+	$sql = "SELECT * FROM buttondata WHERE created >= CURRENT_DATE() - INTERVAL ".($month)." MONTH ORDER BY id DESC;";
 }
 
 $results = mysqli_query($connectdb, $sql);
@@ -79,16 +94,26 @@ td{
 <center>
 
 <?php
-    print "Baby's stats for the last $days days.";
+if ($month > 1)
+    print "Baby's stats for the last $month months.";
+else
+    print "Baby's stats for the last $month month.";
 ?>
 
-Show data for past <select name='days'>
-<option value='7'>week</option>
-<option value='30'>month</option>
-<option value='90'>3 months</option>
-<option value='180'>semester</option>
-<option value='365'>year</option>
+Show 
+<select name='category'>
+<!--<option value='all'>All</option>-->
+<option value='pee'>Pee</option>
+<option value='poo'>Poop</option>
+<option value='fed' >Feeding</option>
 </select>
+stats for past <select name='month'>
+<option value='0.5'>0.5</option>
+<option value='1'>1</option>
+<option value='3'>3</option>
+<option value='6'>6</option>
+<option value='12'>12</option>
+</select> months.
 <input type='submit' value='Update'>
 </center>
 </form>
@@ -113,11 +138,11 @@ while($event = mysqli_fetch_assoc($results)){
 		echo "<td class='pee'><center>". $event['pee_count'] ."</center></td>";
 		echo "<td class='poo'><center>". $event['poo_count'] ."</center></td>";
 		echo "<td class='fed'><center>". $event['fee_count'] ."</center></td>";
-		echo "<td class='fed'><center>". $event['fee_time'] ."</center></td>";
+		echo "<td class='fed'><center>". date("G:i", strtotime($event['fee_time'])) ."</center></td>";
 		}
-	catch:
-		{
-		echo "<td><center>error</center></td>";
+	catch (Exception $ex) {
+		echo "<td><center>Failed to create table</center></td>";
+		echo "<td><center>$er</center></td>";
 	}
 	
 	echo "</tr>";
