@@ -47,17 +47,20 @@ if(!isset($_POST['month'])){
 }else{
 	$month = intval($_POST['month']);
 }
-if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo"])){
+
+if(!isset($_POST['category'])){
+	$category = 'pee';
+}else{
+	$category = ($_POST['category']);
+}
+
+if($category == "pee" or $category == "poo"){
 	// Poo + Pee stats
-	$category = $_POST['category'];
 	$sql = "SELECT DATE(created) as day, COUNT(*) as ".$category."_count FROM buttondata WHERE category = '$category' AND state='start' AND created >= CURRENT_DATE() - INTERVAL '$month' MONTH GROUP BY day DESC;"
-}
-elseif(isset($_POST['category']) && in_array($_POST['category'], ["fed"])){
+}elseif($category == "fed"){
 	// Fee stats
-	$category = $_POST['category'];
 	$sql = "SELECT DATE(created) as day, COUNT(*) as ".$category."_count FROM buttondata WHERE category = '$category' AND state='start' AND created >= CURRENT_DATE() - INTERVAL '$month' MONTH GROUP BY day DESC;"
-}
-else{
+}else{
 	// All stats
 	$sql = "SELECT * FROM buttondata WHERE created >= CURRENT_DATE() - INTERVAL ".($month)." MONTH ORDER BY id DESC;";
 }
@@ -102,10 +105,10 @@ else
 
 Show 
 <select name='category'>
-<!--<option value='all'>All</option>-->
 <option value='pee'>Pee</option>
 <option value='poo'>Poop</option>
 <option value='fed' >Feeding</option>
+<!--<option value='all'>All</option>-->
 </select>
 stats for past <select name='month'>
 <option value='0.5'>0.5</option>
