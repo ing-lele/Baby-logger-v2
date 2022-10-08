@@ -73,9 +73,9 @@ td{
 </head>
 
 <body>
-<hr width='500px' size=1>
+<hr size=1>
 
-<table width="500px" border="0" cellpadding="1" cellspacing="1" align="center">
+<table border="0" cellpadding="1" cellspacing="1" align="center">
 	<!-- add export link -->
 	<tr>
 		<th><a href='export_data.php'>Export all data from DB</a></th>
@@ -84,7 +84,7 @@ td{
 
 </table>
 
-<hr width='500px' size=1>
+<hr size=1>
 
 <form method='POST'>
 <center>
@@ -120,12 +120,12 @@ events for past <select name='days'>
 </center>
 </form>
 
-<table width="500px" border="1" cellpadding="1" cellspacing="1" align="center">
+<table border="1" cellpadding="1" cellspacing="1" align="center">
 <tr>
-<th width='50px'>ID</th>
-<th width='300px'>Start</th>
-<th width='300px'>End</th>
-<th width='100px'>Category</th>
+<th>ID</th>
+<th>Start</th>
+<th>End</th>
+<th>Category</th>
 <tr>
 <?php
 $event_count = 0;
