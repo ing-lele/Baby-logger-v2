@@ -56,10 +56,10 @@ if(!isset($_POST['category'])){
 
 if($category == "pee" or $category == "poo"){
 	// Poo + Pee stats
-	$sql = "SELECT DATE(created) as day, COUNT(*) as ".$category."_count FROM buttondata WHERE category = '$category' AND state='start' AND created >= CURRENT_DATE() - INTERVAL '$month' MONTH GROUP BY day DESC;"
+	$sql = "SELECT DATE(created) as day, COUNT(*) as ".$category."_count FROM buttondata WHERE category = '$category' AND state='start' AND created >= CURRENT_DATE() - INTERVAL '$month' MONTH GROUP BY day DESC;";
 }elseif($category == "fed"){
 	// Fee stats
-	$sql = "SELECT DATE(created) as day, COUNT(*) as ".$category."_count FROM buttondata WHERE category = '$category' AND state='start' AND created >= CURRENT_DATE() - INTERVAL '$month' MONTH GROUP BY day DESC;"
+	$sql = "SELECT DATE(created) as day, COUNT(*) as ".$category."_count FROM buttondata WHERE category = '$category' AND state='start' AND created >= CURRENT_DATE() - INTERVAL '$month' MONTH GROUP BY day DESC;";
 }else{
 	// All stats
 	$sql = "SELECT * FROM buttondata WHERE created >= CURRENT_DATE() - INTERVAL ".($month)." MONTH ORDER BY id DESC;";
