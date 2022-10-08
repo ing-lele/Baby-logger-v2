@@ -1,4 +1,3 @@
-### IngLele Fork at 26 Jun 2022 from https://github.com/tommygober/Baby-logger
 # =========================================================
 # Scope:
 # -- Export all SQL data to CSV file for backup

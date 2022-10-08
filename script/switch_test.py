@@ -1,7 +1,6 @@
-### IngLele Fork at 26 Jun 2022 from https://github.com/tommygober/Baby-logger
 # =========================================================
 # Scope:
-# -- Basic LED and Switch script to verify wires are connected to correct PIN#
+# --- Basic LED and Switch script to verify wires are connected to correct PIN#
 # 
 # =========================================================
 

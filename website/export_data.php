@@ -16,30 +16,30 @@ include_once 'mysql_variables.php';
 $connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("ERROR - Cannot reach database");
 mysqli_select_db($connectdb,$db_name) or die ("ERROR - Cannot select database");
 
-// TABLE buttondata(
-//      id INT PRIMARY KEY auto_increment,
-//  	created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-//	    category TEXT,
-//  	state TEXT); 
- 
+// TABLE switchdata(
+//  id INT PRIMARY KEY auto_increment NOT NULL,
+//  ts_start TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+//  ts_end TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+//  category TEXT
+
 // Fetch all records from database 
-$sql = "SELECT * FROM buttondata ORDER BY id DESC"; 
+$sql = "SELECT * FROM $db_table ORDER BY id DESC"; 
 $results = mysqli_query($connectdb, $sql);
 
 if($results->num_rows > 0){ 
     $delimiter = ","; 
-    $filename = "button-data_" . date('Y-m-d') . ".csv"; 
+    $filename = $db_table."_" . date('Y-m-d') . ".csv"; 
     
     // Create a file pointer 
     $f = fopen('php://memory', 'w'); 
      
     // Set column headers 
-    $fields = array('ID', 'CREATED', 'CATEGORY', 'STATE');
+    $fields = array('ID', 'START', 'END', 'CATEGORY');
     fputcsv($f, $fields, $delimiter); 
      
     // Output each row of the data, format line as csv and write to file pointer 
     while($row = $results->fetch_assoc()){ 
-        $lineData = array($row['id'], $row['created'], $row['category'], $row['state']);
+        $lineData = array($row['id'], $row['ts_start'], $row['ts_end'], $row['category']);
         fputcsv($f, $lineData, $delimiter);
     } 
      

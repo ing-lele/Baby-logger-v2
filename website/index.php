@@ -30,9 +30,9 @@ if(!isset($_POST['days'])){
 }
 if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo", "fed"])){
 	$category = $_POST['category'];
-	$sql = "SELECT * FROM buttondata WHERE category = '$category' AND created >= CURRENT_DATE() - INTERVAL ".($days-1)." day ORDER BY id DESC;";
+	$sql = "SELECT * FROM $db_table WHERE category = '$category' AND created >= CURRENT_DATE() - INTERVAL ".($days-1)." day ORDER BY id DESC;";
 }else{
-	$sql = "SELECT * FROM buttondata WHERE created >= CURRENT_DATE() - INTERVAL ".($days-1)." day ORDER BY id DESC;";
+	$sql = "SELECT * FROM $db_table WHERE created >= CURRENT_DATE() - INTERVAL ".($days-1)." day ORDER BY id DESC;";
 }
 
 $results = mysqli_query($connectdb, $sql);
@@ -123,9 +123,9 @@ events for past <select name='days'>
 <table width="500px" border="1" cellpadding="1" cellspacing="1" align="center">
 <tr>
 <th width='50px'>ID</th>
-<th width='300px'>Date & Time</th>
+<th width='300px'>Start</th>
+<th width='300px'>End</th>
 <th width='100px'>Category</th>
-<th width='50px'>State</th>
 <tr>
 <?php
 $event_count = 0;
@@ -135,24 +135,24 @@ while($event = mysqli_fetch_assoc($results)){
 	echo "<tr>";
 	if ($event['category'] == "fed"){
 		echo "<td class='fed'><center>". $event['id'] ."</center></td>";
-		echo "<td class='fed'><center>". date("d M y G:i", strtotime($event['created'])) ."</center></td>";
+		echo "<td class='fed'><center>". date("d M y G:i", strtotime($event['ts_start'])) ."</center></td>";
+		echo "<td class='fed'><center>". date("d M y G:i", strtotime($event['ts_end'])) ."</center></td>";
 		echo "<td class='fed'><center>&#x1f37c;</center></td>"; //Show baby bottle emoji
-		echo "<td class='fed'><center>". $event['state'] ."</center></td>";
 	}else if ($event['category'] == "pee"){
 		echo "<td class='pee'><center>". $event['id'] ."</center></td>";
-		echo "<td class='pee'><center>". date("d M y G:i", strtotime($event['created'])) ."</center></td>";
+		echo "<td class='pee'><center>". date("d M y G:i", strtotime($event['ts_start'])) ."</center></td>";
+		echo "<td class='pee'><center>". date("d M y G:i", strtotime($event['ts_end'])) ."</center></td>";
 		echo "<td class='pee'><center>&#128166;</center></td>";  //Show pee emoji
-		echo "<td class='pee'><center>". $event['state'] ."</center></td>";
 	}else if ($event['category'] == "poo"){
 		echo "<td class='poo'><center>". $event['id'] ."</center></td>";
-		echo "<td class='poo'><center>". date("d M y G:i", strtotime($event['created'])) ."</center></td>";
+		echo "<td class='poo'><center>". date("d M y G:i", strtotime($event['ts_start'])) ."</center></td>";
+		echo "<td class='poo'><center>". date("d M y G:i", strtotime($event['ts_end'])) ."</center></td>";
 		echo "<td class='poo'><center>&#128169;</center></td>";  //Show poop emoji
-		echo "<td class='poo'><center>". $event['state'] ."</center></td>";
 	}else{
 		echo "<td><center>". $event['id'] ."</center></td>";
-		echo "<td><center>". date("d M y G:i", strtotime($event['created'])) ."</center></td>";
+		echo "<td><center>". date("d M y G:i", strtotime($event['ts_start'])) ."</center></td>";
+		echo "<td><center>". date("d M y G:i", strtotime($event['ts_end'])) ."</center></td>";
 		echo "<td style='background-color: red;'><center><b>Error</b></center></td>";
-		echo "<td><center>". $event['state'] ."</center></td>";
 	}
 	
 	echo "<tr>\n";

@@ -1,9 +1,10 @@
-### IngLele Fork at 26 Jun 2022 from https://github.com/tommygober/Baby-logger
 # =========================================================
-# Changes: 
-# * Updated 3 colored switches
-# * Use RGB LED for confirmation
-# * Record ON / OFF time for the switches
+# Scope:
+# --- Main Python script
+# --- Use RGB LED for confirmation
+# --- Record timestamp ON / OFF time for the 3 switches (pee,poo,fee)
+# --- Daily backup locally and on OneDrive
+# --- UI with raw data, stats and CSV export
 #
 # =========================================================
 
@@ -17,10 +18,9 @@ import time
 import datetime
 
 #! /usr/bin/python3
-table_name = "buttondata"
-backup_path = "/home/pi/Baby-logger/backup/"
-current_path = "/home/pi/Baby-logger/script/"
-sys.path.insert(0, current_path)    # Add script folder to default import search
+backup_path = "/home/pi/Baby-logger-v2/backup/"
+script_path = "/home/pi/Baby-logger-v2/script/"
+sys.path.insert(0, script_path)    # Add script folder to default import search
 
 import pymysql
 pymysql.install_as_MySQLdb()
@@ -28,6 +28,12 @@ import MySQLdb
 import mysql_variables      #Import MySQL variable
 from export_data import *   #Import Export to CSV functions
 
+# MySQL variable are defined in mysql_variables.py module
+# MySQLdb.db_host 
+# MySQLdb.db_user 
+# MySQLdb.db_pass 
+# MySQLdb.db_name 
+# MySQLdb.db_table
 
 #DEBUG - Enable debug print
 debug_on = 1
@@ -46,14 +52,8 @@ pee_switch_pin = 17     #Green Switch
 fed_switch_pin = 27     #Blue Switch
 poo_switch_pin = 22     #Red Switch
 #            PIN#17     VCC +3.3V
-
-# MySQL variable are defined in mysql_variables.py module
-# MySQLdb.db_host 
-# MySQLdb.db_user 
-# MySQLdb.db_pass 
-# MySQLdb.db_name 
-
 #----------------------------------------------------------
+
 #Setup DB
 if(debug_on): print("DEBUG - DB Connection settings:", mysql_variables.db_host, mysql_variables.db_user, mysql_variables.db_pass, mysql_variables.db_name)     # DEBUG - Print DB info
 
@@ -136,27 +136,25 @@ flash_led("starting","")
 
 #---------------------------------------------------------
 # FUNCTION: Write to DB
-# Table structure: CREATE TABLE buttondata(
-#	id INT PRIMARY KEY auto_increment,
-#	created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-#	category TEXT,
-#	state TEXT); 
+#
+# Table structure: CREATE TABLE switchdata(
+#	id INT PRIMARY KEY auto_increment NOT NULL,
+#	ts_start TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+#	ts_end TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+#   category TEXT
 #
 #---------------------------------------------------------
-def write_event(category, state):
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-    if(debug_on): print("DEBUG - Creating new entry in DB:", category.upper(), "-", state.upper(),"at", now)      # DEBUG - Print DB info
+def write_event(ts_start, ts_end, category):
+    if(debug_on): print("DEBUG - Creating new entry in DB:", category.upper(), "- from", ts_start,"to", ts_end)      # DEBUG - Print DB info
 
     try:
-        curs.execute("""INSERT INTO babylogger.buttondata (category, state) VALUES (%s,%s)""", (category, state))
+        curs.execute("""INSERT INTO babylogger.switchdata (ts_start, ts_end, category) VALUES (%s,%s,%s)""", (ts_start, ts_end, category))
         db.commit()
-        flash_led(category.lower(), state.lower())
     except Exception as ex:
-        print("ERROR - Database is being rolled back --- Category:", category.upper(), "-", state.upper(), "at", now)
+        print("ERROR - Database is being rolled back --- ", category.upper(), "- from", ts_start,"to", ts_end)
         print(ex)
         #Flash LED
-        flash_led("Error writing DB","")
+        flash_led("Error writing DB")
         sys.exit(0)
 
 #---------------------------------------------------------
@@ -165,7 +163,7 @@ time.sleep(1)
 
 print("LOG - Baby Logger running...")
 
-# Reset start status
+# Reset start time
 start_state_pee = 0 #PEE
 start_state_fed = 0 #FED
 start_state_poo = 0 #POO
@@ -175,50 +173,55 @@ last_backup = datetime.date(2000,1,1)
 
 try: 
     while True:
-        now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        now = datetime.datetime.now() #.strftime("%Y-%m-%d %H:%M:%S")
         
         #---------------------------------------------------------
-        #PEE - START
+        #PEE - Start
         if (GPIO.input(pee_switch_pin) == GPIO.LOW and (start_state_pee == 0)):
-            print("LOG - Event logged - PEE - Start at", now)
+            if(debug_on): print("DEBUG - PEE start at", now)
             start_state_pee = 1         # Update Start State
-            write_event("pee","start")  # Write DB + Flash LED
+            ts_start_pee = now          # Save Start time
+            flash_led("pee","start")    # Turn LED On
             
         #---------------------------------------------------------
         #PEE - Stop
         elif (GPIO.input(pee_switch_pin) == GPIO.HIGH and (start_state_pee == 1)):
-            print("LOG - Event logged: PEE - Stop at", now)
-            start_state_pee = 0         # Start flag - OFF
-            write_event("pee","stop")   # Write DB + Flash LED
+            print("LOG - Event logged: PEE - from", ts_start_pee," to ", now)
+            start_state_pee = 0                     # Start flag - OFF
+            write_event(ts_start_pee, now, "pee")   # Write DB
+            flash_led("pee","stop")                 # Turn LED Off
 
         #---------------------------------------------------------
         #FED - START
         if (GPIO.input(fed_switch_pin) == GPIO.LOW and (start_state_fed == 0)):
-            print("LOG - Event logged: FED - Start at", now)
+            if(debug_on): print("DEBUG - FED start at", now)
             start_state_fed = 1         # Update Start State
-            write_event("fed","start")  # Write DB + Flash LED
+            ts_start_fed = now          # Save Start time
+            flash_led("fed","start")    # Turn LED On
 
         #---------------------------------------------------------
         #FED - STOP
         if (GPIO.input(fed_switch_pin) == GPIO.HIGH and (start_state_fed == 1)):
-            print("LOG - Event logged: FED - Stop at", now)
-            start_state_fed = 0         # Update Start State
-            write_event("fed","stop")   # Write DB + Flash LED
+            print("LOG - Event logged: FED - from", ts_start_pee," to ", now)
+            start_state_fed = 0                     # Update Start State
+            write_event(ts_start_fed, now, "fed")   # Write DB
+            flash_led("fed","stop")                 # Turn LED Off
 
         #---------------------------------------------------------
         #POO - START
         if (GPIO.input(poo_switch_pin) == GPIO.LOW and (start_state_poo == 0)):
-            print("LOG - Event logged: POO - Start at", now)
+            if(debug_on): print("DEBUG - POO start at", now)
             start_state_poo = 1         # Update Start State
-            write_event("poo","start")  # Write DB + Flash LED
+            ts_start_poo = now          # Save Start time
+            flash_led("poo","start")    # Turn LED On
 
         #---------------------------------------------------------
         #POO - STOP
         if (GPIO.input(poo_switch_pin) == GPIO.HIGH and (start_state_poo == 1)):
-            print("LOG - Event logged: POO - Stop at", now)
-            start_state_poo = 0        # Update Start State
-            write_event("poo","stop")  # Write DB + Flash LED
-
+            print("LOG - Event logged: POO - from", ts_start_pee," to ", now)
+            start_state_poo = 0                     # Update Start State
+            write_event(ts_start_poo, now, "poo")   # Write DB
+            flash_led("poo","stop")                 # Turn LED Off
 
         #---------------------------------------------------------
         # Daily export at midnight
@@ -226,13 +229,13 @@ try:
         if (last_backup < datetime.date.today()):
             # Update names and variables
             last_backup = datetime.date.today()
-            file_name = backup_path + table_name + "_" + last_backup.strftime("%Y-%m-%d")  + ".csv"
+            file_name = backup_path + MySQLdb.db_table + "_" + last_backup.strftime("%Y-%m-%d")  + ".csv"
             
             if(debug_on): print("DEBUG - File:", file_name)
 
             # Call write function
             print("LOG - Backup to", file_name)
-            export_file(table_name, file_name)
+            export_file(MySQLdb.db_table, file_name)
 
             time.sleep(1)
 
