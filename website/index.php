@@ -158,14 +158,7 @@ echo "<p align='center'>Event count: $event_count<br></p>";
 
 ?>
 
-<table width="50%" border="0" cellpadding="10" align="center">
-	<tr>
-		<td><a href='export_data.php'>Export DB data</a></td>
-		<td><a href='off.php' target='_blank'>Turn off Raspberry PI</a></td>
-	</tr>
-</table>
-
-
+<p align='center'><a href='admin.php' target='_blank'>Admin page</a></p>
 
 
 </body>
