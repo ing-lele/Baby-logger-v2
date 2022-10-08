@@ -112,6 +112,7 @@ Show stats for past <select name='month'>
 <th>&#128169; Count</th>
 <th>&#x1f37c; Count</th>
 <th>&#x1f37c; Duration</th>
+<th>&#x1f37c; Duration [min]</th>
 <tr>
 <?php
 $event_count = 0;
@@ -121,11 +122,12 @@ while($event = mysqli_fetch_assoc($results)){
 	echo "<tr>";
 	
 	try {
-		echo "<td>". date("d M y", strtotime($event['day'])) ."</td>";
+		echo "<td>". date("d M y", strtotime($event['day'])) ."</td>";		
 		echo "<td class='pee'>". $event['pee_count'] ."</td>";
 		echo "<td class='poo'>". $event['poo_count'] ."</td>";
 		echo "<td class='fed'>". $event['fed_count'] ."</td>";
 		echo "<td class='fed'>". date("G:i:s", strtotime($event['fed_duration'])) ."</td>";
+		echo "<td class='fed'>". $event['fed_duration'] ."</td>";
 		}
 	catch (Exception $ex) {
 		echo "<td><center>Failed to create table</center></td>";
@@ -140,3 +142,4 @@ echo "<p align='center'>Event count: $event_count<br></p>";
 ?>
 </body>
 </html>
+
