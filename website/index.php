@@ -74,13 +74,13 @@ td{
 
 <body>
 
-<table width="50%" border="1" cellpadding="10" align="center">
+<table border="1" cellpadding="10" align="center">
 	<tr>
 		<td><a href='stat.php'>View statistic</a></td>
 	</tr>
 </table>
 
-<hr size=1 width="50%">
+<hr size=1>
 
 <form method='POST'>
 <center>
