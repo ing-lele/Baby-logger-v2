@@ -22,24 +22,12 @@
 //$db_user
 //$db_pass
 //$db_name
+//$db_table
 include_once 'mysql_variables.php';
 
 // Make connection to database
 $connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("ERROR - Cannot reach database");
 mysqli_select_db($connectdb,$db_name) or die ("ERROR - Cannot select database");
-
-//
-// https://www.techrepublic.com/article/10-tips-for-sorting-grouping-and-summarizing-sql-data
-// 
-// 
-
-// 
-// Summary Table (
-//	created TIMESTAMP,
-//	pee_count INT,
-//	poo_count INT,
-//	fee_count INT,
-//	fee_time TIMESTAMP)
 
 // Querie stat from the current date
 if(!isset($_POST['month'])){
@@ -48,22 +36,24 @@ if(!isset($_POST['month'])){
 	$month = intval($_POST['month']);
 }
 
-if(!isset($_POST['category'])){
-	$category = 'pee';
-}else{
-	$category = ($_POST['category']);
-}
+// Stats (
+//	day DATE,
+//	pee_count INT,
+//	poo_count INT,
+//	fed_count INT,
+//	fed_time TIME)
 
-if($category == "pee" or $category == "poo"){
-	// Poo + Pee stats
-	$sql = "SELECT DATE(created) as day, COUNT(*) as ".$category."_count FROM buttondata WHERE category = '$category' AND state='start' AND created >= CURRENT_DATE() - INTERVAL '$month' MONTH GROUP BY day DESC;";
-}elseif($category == "fed"){
-	// Fee stats
-	$sql = "SELECT DATE(created) as day, COUNT(*) as ".$category."_count FROM buttondata WHERE category = '$category' AND state='start' AND created >= CURRENT_DATE() - INTERVAL '$month' MONTH GROUP BY day DESC;";
-}else{
-	// All stats
-	$sql = "SELECT * FROM buttondata WHERE created >= CURRENT_DATE() - INTERVAL ".($month)." MONTH ORDER BY id DESC;";
-}
+// Show count of pee, poo, fed, fed_duration by day
+$sql = "SELECT 
+	DATE(ts_start) AS day, 
+	COUNT(CASE WHEN category = 'pee' THEN id END) AS pee_count,
+	COUNT(CASE WHEN category = 'poo' THEN id END) AS poo_count,
+	COUNT(CASE WHEN category = 'fed' THEN id END) AS fed_count,
+	SUM(CASE WHEN category = 'fed' THEN TIMEDIFF(ts_end,ts_start) END) AS fed_duration 
+	FROM switchdata
+	WHERE ts_start>= CURRENT_DATE() - INTERVAL ".($month)." MONTH 
+	GROUP BY DATE(ts_start)
+	ORDER BY DATE(ts_start) DESC;";
 
 $results = mysqli_query($connectdb, $sql);
 ?>
@@ -84,7 +74,7 @@ th, td{
 	font-family: arial;
 }
 td{
-	text-align: right;
+	text-align: center;
 	font-size: 32px;
 	padding: 2px;
 }
@@ -102,15 +92,9 @@ if ($month > 1)
 else
     print "Baby's stats for the last $month month.";
 ?>
+<br><br>
 
-Show 
-<select name='category'>
-<option value='pee'>Pee</option>
-<option value='poo'>Poop</option>
-<option value='fed' >Feeding</option>
-<!--<option value='all'>All</option>-->
-</select>
-stats for past <select name='month'>
+Show stats for past <select name='month'>
 <option value='0.5'>0.5</option>
 <option value='1'>1</option>
 <option value='3'>3</option>
@@ -137,11 +121,11 @@ while($event = mysqli_fetch_assoc($results)){
 	echo "<tr>";
 	
 	try {
-		echo "<td><center>". date("d M y", strtotime($event['day'])) ."</center></td>";
-		echo "<td class='pee'><center>". $event['pee_count'] ."</center></td>";
-		echo "<td class='poo'><center>". $event['poo_count'] ."</center></td>";
-		echo "<td class='fed'><center>". $event['fee_count'] ."</center></td>";
-		echo "<td class='fed'><center>". date("G:i", strtotime($event['fee_time'])) ."</center></td>";
+		echo "<td>". date("d M y", strtotime($event['day'])) ."</td>";
+		echo "<td class='pee'>". $event['pee_count'] ."</td>";
+		echo "<td class='poo'>". $event['poo_count'] ."</td>";
+		echo "<td class='fed'>". $event['fed_count'] ."</td>";
+		echo "<td class='fed'>". date("G:i:s", strtotime($event['fed_duration'])) ."</td>";
 		}
 	catch (Exception $ex) {
 		echo "<td><center>Failed to create table</center></td>";
