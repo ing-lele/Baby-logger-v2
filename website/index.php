@@ -73,18 +73,14 @@ td{
 </head>
 
 <body>
-<hr size=1>
 
-<table border="0" cellpadding="1" cellspacing="1" align="center">
-	<!-- add export link -->
+<table width="50%" border="1" cellpadding="10" align="center">
 	<tr>
-		<th><a href='export_data.php'>Export all data from DB</a></th>
-		<th><a href='stat.php'>View statistic</a></th>
+		<td><a href='stat.php'>View statistic</a></td>
 	</tr>
-
 </table>
 
-<hr size=1>
+<hr size=1 width="50%">
 
 <form method='POST'>
 <center>
@@ -162,7 +158,15 @@ echo "<p align='center'>Event count: $event_count<br></p>";
 
 ?>
 
-<p align='center'><a href='off.php' target='_blank'>Turn off Raspberry PI</a></p>
+<table width="50%" border="0" cellpadding="10" align="center">
+	<tr>
+		<td><a href='export_data.php'>Export DB data</a></td>
+		<td><a href='off.php' target='_blank'>Turn off Raspberry PI</a></td>
+	</tr>
+</table>
+
+
+
 
 </body>
 </html>
