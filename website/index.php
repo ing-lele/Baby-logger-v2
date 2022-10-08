@@ -76,7 +76,8 @@ td{
 
 <table border="1" cellpadding="10" align="center">
 	<tr>
-		<td><a href='stat.php'>View statistic</a></td>
+		<td><a href='index.php'>Log entry</a></td>
+		<td><a href='stat.php'>View stats</a></td>
 	</tr>
 </table>
 

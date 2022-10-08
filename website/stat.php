@@ -83,6 +83,15 @@ td{
 
 <body>
 
+<table border="1" cellpadding="10" align="center">
+	<tr>
+		<td><a href='index.php'>Log entry</a></td>
+		<td><a href='stat.php'>View stats</a></td>
+	</tr>
+</table>
+
+<hr size=1>
+
 <form method='POST'>
 <center>
 
