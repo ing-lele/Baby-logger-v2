@@ -39,6 +39,7 @@ td{
     <tr><td><a href='export_data.php'>Export DB data</a></td></tr>
     <tr><td><hr size=1></td></tr>
 	<tr><td><a href='off.php' target='_blank'>Turn off Raspberry PI</a></td></tr>
+    <tr><td><hr size=1></td></tr>
 </table>
 
 </body>

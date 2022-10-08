@@ -158,7 +158,7 @@ echo "<p align='center'>Event count: $event_count<br></p>";
 
 ?>
 
-<p align='center'><a href='admin.php' target='_blank'>Admin page</a></p>
+<p align='center'><a href='admin.php'>Admin page</a></p>
 
 
 </body>
