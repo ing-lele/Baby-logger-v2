@@ -49,7 +49,7 @@ $sql = "SELECT
 	COUNT(CASE WHEN category = 'pee' THEN id END) AS pee_count,
 	COUNT(CASE WHEN category = 'poo' THEN id END) AS poo_count,
 	COUNT(CASE WHEN category = 'fed' THEN id END) AS fed_count,
-	SUM(CASE WHEN category = 'fed' THEN TIMEDIFF(ts_end,ts_start) END) AS fed_duration 
+	SEC_TO_TIME(SUM(CASE WHEN category = 'fed' THEN TIME_TO_SEC(TIMEDIFF(ts_end,ts_start)) END)) AS fed_duration 
 	FROM switchdata
 	WHERE ts_start>= CURRENT_DATE() - INTERVAL ".($month)." MONTH 
 	GROUP BY DATE(ts_start)
