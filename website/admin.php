@@ -34,8 +34,10 @@ td{
 </head>
 
 <body>
-<table width="50%" border="0" cellpadding="10" align="center">
-	<tr><td><a href='export_data.php'>Export DB data</a></td></tr>
+<table width="50%" border="0" cellpadding="30" align="center">
+    <tr><td><hr size=1></td></tr>	
+    <tr><td><a href='export_data.php'>Export DB data</a></td></tr>
+    <tr><td><hr size=1></td></tr>
 	<tr><td><a href='off.php' target='_blank'>Turn off Raspberry PI</a></td></tr>
 </table>
 
