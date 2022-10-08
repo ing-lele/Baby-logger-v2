@@ -16,11 +16,11 @@ include_once 'mysql_variables.php';
 $connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("ERROR - Cannot reach database");
 mysqli_select_db($connectdb,$db_name) or die ("ERROR - Cannot select database");
 
-// TABLE buttondata(
-//	id INT PRIMARY KEY auto_increment,
-//	created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-//	category TEXT,
-//	state TEXT); 
+// TABLE switchdata(
+//  id INT PRIMARY KEY auto_increment NOT NULL,
+//  ts_start TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+//  ts_end TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+//  category TEXT
 
 // show queries from the current date and the day before
 if(!isset($_POST['days'])){
@@ -30,9 +30,9 @@ if(!isset($_POST['days'])){
 }
 if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo", "fed"])){
 	$category = $_POST['category'];
-	$sql = "SELECT * FROM $db_table WHERE category = '$category' AND created >= CURRENT_DATE() - INTERVAL ".($days-1)." day ORDER BY id DESC;";
+	$sql = "SELECT * FROM $db_table WHERE category = '$category' AND ts_start >= CURRENT_DATE() - INTERVAL ".($days-1)." day ORDER BY id DESC;";
 }else{
-	$sql = "SELECT * FROM $db_table WHERE created >= CURRENT_DATE() - INTERVAL ".($days-1)." day ORDER BY id DESC;";
+	$sql = "SELECT * FROM $db_table WHERE ts_start >= CURRENT_DATE() - INTERVAL ".($days-1)." day ORDER BY id DESC;";
 }
 
 $results = mysqli_query($connectdb, $sql);
