@@ -54,7 +54,7 @@ th, td{
 	font-family: arial;
 }
 td{
-	text-align: right;
+	text-align: center;
 	font-size: 32px;
 	padding: 2px;
 }
