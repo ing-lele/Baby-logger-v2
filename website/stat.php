@@ -123,7 +123,7 @@ stats for past <select name='month'>
 
 <table border="1" cellpadding="1" cellspacing="1" align="center">
 <tr>
-<th>Date & Time</th>
+<th>Day</th>
 <th>&#128166; Count</th>
 <th>&#128169; Count</th>
 <th>&#x1f37c; Count</th>
@@ -137,7 +137,7 @@ while($event = mysqli_fetch_assoc($results)){
 	echo "<tr>";
 	
 	try {
-		echo "<td><center>". date("d M y G:i", strtotime($event['created'])) ."</center></td>";
+		echo "<td><center>". date("d M y", strtotime($event['day'])) ."</center></td>";
 		echo "<td class='pee'><center>". $event['pee_count'] ."</center></td>";
 		echo "<td class='poo'><center>". $event['poo_count'] ."</center></td>";
 		echo "<td class='fed'><center>". $event['fee_count'] ."</center></td>";
