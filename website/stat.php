@@ -126,7 +126,7 @@ while($event = mysqli_fetch_assoc($results)){
 		echo "<td class='pee'>". $event['pee_count'] ."</td>";
 		echo "<td class='poo'>". $event['poo_count'] ."</td>";
 		echo "<td class='fed'>". $event['fed_count'] ."</td>";
-		echo "<td class='fed'>". strtotime($event['fed_duration'])) ."</td>";
+		echo "<td class='fed'>". strtotime($event['fed_duration']) ."</td>";
 		echo "<td class='fed'>". $event['fed_duration'] ."</td>";
 		}
 	catch (Exception $ex) {
