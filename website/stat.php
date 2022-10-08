@@ -96,10 +96,8 @@ td{
 <center>
 
 <?php
-if ($month > 1)
-    print "Baby's stats for the last $month months.";
-else
-    print "Baby's stats for the last $month month.";
+	$current_date = date("d M Y");
+	echo "<P>Baby's stats from ". $current_date->modify('-'.$month.' months').".</P>";
 ?>
 <br><br>
 
