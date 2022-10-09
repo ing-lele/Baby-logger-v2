@@ -138,7 +138,7 @@ while($event = mysqli_fetch_assoc($results)){
 	}else if ($event['category'] == "poo"){
 		echo "<td class='poo'>". date("d M y G:i", strtotime($event['ts_start'])) ."</td>";
 		echo "<td class='poo'>&#128169;</td>";  //Show poop emoji
-		echo "<td class='pee'>". date("G:i:s", strtotime($event['duration'])) ."</td>";
+		echo "<td class='poo'>". date("G:i:s", strtotime($event['duration'])) ."</td>";
 
 	}else{
 		echo "<td>". date("d M y G:i", strtotime($event['ts_start'])) ."</td>";
