@@ -119,5 +119,12 @@ Show stats for past <select name='weeks'>
   };
 </script>
 
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
+
 </body>
 </html>
