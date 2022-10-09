@@ -87,12 +87,11 @@ Show stats for past <select name='weeks'>
 // Using chart.js to create chart
 // https://www.chartjs.org/docs/latest/getting-started/
 
-?>
+echo "<div><canvas id='myChart'></canvas></div>";                       // Creating canvas
+echo "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>";   // download chart,js
 
-<div><canvas id='myChart'></canvas></div>
-<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
-
-<script>
+// Set X value
+echo "<script>
   const labels = [
     'January',
     'February',
@@ -100,9 +99,10 @@ Show stats for past <select name='weeks'>
     'April',
     'May',
     'June',
-  ];
+  ];";
 
-  const data = {
+// Chart Y data
+echo "const data = {
     labels: labels,
     datasets: [{
       label: 'My First dataset',
@@ -110,21 +110,25 @@ Show stats for past <select name='weeks'>
       borderColor: 'rgb(255, 99, 132)',
       data: [0, 10, 5, 2, 20, 30, 45],
     }]
-  };
+  };";
 
-  const config = {
+// Chart config and options
+echo "const config = {
     type: 'line',
     data: data,
     options: {}
   };
-</script>
+</script>";
 
-<script>
+// Render chart
+echo "<script>
   const myChart = new Chart(
     document.getElementById('myChart'),
     config
   );
-</script>
+</script>";
+
+?>
 
 </body>
 </html>
