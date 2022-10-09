@@ -1,4 +1,7 @@
 <?php
+// Baby Log Entry page
+// =========================================================
+
 // For debug, enable the following
 // ini_set("display_error", "stderr");
 // ini_set("display_startup_errors", 1);

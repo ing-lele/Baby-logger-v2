@@ -1,6 +1,7 @@
 <?php
-// Statistic page
+// --- Show statistics about metrics
 // =========================================================
+
 // Daily entry with:
 // Date | Pee Count | Poo Count | Milk Count | Milk Duration
 //
