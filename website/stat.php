@@ -30,10 +30,10 @@ $connectdb = mysqli_connect($db_host, $db_user, $db_pass) or die ("ERROR - Canno
 mysqli_select_db($connectdb,$db_name) or die ("ERROR - Cannot select database");
 
 // Querie stat from the current date
-if(!isset($_POST['month'])){
-	$month = 0.5;
+if(!isset($_POST['weeks'])){
+	$weeks = 2;
 }else{
-	$month = intval($_POST['month']);
+	$weeks = floatval($_POST['weeks']);
 }
 
 // Stats (
@@ -51,7 +51,7 @@ $sql = "SELECT
 	COUNT(CASE WHEN category = 'fed' THEN id END) AS fed_count,
 	SEC_TO_TIME(SUM(CASE WHEN category = 'fed' THEN TIME_TO_SEC(TIMEDIFF(ts_end,ts_start)) END)) AS fed_duration 
 	FROM switchdata
-	WHERE ts_start>= CURRENT_DATE() - INTERVAL ".($month)." MONTH 
+	WHERE ts_start>= CURRENT_DATE() - INTERVAL ".($weeks)." WEEK 
 	GROUP BY DATE(ts_start)
 	ORDER BY DATE(ts_start) DESC;";
 
@@ -96,18 +96,18 @@ td{
 <center>
 
 <?php
-	$current_date = date("d M Y");
-	echo "<P>Baby's stats from ". $current_date->modify('-'.$month.' months').".</P>";
+	$updated_date = date_modify(new DateTime(), "-". $weeks ." week");
+	echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date_format($updated_date, "d M y") .".</P>";
 ?>
 <br><br>
 
-Show stats for past <select name='month'>
-<option value='0.5'>0.5</option>
+Show stats for past <select name='weeks'>
 <option value='1'>1</option>
-<option value='3'>3</option>
-<option value='6'>6</option>
+<option value='2'>2</option>
+<option value='4'>4</option>
+<option value='8'>8</option>
 <option value='12'>12</option>
-</select> months.
+</select> weeks.
 <input type='submit' value='Update'>
 </center>
 </form>
