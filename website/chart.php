@@ -83,19 +83,18 @@ Show stats for past <select name='weeks'>
 </center>
 </form>
 
-<?php
+<!-- 
 // Using chart.js to create chart
 // https://www.chartjs.org/docs/latest/getting-started/
 
-// Creating canvas
-echo "
+// Creating canvas -->
 <div>
     <canvas id='BabyStatChart'></canvas>
-</div>";
+</div>
 
-// Load Chart.js
-echo "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>";
-echo "<script>";
+<!-- // Load Chart.js -->
+<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
+<script>
 
 // --------------------------
 // --- Chart config - start
@@ -109,12 +108,12 @@ echo "const chart_option =
                 beginAtZero: true
             }
         }
-    };";
+    };
 
 // Chart -> Data -> Labels - used for all data in dataset
-echo "const x_labels = [
-        'January', 'February', 'March', 'April', 'May','June'
-    ];"
+const x_labels = [
+    'January', 'February', 'March', 'April', 'May','June'
+];
 
 // --------------------------
 // Chart -> Config -> Data = 
@@ -127,53 +126,43 @@ echo "const x_labels = [
 //      ]
 // }
 // --------------------------
-echo "const chart_data = {
-        labels: x_labels,
-        datasets: [";
-
-        // --------------------------  
-        // Chart -> Data -> Dataset #1 -> Pee count
-        echo "{
-                type: 'line',
-                label: 'Pee Count',
-                backgroundColor: '#ffff66',
-                borderColor: '#ffff66',
-                data: [3, 13, 8, 5, 23, 33, 28]
-        }";
-
-        // --------------------------
-        // Chart -> Data -> Dataset #2 -> Poo count
-        echo "{
-                type: 'line'
-                label: 'Poo Count',
-                backgroundColor: '#996600',
-                borderColor: '#996600',
-                data: [1, 11, 6, 3, 21, 31, 26]
-        }";
-
-        // --------------------------  
-        // Chart -> Data -> Dataset #3 -> Milk count
-        echo "{
-                type: 'line',
-                label: 'Milk Count',
-                backgroundColor: '#399cbd',
-                borderColor: '#399cbd',
-                data: [0, 10, 5, 2, 20, 30, 25]
-        }";
-
-        // --------------------------  
-        // Chart -> Data -> Dataset #4 -> Milk duration
-        echo "{
+const chart_data = {
+    labels: x_labels,
+    datasets: [
+        <?php // Chart -> Config -> Data -> Dataset #1 -> Pee count ?>
+        {
+            type: 'line',
+            label: 'Pee Count',
+            backgroundColor: '#ffff66',
+            borderColor: '#ffff66',
+            data: [3, 13, 8, 5, 23, 33, 28]
+        },
+        <?php // Chart -> Config -> Data -> Dataset #2 -> Poo count ?>
+        {
+            type: 'line'
+            label: 'Poo Count',
+            backgroundColor: '#996600',
+            borderColor: '#996600',
+            data: [1, 11, 6, 3, 21, 31, 26]
+        },
+        <?php // Chart -> Config -> Data -> Dataset #3 -> Milk count ?>
+        {
+            type: 'line',
+            label: 'Milk Count',
+            backgroundColor: '#399cbd',
+            borderColor: '#399cbd',
+            data: [0, 10, 5, 2, 20, 30, 25]
+        },
+        <?php // Chart -> Config -> Data -> Dataset #4 -> Milk duration ?>
+        {
             type: 'bar',
             label: 'Milk Duration',
             backgroundColor: '#add8e6',
             borderColor: '#add8e6',
             data: [15, 15, 15, 10, 20, 15, 5]
-        }";
-
-// Closing dataset and data
-echo "]
-};";
+        }
+    ]
+};
 
 // --------------------------
 // Chart -> Config
@@ -183,26 +172,23 @@ echo "]
 //      options: chart_option
 // }
 // --------------------------
-echo "const chart_config = {
-        type: 'scatter',
-        data: chart_data,
-        options: chart_option
-};";
+const chart_config = {
+    type: 'scatter',
+    data: chart_data,
+    options: chart_option
+};
 
 // --------------------------
 // --- Chart config - end
 // --------------------------
 
 // Create chart
-echo "
-    const MyBabyStatChart = new Chart(
-        document.getElementById('BabyStatChart'),
-        chart_config
-    );";
+const MyBabyStatChart = new Chart(
+    document.getElementById('BabyStatChart'),
+    chart_config
+);
 
-echo "</script>";
-
-?>
+</script>
 
 </body>
 </html>
