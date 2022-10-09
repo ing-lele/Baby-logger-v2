@@ -88,7 +88,6 @@ if ($days > 1)
 else
     print "<P>Baby's vital functions for the last $days day.</P>";
 ?>
-<br><br>
 
 Show 
 <select name='category'>
