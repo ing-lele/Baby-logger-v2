@@ -60,26 +60,28 @@ $results = mysqli_query($connectdb, $sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<title>Baby &#x1F476; Statistics</title>
-<style>
-body{
-	background-color: #fff3f5; /* pink background */
-}
-table{
-	background-color: white;
-	border: 1px solid black;
-	border-spacing: 0px 0px;
-}
-th, td{
-	font-family: arial;
-}
-td{
-	text-align: center;
-	font-size: 32px;
-	padding: 2px;
-}
-</style>
+	<title>Baby &#x1F476; Statistics</title>
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+	<style>
+	body{
+		background-color: #fff3f5; /* pink background */
+	}
+	table{
+		background-color: white;
+		border: 1px solid black;
+		border-spacing: 0px 0px;
+	}
+	th, td{
+		font-family: arial;
+	}
+	td{
+		text-align: center;
+		font-size: 32px;
+		padding: 2px;
+	}
+	</style>
 </head>
 
 <body>

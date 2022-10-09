@@ -41,37 +41,39 @@ $results = mysqli_query($connectdb, $sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<title>Baby &#x1F476; Logger</title>
-<style>
-body{
-	background-color: #fff3f5; /* pink background */
-}
-table{
-	background-color: white;
-	border: 1px solid black;
-	border-spacing: 0px 0px;
-}
-th, td{
-	font-family: arial;
-}
-td{
-	text-align: center;
-	font-size: 32px;
-	padding: 2px;
-}
-.pee{
-	background-color: #ffff66;
-}
+	title>Baby &#x1F476; Logger</title>
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+	<style>
+	body{
+		background-color: #fff3f5; /* pink background */
+	}
+	table{
+		background-color: white;
+		border: 1px solid black;
+		border-spacing: 0px 0px;
+	}
+	th, td{
+		font-family: arial;
+	}
+	td{
+		text-align: center;
+		font-size: 32px;
+		padding: 2px;
+	}
+	.pee{
+		background-color: #ffff66;
+	}
 
-.poo{
-	background-color: #996600;
-}
+	.poo{
+		background-color: #996600;
+	}
 
-.fed{
-	background-color: #add8e6;
-}
-</style>
+	.fed{
+		background-color: #add8e6;
+	}
+	</style>
 </head>
 
 <body>
