@@ -39,7 +39,8 @@ if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo", "fed
 $results = mysqli_query($connectdb, $sql);
 ?>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>Baby &#x1F476; Logger</title>
 <style>

@@ -58,7 +58,8 @@ $sql = "SELECT
 $results = mysqli_query($connectdb, $sql);
 ?>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>Baby &#x1F476; Statistics</title>
 <style>
