@@ -7,6 +7,6 @@ For the techy/geek parents, there are projects like this! :sunglasses:
 
 
 This project was forked from
-* [ing-lele' Baby-logger project](https://github.com/inglele/Baby-logger)
+* [ing-lele's Baby-logger project](https://github.com/inglele/Baby-logger)
 * [tenmonkeys' Baby-logger project](https://github.com/tenmonkeys/Baby-logger)
-* [tommygober' Baby-logger project](https://github.com/tommygober/Baby-logger).
+* [tommygober's Baby-logger project](https://github.com/tommygober/Baby-logger).
