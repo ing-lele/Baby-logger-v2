@@ -58,17 +58,6 @@ td{
 	font-size: 32px;
 	padding: 2px;
 }
-.pee{
-	background-color: #ffff66;
-}
-
-.poo{
-	background-color: #996600;
-}
-
-.fed{
-	background-color: #add8e6;
-}
 </style>
 </head>
 
@@ -83,43 +72,22 @@ td{
 <center>
 
 <?php
-if ($days > 1)
-    print "Baby's vital functions for the last $days days.";
-else
-    print "Baby's vital functions for the last $days day.";
+	$updated_date = date_modify(new DateTime(), "-". $weeks ." week");
+	echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date_format($updated_date, "d M y") .".</P>";
 ?>
-<br><br>
 
-Show 
-<select name='category'>
-<option value='all'>All</option>
-<option value='pee'>Pee</option>
-<option value='poo'>Poop</option>
-<option value='fed'>Feeding</option>
-</select>
-events for past <select name='days'>
-<option value='1'>1</option>
+Show stats for past <select name='weeks'>
 <option value='2'>2</option>
-<option value='3'>3</option>
-<option value='4'>4</option>
-<option value='5'>5</option>
-<option value='6'>6</option>
-<option value='7'>7</option>
-<option value='14'>14</option>
-<option value='21'>21</option>
-<option value='31'>31</option>
-<option value='365'>365</option>
-</select> days.
+<option value='4'>4</option> 
+<option value='9'>9</option>
+<option value='13'>13</option>
+<option value='26'>26</option>
+<option value='52'>52</option>
+</select> weeks.
 <input type='submit' value='Update'>
 </center>
 </form>
 
-<table border="1" cellpadding="1" cellspacing="1" align="center">
-<tr>
-<th>Start</th>
-<th>Category</th>
-<th>Duration</th>
-<tr>
 <?php
 $event_count = 0;
 // loop all the results that were read from database and "draw" to web page
@@ -153,9 +121,6 @@ echo "</table>\n";
 echo "<p align='center'>Event count: $event_count<br></p>";
 
 ?>
-
-<p align='center'><a href='admin.php'>Admin page</a></p>
-
 
 </body>
 </html>
