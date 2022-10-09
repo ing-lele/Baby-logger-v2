@@ -100,13 +100,13 @@ td{
 	echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date_format($updated_date, "d M y") .".</P>";
 ?>
 
-
 Show stats for past <select name='weeks'>
-<option value='1'>1</option>
 <option value='2'>2</option>
-<option value='4'>4</option>
-<option value='8'>8</option>
-<option value='12'>12</option>
+<option value='4'>4</option> 
+<option value='9'>9</option>
+<option value='13'>13</option>
+<option value='26'>26</option>
+<option value='52'>52</option>
 </select> weeks.
 <input type='submit' value='Update'>
 </center>
