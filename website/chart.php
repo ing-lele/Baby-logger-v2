@@ -128,7 +128,7 @@ const x_labels = [
 const chart_data = {
     labels: x_labels,
     datasets: [
-        <?php // Chart -> Config -> Data -> Dataset #1 -> Pee count ?>
+<?php // Chart -> Config -> Data -> Dataset #1 -> Pee count ?>
         {
             type: 'line',
             label: 'Pee Count',
@@ -136,15 +136,15 @@ const chart_data = {
             borderColor: '#ffff66',
             data: [3, 13, 8, 5, 23, 33, 28]
         },
-        <?php // Chart -> Config -> Data -> Dataset #2 -> Poo count ?>
+<?php // Chart -> Config -> Data -> Dataset #2 -> Poo count ?>
         {
-            type: 'line'
+            type: 'line',
             label: 'Poo Count',
             backgroundColor: '#996600',
             borderColor: '#996600',
             data: [1, 11, 6, 3, 21, 31, 26]
         },
-        <?php // Chart -> Config -> Data -> Dataset #3 -> Milk count ?>
+<?php // Chart -> Config -> Data -> Dataset #3 -> Milk count ?>
         {
             type: 'line',
             label: 'Milk Count',
@@ -152,7 +152,7 @@ const chart_data = {
             borderColor: '#399cbd',
             data: [0, 10, 5, 2, 20, 30, 25]
         },
-        <?php // Chart -> Config -> Data -> Dataset #4 -> Milk duration ?>
+<?php // Chart -> Config -> Data -> Dataset #4 -> Milk duration ?>
         {
             type: 'bar',
             label: 'Milk Duration',
