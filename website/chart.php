@@ -40,7 +40,7 @@ $results = mysqli_query($connectdb, $sql);
 
 <html>
 <head>
-<title>Baby &#x1F476; Logger</title>
+<title>Baby &#x1F476; Charts</title>
 <style>
 body{
 	background-color: #fff3f5; /* pink background */

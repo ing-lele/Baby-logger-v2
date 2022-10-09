@@ -60,7 +60,7 @@ $results = mysqli_query($connectdb, $sql);
 
 <html>
 <head>
-<title>Baby Logger &#x1F476; - Stats</title>
+<title>Baby &#x1F476; Statistics</title>
 <style>
 body{
 	background-color: #fff3f5; /* pink background */
