@@ -101,14 +101,13 @@ Show stats for past <select name='weeks'>
 // --------------------------
 
 // Chart -> Options
-echo "const chart_option = 
-    {
-        scales: {
-            y:{
-                beginAtZero: true
-            }
+const chart_option = {
+    scales: {
+        y:{
+            beginAtZero: true
         }
-    };
+    }
+};
 
 // Chart -> Data -> Labels - used for all data in dataset
 const x_labels = [
