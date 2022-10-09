@@ -84,9 +84,9 @@ td{
 
 <?php
 if ($days > 1)
-    print "<P>Baby's vital functions for the last $days days.</P>";
+    print "<P>Baby's vital functions for the last <B>$days days.</B></P>";
 else
-    print "<P>Baby's vital functions for the last $days day.</P>";
+    print "<P>Baby's vital functions for the last <B>$days day.</B></P>";
 ?>
 
 Show 
