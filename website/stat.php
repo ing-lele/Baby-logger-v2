@@ -99,7 +99,7 @@ td{
 	$updated_date = date_modify(new DateTime(), "-". $weeks ." week");
 	echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date_format($updated_date, "d M y") .".</P>";
 ?>
-<br><br>
+
 
 Show stats for past <select name='weeks'>
 <option value='1'>1</option>
