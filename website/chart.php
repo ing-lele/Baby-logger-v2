@@ -87,21 +87,21 @@ Show stats for past <select name='weeks'>
 // Using chart.js to create chart
 // https://www.chartjs.org/docs/latest/getting-started/
 
-echo "<div><canvas id='BabyStatChart'></canvas></div>";                       // Creating canvas
-echo "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>";   // download chart,js
+// Creating canvas
+echo "
+<div>
+    <canvas id='BabyStatChart'></canvas>
+</div>";
 
+// Load Chart.js
+echo "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>";
+echo "<script>";
 
 // --------------------------
 // --- Chart config - start
-// config {
-//      type: 'scatter',
-//      data: chart_data,
-//      options: chart_option,
-// }
 // --------------------------
-echo "<script>";
 
-// Chart Options
+// Chart -> Options
 echo "const chart_option = 
     {
         scales: {
@@ -111,89 +111,96 @@ echo "const chart_option =
         }
     };";
 
-// X Labels - used for all data in dataset
+// Chart -> Data -> Labels - used for all data in dataset
 echo "const x_labels = [
         'January', 'February', 'March', 'April', 'May','June'
     ];"
 
 // --------------------------
-// chart data = {
+// Chart -> Config -> Data = 
+// {
 //      labels:
 //      dataset: [
 //          {type1, label1, data1},
 //          {type2, label2, data2},
 //          {...}
 //      ]
+// }
 // --------------------------
 echo "const chart_data = {
-            labels: x_labels,
-            datasets: [";
+        labels: x_labels,
+        datasets: [";
 
-// --------------------------  
-// Pee count
-echo "{
-        type: 'line',
-        label: 'Pee Count',
-        backgroundColor: '#ffff66',
-        borderColor: '#ffff66',
-        data: [3, 13, 8, 5, 23, 33, 28]
-    }";
+        // --------------------------  
+        // Chart -> Data -> Dataset #1 -> Pee count
+        echo "{
+                type: 'line',
+                label: 'Pee Count',
+                backgroundColor: '#ffff66',
+                borderColor: '#ffff66',
+                data: [3, 13, 8, 5, 23, 33, 28]
+        }";
+
+        // --------------------------
+        // Chart -> Data -> Dataset #2 -> Poo count
+        echo "{
+                type: 'line'
+                label: 'Poo Count',
+                backgroundColor: '#996600',
+                borderColor: '#996600',
+                data: [1, 11, 6, 3, 21, 31, 26]
+        }";
+
+        // --------------------------  
+        // Chart -> Data -> Dataset #3 -> Milk count
+        echo "{
+                type: 'line',
+                label: 'Milk Count',
+                backgroundColor: '#399cbd',
+                borderColor: '#399cbd',
+                data: [0, 10, 5, 2, 20, 30, 25]
+        }";
+
+        // --------------------------  
+        // Chart -> Data -> Dataset #4 -> Milk duration
+        echo "{
+            type: 'bar',
+            label: 'Milk Duration',
+            backgroundColor: '#add8e6',
+            borderColor: '#add8e6',
+            data: [15, 15, 15, 10, 20, 15, 5]
+        }";
+
+// Closing dataset and data
+echo "]
+};";
 
 // --------------------------
-// Poo count
-echo "{
-        type: 'line'
-        label: 'Poo Count',
-        backgroundColor: '#996600',
-        borderColor: '#996600',
-        data: [1, 11, 6, 3, 21, 31, 26]
-    }";
-
-// --------------------------  
-// Milk count
-echo "{
-        type: 'line',
-        label: 'Milk Count',
-        backgroundColor: '#399cbd',
-        borderColor: '#399cbd',
-        data: [0, 10, 5, 2, 20, 30, 25]
-    }";
-
-// --------------------------  
-// Milk durations
-echo "{
-    type: 'bar',
-    label: 'Milk Duration',
-    backgroundColor: '#add8e6',
-    borderColor: '#add8e6',
-    data: [15, 15, 15, 10, 20, 15, 5]
-}";
-
-// Closing dataset
-echo "]
-    };"
-
-// Chart config
-echo "const chart_config =
-    {
+// Chart -> Config
+// {
+//      type: 'scatter',
+//      data: chart_data,
+//      options: chart_option
+// }
+// --------------------------
+echo "const chart_config = {
         type: 'scatter',
         data: chart_data,
         options: chart_option
-    };";
+};";
 
-echo "</script>";
 // --------------------------
 // --- Chart config - end
 // --------------------------
 
+// Create chart
+echo "
+    const MyBabyStatChart = new Chart(
+        document.getElementById('BabyStatChart'),
+        chart_config
+    );";
 
-// Render chart in page
-echo "<script>
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-    );
-</script>";
+echo "</script>";
 
 ?>
 
