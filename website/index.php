@@ -10,6 +10,7 @@
 //$db_user
 //$db_pass
 //$db_name
+//$db_table
 include_once 'mysql_variables.php';
 
 // Make connection to database

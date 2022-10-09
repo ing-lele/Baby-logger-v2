@@ -1,15 +1,10 @@
 <?php
-// For debug, enable the following
-// ini_set("display_error", "stderr");
-// ini_set("display_startup_errors", 1);
-// ini_set("log_errors", 1);
-// ini_set("html_errors", 1);
-
 // DB Connection settings - mysql_variables.php
 //$db_host
 //$db_user
 //$db_pass
 //$db_name
+//$db_table
 include_once 'mysql_variables.php';
 
 // Make connection to database
