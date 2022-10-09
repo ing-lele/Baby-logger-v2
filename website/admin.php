@@ -19,17 +19,6 @@ td{
 	font-size: 32px;
 	padding: 2px;
 }
-.pee{
-	background-color: #ffff66;
-}
-
-.poo{
-	background-color: #996600;
-}
-
-.fed{
-	background-color: #add8e6;
-}
 </style>
 </head>
 

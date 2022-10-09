@@ -84,38 +84,40 @@ Show stats for past <select name='weeks'>
 </form>
 
 <?php
-$event_count = 0;
-// loop all the results that were read from database and "draw" to web page
-while($event = mysqli_fetch_assoc($results)){
-	$event_count++;
-	echo "<tr>";
-	if ($event['category'] == "fed"){
-		echo "<td class='fed'>". date("d M y G:i", strtotime($event['ts_start'])) ."</td>";
-		echo "<td class='fed'>&#x1f37c;</td>"; //Show baby bottle emoji
-		echo "<td class='fed'>". date("G:i:s", strtotime($event['duration'])) ."</td>";
-
-	}else if ($event['category'] == "pee"){
-		echo "<td class='pee'>". date("d M y G:i", strtotime($event['ts_start'])) ."</td>";
-		echo "<td class='pee'>&#128166;</td>";  //Show pee emoji
-		echo "<td class='pee'>". date("G:i:s", strtotime($event['duration'])) ."</td>";
-
-	}else if ($event['category'] == "poo"){
-		echo "<td class='poo'>". date("d M y G:i", strtotime($event['ts_start'])) ."</td>";
-		echo "<td class='poo'>&#128169;</td>";  //Show poop emoji
-		echo "<td class='pee'>". date("G:i:s", strtotime($event['duration'])) ."</td>";
-
-	}else{
-		echo "<td>". date("d M y G:i", strtotime($event['ts_start'])) ."</td>";
-		echo "<td>&#10060;</td>"; //Show cross mark emoji
-		echo "<td style='background-color: red;'><center><b>Error</b></center></td>";		
-	}
-	
-	echo "<tr>\n";
-}
-echo "</table>\n";
-echo "<p align='center'>Event count: $event_count<br></p>";
+// Using chart.js to create chart
+// https://www.chartjs.org/docs/latest/getting-started/
 
 ?>
+
+<div><canvas id='myChart'></canvas></div>
+<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
+
+<script>
+  const labels = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'My First dataset',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [0, 10, 5, 2, 20, 30, 45],
+    }]
+  };
+
+  const config = {
+    type: 'line',
+    data: data,
+    options: {}
+  };
+</script>
 
 </body>
 </html>
