@@ -158,6 +158,7 @@ const chart_config = {
     data: chart_data,
     options: chart_option
 };
+*/
 
 // Chart -> Options
 const chart_option = {
@@ -171,8 +172,6 @@ const chart_option = {
 // --------------------------
 // --- Chart config - end
 // --------------------------
-
-*/
 
 // Data from MySQL --> 'chart_data.php';
 $.ajax({
