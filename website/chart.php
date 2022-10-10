@@ -77,10 +77,25 @@ Show stats for past <select name='weeks'>
 $.ajax({
     type: 'POST',
     url: 'chart_data.php',
-    success: function (data) {
-        chart_data = data;//alert(JSON.stringify(data));
-        //var myLine = new Chart(document.getElementById("BabyStatChart").getContext("2d")).scatter(chart_data);
-        ctx = document.getElementById("BabyStatChart").getContext("2d");
+    dataType: 'json',
+    success: function (chart_data) {
+        console.log(JSON.stringify(chart_data));
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        let responseText = jQuery.parseJSON(jqXHR.responseText);
+        console.log("Response" + responseText);
+        console.log("Error" + errorThrown);
+    }
+});
+
+JSON.parse(chart_data).tostring();
+
+
+
+/*
+//var myLine = new Chart(document.getElementById("BabyStatChart").getContext("2d")).scatter(chart_data);
+
+ctx = document.getElementById("BabyStatChart").getContext("2d");
 
         var MyBabyStatChart = new Chart(ctx,
         {
@@ -89,14 +104,6 @@ $.ajax({
             options: chart_option
         }
         );
-    },
-    error: function(jqXHR, textStatus) {
-        let responseText = jQuery.parseJSON(jqXHR.responseText);
-        console.log(responseText);
-    }
-});
-
-JSON.parse(chart_data).tostring();
 
 
 // --------------------------
