@@ -80,6 +80,7 @@ $.ajax({
     dataType: 'json',
     done: function (data) {
         chart_data = data;
+        alert(chart_data);
         console.log(JSON.stringify(chart_data));
     },
     fail: function(jqXHR, textStatus, errorThrown) {
