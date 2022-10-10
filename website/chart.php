@@ -78,17 +78,18 @@ $.ajax({
     type: 'POST',
     url: 'chart_data.php',
     dataType: 'json',
-    success: function (chart_data) {
+    done: function (data) {
+        chart_data = data;
         console.log(JSON.stringify(chart_data));
     },
-    error: function(jqXHR, textStatus, errorThrown) {
-        let responseText = jQuery.parseJSON(jqXHR.responseText);
+    fail: function(jqXHR, textStatus, errorThrown) {
+        console.log(JSON.stringfy(jqXHR));
         console.log("Response" + responseText);
         console.log("Error" + errorThrown);
     }
 });
 
-JSON.parse(chart_data).tostring();
+//JSON.parse(chart_data).tostring();
 
 
 
