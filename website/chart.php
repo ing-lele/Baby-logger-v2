@@ -43,8 +43,15 @@
         dataType: 'json',
         success: function (data) {
             var chart_data = data;
-            alert(JSON.stringify(chart_data));
             console.log(JSON.stringify(chart_data));
+            // Verify if it's valid JSON
+                try{
+                    JSON.parse(str);
+                    console.log("Valid JSON");
+                }catch (e){
+                    //Error - JSON is not okay
+                    console.log("Not a valid JSON!");
+                }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(JSON.stringfy(jqXHR));
