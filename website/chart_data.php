@@ -8,6 +8,9 @@
 // ini_set("log_errors", 1);
 // ini_set("html_errors", 1);
 
+header("Content-Type: application/json");
+http_response_code(200);
+
 // DB Connection settings - mysql_variables.php
 //$db_host
 //$db_user
@@ -164,20 +167,16 @@ print_r($datasets_fed_duration);
 //      ]
 // }
 $chart_data = array(
-    array(
-        'labels' => $x_labels,
-        'datasets' => array(
-            $datasets_pee_count,
-            $datasets_poo_count,
-            $datasets_fed_count,
-            $datasets_fed_duration
-        )
+    'labels' => $x_labels,
+    'datasets' => array(
+        $datasets_pee_count,
+        $datasets_poo_count,
+        $datasets_fed_count,
+        $datasets_fed_duration
     )
 );
 
 // Encode in JSON format and print
-echo json_encode($chart_data);
-//$json_data = json_encode($chart_data, JSON_PRETTY_PRINT);
-//echo "<pre>". $json_data ."</pre>";
+echo json_encode($chart_data, JSON_PRETTY_PRINT);
 
 ?>
