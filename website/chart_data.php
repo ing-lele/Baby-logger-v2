@@ -175,12 +175,8 @@ $chart_data = array(
     )
 );
 
-/*
-echo "<br>Chart data: ";
-print_r ($chart_data);
-*/
-
-// Encond in JSON format
-print(json_encode($chart_data));
+// Encode in JSON format and print
+$json_data = json_encode($chart_data, JSON_PRETTY_PRINT);
+echo "<pre>". $json_data ."</pre>";
 
 ?>

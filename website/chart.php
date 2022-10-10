@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
 
 <head>
@@ -73,14 +73,40 @@ Show stats for past <select name='weeks'>
 <script>
 
 // --------------------------
+// AJAX query to get Data from MySQL --> 'chart_data.php';
+$.ajax({
+    type: 'POST',
+    url: 'chart_data.php',
+    success: function (data) {
+        chart_data = data;//alert(JSON.stringify(data));
+        //var myLine = new Chart(document.getElementById("BabyStatChart").getContext("2d")).scatter(chart_data);
+        ctx = document.getElementById("BabyStatChart").getContext("2d");
+
+        var MyBabyStatChart = new Chart(ctx,
+        {
+            type: 'scatter',
+            data: JSON.parse(chart_data),
+            options: chart_option
+        }
+        );
+    },
+    error: function(jqXHR, textStatus) {
+        let responseText = jQuery.parseJSON(jqXHR.responseText);
+        console.log(responseText);
+    }
+});
+
+JSON.parse(chart_data).tostring();
+
+
+// --------------------------
 // --- Chart config - start
 // --------------------------
 
-/* 
+
 // Chart -> Data -> Labels - used for all data in dataset
-const x_labels = [
-    'January', 'February', 'March', 'April', 'May','June'
-];
+const x_labels = x_labels;
+// Data example: ['January', 'February', 'March', 'April', 'May','June'];
 
 // --------------------------
 // Chart -> Config -> Data = 
@@ -173,24 +199,6 @@ const chart_option = {
 // --- Chart config - end
 // --------------------------
 
-// Data from MySQL --> 'chart_data.php';
-$.ajax({
-    type: 'POST',
-    url: 'chart_data.php',
-    success: function (data) {
-        chart_data = data;//alert(JSON.stringify(data));
-        //var myLine = new Chart(document.getElementById("BabyStatChart").getContext("2d")).scatter(chart_data);
-        ctx = document.getElementById("BabyStatChart").getContext("2d");
-
-        var MyBabyStatChart = new Chart(ctx,
-        {
-            type: 'scatter',
-            data: JSON.parse(chart_data),
-            options: chart_option
-        }
-        );
-    }
-});
 
 /*
 // Create chart
