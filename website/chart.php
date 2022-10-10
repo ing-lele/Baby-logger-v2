@@ -32,6 +32,27 @@
         padding: 2px;
     }
     </style>
+
+    <script>
+    // Get chart data from MySQL --> 'chart_data.php'
+    alert("Start AJAX");
+
+    $.ajax({
+        type: 'POST',
+        url: 'chart_data.php',
+        dataType: 'json',
+        done: function (data) {
+            var chart_data = data;
+            alert(JSON.stringify(chart_data));
+            console.log(JSON.stringify(chart_data));
+        },
+        fail: function(jqXHR, textStatus, errorThrown) {
+            console.log(JSON.stringfy(jqXHR));
+            console.log("Response" + responseText);
+            console.log("Error" + errorThrown);
+        }
+    });
+    </script>
 </head>
 
 <body>
@@ -61,40 +82,17 @@ Show stats for past <select name='weeks'>
 </center>
 </form>
 
-<!-- 
-// Using chart.js to create chart
-// https://www.chartjs.org/docs/latest/getting-started/
+<!-- chart.js to create chart
+https://www.chartjs.org/docs/latest/getting-started/
 
-// Creating canvas -->
+Creating canvas -->
 <div>
     <canvas id='BabyStatChart' width="500" height="500"></canvas>
 </div>
 
 <script>
 
-// --------------------------
-// AJAX query to get Data from MySQL --> 'chart_data.php';
-alert("Start AJAX");
-
-$.ajax({
-    type: 'POST',
-    url: 'chart_data.php',
-    dataType: 'json',
-    done: function (data) {
-        chart_data = data;
-        alert(chart_data);
-        console.log(JSON.stringify(chart_data));
-    },
-    fail: function(jqXHR, textStatus, errorThrown) {
-        console.log(JSON.stringfy(jqXHR));
-        console.log("Response" + responseText);
-        console.log("Error" + errorThrown);
-    }
-});
-
 //JSON.parse(chart_data).tostring();
-
-
 
 /*
 //var myLine = new Chart(document.getElementById("BabyStatChart").getContext("2d")).scatter(chart_data);
