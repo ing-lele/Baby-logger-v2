@@ -11,7 +11,6 @@
 // * Last 3 months
 // * Current semester
 
-
 // For debug, enable the following
 // ini_set("display_error", "stderr");
 // ini_set("display_startup_errors", 1);
@@ -82,6 +81,17 @@ $results = mysqli_query($connectdb, $sql);
 		font-size: 32px;
 		padding: 2px;
 	}
+	.pee{
+		background-color: #ffff66;
+	}
+
+	.poo{
+		background-color: #996600;
+	}
+
+	.fed{
+		background-color: #add8e6;
+	}
 	</style>
 </head>
 
@@ -115,10 +125,10 @@ Show stats for past <select name='weeks'>
 <table border="1" cellpadding="1" cellspacing="1" align="center">
 <tr>
 <th>Day</th>
-<th>&#128166; Count</th>
-<th>&#128169; Count</th>
-<th>&#x1f37c; Count</th>
-<th>&#x1f37c; Duration</th>
+<th class='pee'>&#128166; Count</th>
+<th class='poo'>&#128169; Count</th>
+<th class='fed'>&#x1f37c; Count</th>
+<th class='fed'>&#x1f37c; Duration</th>
 <tr>
 <?php
 $event_count = 0;
