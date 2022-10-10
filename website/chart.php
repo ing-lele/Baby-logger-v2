@@ -181,9 +181,15 @@ $.ajax({
         chart_data = data;//alert(JSON.stringify(data));
         //var myLine = new Chart(document.getElementById("BabyStatChart").getContext("2d")).scatter(chart_data);
 
-        var ctx = document.getElementById("BabyStatChart").getContext("2d");
-        var MyBabyStatChart = new Chart(ctx).scatter(chart_data, {responsive: true});
-    } 
+        var MyBabyStatChart = new Chart(
+            document.getElementById("BabyStatChart").getContext("2d"),
+            {
+                type: 'scatter',
+                data: JSON.parse(chart_data),
+                options: chart_option
+            }
+        )
+    }
 });
 
 /*
