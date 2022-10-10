@@ -37,7 +37,7 @@ $sql = "SELECT
 	FROM switchdata
 	WHERE ts_start>= CURRENT_DATE() - INTERVAL ".($weeks)." WEEK 
 	GROUP BY DATE(ts_start)
-	ORDER BY DATE(ts_start) DESC;";
+	ORDER BY DATE(ts_start) ASC;";
 
 $results = mysqli_query($connectdb, $sql) or die(mysql_error());
 
@@ -81,7 +81,7 @@ while($event = mysqli_fetch_assoc($results)){
 }
 
 // Print to check arrays values
-echo "<br>Lable array: ";
+echo "<br>Label array: ";
 print_r($x_labels);
 
 echo "<br>Pee array: ";
