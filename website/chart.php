@@ -35,11 +35,11 @@
 
     <script>
     // Get chart data from MySQL --> 'chart_data.php'
-    alert("Start AJAX");
+    console.log("Start AJAX call");
 
     $.ajax({
         type: 'POST',
-        url: 'chart_data.php',
+        url: '/chart_data.php',
         dataType: 'json',
         done: function (data) {
             var chart_data = data;
@@ -52,6 +52,9 @@
             console.log("Error" + errorThrown);
         }
     });
+
+    console.log("AJAX call completed");
+
     </script>
 </head>
 
