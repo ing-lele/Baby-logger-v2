@@ -3,9 +3,6 @@
 // Info: https://www.chartjs.org/
 // =========================================================
 
-// Data from MySQL
-// include_once 'chart_data.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +83,7 @@ const chart_option = {
     }
 };
 
+/* 
 // Chart -> Data -> Labels - used for all data in dataset
 const x_labels = [
     'January', 'February', 'March', 'April', 'May','June'
@@ -105,57 +103,51 @@ const x_labels = [
 const chart_data = {
     labels: x_labels,
     datasets: [
-<?php // Chart -> Config -> Data -> Dataset #1 -> Pee count ?>
+        // Chart -> Config -> Data -> Dataset #1 -> Pee count
         {
             type: 'line',
             label: 'Pee Count',
             backgroundColor: '#ffff66',
             borderColor: '#ffff66',
             data:
-                <?php
                 // Getting pee count data
-                // Format example: [3, 13, 8, 5, 23, 33, 28]
-                
-                ?>
+                // Format example:
+                [3, 13, 8, 5, 23, 33, 28]
+
         },
-<?php // Chart -> Config -> Data -> Dataset #2 -> Poo count ?>
+        // Chart -> Config -> Data -> Dataset #2 -> Poo count
         {
             type: 'line',
             label: 'Poo Count',
             backgroundColor: '#996600',
             borderColor: '#996600',
             data:
-            <?php
                 // Getting poo count data
-                // Format example: [1, 11, 6, 3, 21, 31, 26]
-                
-            ?>
+                // Format example:
+                [1, 11, 6, 3, 21, 31, 26]                
         },
-<?php // Chart -> Config -> Data -> Dataset #3 -> Milk count ?>
+        // Chart -> Config -> Data -> Dataset #3 -> Milk count
         {
             type: 'line',
             label: 'Milk Count',
             backgroundColor: '#399cbd',
             borderColor: '#399cbd',
             data:
-            <?php
                 // Getting milk count data
-                // Format example: [0, 10, 5, 2, 20, 30, 25]
+                // Format example:
+                [0, 10, 5, 2, 20, 30, 25]
                 
-            ?>
         },
-<?php // Chart -> Config -> Data -> Dataset #4 -> Milk duration ?>
+        // Chart -> Config -> Data -> Dataset #4 -> Milk duration
         {
             type: 'bar',
             label: 'Milk Duration',
             backgroundColor: '#add8e6',
             borderColor: '#add8e6',
             data: 
-            <?php
                 // Getting milk duration data
-                // Format example: [15, 15, 15, 10, 20, 15, 5]
-                
-            ?>
+                // Format example:
+                [15, 15, 15, 10, 20, 15, 5]                
         }
     ]
 };
@@ -178,11 +170,28 @@ const chart_config = {
 // --- Chart config - end
 // --------------------------
 
+*/
+
+// Data from MySQL --> 'chart_data.php';
+$.ajax({
+    type: 'POST',
+    url: 'chart_data.php',
+    success: function (data) {
+        chart_data = data;//alert(JSON.stringify(data));
+        //var myLine = new Chart(document.getElementById("BabyStatChart").getContext("2d")).scatter(chart_data);
+
+        var ctx = document.getElementById("BabyStatChart").getContext("2d");
+        var MyBabyStatChart = new Chart(ctx).scatter(chart_data, {responsive: true});
+    } 
+});
+
+/*
 // Create chart
 const MyBabyStatChart = new Chart(
     document.getElementById('BabyStatChart').getContext("2d"),
     chart_config
 );
+*/
 
 </script>
 

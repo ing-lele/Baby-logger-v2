@@ -80,6 +80,7 @@ while($event = mysqli_fetch_assoc($results)){
 
 }
 
+/*
 // Print to check arrays values
 echo "<br>Label array: ";
 print_r($x_labels);
@@ -95,7 +96,7 @@ print_r($data_fed_count);
 
 echo "<br>Duration array: ";
 print_r($data_fed_duration);
-
+*/
 
 // --------------------------
 // Initialize dataset
@@ -136,6 +137,7 @@ $datasets_fed_duration = array(
     'data' => $data_fed_duration
 );
 
+/*
 echo "<br>Pee count dataset: ";
 print_r($datasets_pee_count);
 
@@ -147,6 +149,7 @@ print_r($datasets_fed_count);
 
 echo "<br>Fed duration dataset: ";
 print_r($datasets_fed_duration);
+*/
 
 // --------------------------
 // Initialize Chart Data
@@ -172,8 +175,10 @@ $chart_data = array(
     )
 );
 
+/*
 echo "<br>Chart data: ";
 print_r ($chart_data);
+*/
 
 // Encond in JSON format
 print(json_encode($chart_data));
