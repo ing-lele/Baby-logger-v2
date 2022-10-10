@@ -7,7 +7,10 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
+
 <head>
     <title>Baby &#x1F476; Charts</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -64,25 +67,14 @@ Show stats for past <select name='weeks'>
 
 // Creating canvas -->
 <div>
-    <canvas id='BabyStatChart'></canvas>
+    <canvas id='BabyStatChart' width="500" height="500"></canvas>
 </div>
 
-<!-- // Load Chart.js -->
-<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
 <script>
 
 // --------------------------
 // --- Chart config - start
 // --------------------------
-
-// Chart -> Options
-const chart_option = {
-    scales: {
-        y:{
-            beginAtZero: true
-        }
-    }
-};
 
 /* 
 // Chart -> Data -> Labels - used for all data in dataset
@@ -167,6 +159,15 @@ const chart_config = {
     options: chart_option
 };
 
+// Chart -> Options
+const chart_option = {
+    scales: {
+        y:{
+            beginAtZero: true
+        }
+    }
+};
+
 // --------------------------
 // --- Chart config - end
 // --------------------------
@@ -180,14 +181,14 @@ $.ajax({
     success: function (data) {
         chart_data = data;//alert(JSON.stringify(data));
         //var myLine = new Chart(document.getElementById("BabyStatChart").getContext("2d")).scatter(chart_data);
+        cxt = document.getElementById("BabyStatChart").getContext("2d")
 
-        var MyBabyStatChart = new Chart(
-            document.getElementById("BabyStatChart").getContext("2d"),
-            {
-                type: 'scatter',
-                data: JSON.parse(chart_data),
-                options: chart_option
-            }
+        var MyBabyStatChart = new Chart(ctx,
+        {
+            type: 'scatter',
+            data: JSON.parse(chart_data),
+            options: chart_option
+        }
         )
     }
 });
