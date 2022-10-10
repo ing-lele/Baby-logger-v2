@@ -46,7 +46,7 @@
             console.log(JSON.stringify(chart_data));
             // Verify if it's valid JSON
                 try{
-                    JSON.parse(str);
+                    JSON.parse(chart_data);
                     console.log("Valid JSON");
                 }catch (e){
                     //Error - JSON is not okay
