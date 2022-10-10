@@ -181,7 +181,7 @@ $.ajax({
     success: function (data) {
         chart_data = data;//alert(JSON.stringify(data));
         //var myLine = new Chart(document.getElementById("BabyStatChart").getContext("2d")).scatter(chart_data);
-        cxt = document.getElementById("BabyStatChart").getContext("2d");
+        ctx = document.getElementById("BabyStatChart").getContext("2d");
 
         var MyBabyStatChart = new Chart(ctx,
         {
