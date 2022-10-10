@@ -7,6 +7,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <head>
     <title>Baby &#x1F476; Charts</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
