@@ -40,7 +40,7 @@
     $.ajax({
         type: 'POST',
         url: 'chart_data.php',
-        //dataType: 'json',
+        dataType: 'json',
         success: function (data) {
             var chart_data = data;
             alert(JSON.stringify(chart_data));
