@@ -39,14 +39,14 @@
 
     $.ajax({
         type: 'POST',
-        url: '/chart_data.php',
-        dataType: 'json',
-        done: function (data) {
+        url: 'chart_data.php',
+        //dataType: 'json',
+        success: function (data) {
             var chart_data = data;
             alert(JSON.stringify(chart_data));
             console.log(JSON.stringify(chart_data));
         },
-        fail: function(jqXHR, textStatus, errorThrown) {
+        error: function(jqXHR, textStatus, errorThrown) {
             console.log(JSON.stringfy(jqXHR));
             console.log("Response" + responseText);
             console.log("Error" + errorThrown);
