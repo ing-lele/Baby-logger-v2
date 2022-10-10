@@ -55,7 +55,7 @@ $sql = "SELECT
 	GROUP BY DATE(ts_start)
 	ORDER BY DATE(ts_start) DESC;";
 
-$results = mysqli_query($connectdb, $sql);
+$results = mysqli_query($connectdb, $sql) or die(mysql_error());
 ?>
 
 <!DOCTYPE html>
