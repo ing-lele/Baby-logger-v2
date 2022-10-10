@@ -74,6 +74,8 @@ Show stats for past <select name='weeks'>
 
 // --------------------------
 // AJAX query to get Data from MySQL --> 'chart_data.php';
+alert("Start AJAX");
+
 $.ajax({
     type: 'POST',
     url: 'chart_data.php',
