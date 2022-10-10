@@ -113,7 +113,7 @@ const chart_data = {
             borderColor: '#ffff66',
             data:
                 <?php
-                // Gettin pee count data
+                // Getting pee count data
                 // Format example: [3, 13, 8, 5, 23, 33, 28]
                 
                 ?>
@@ -126,7 +126,7 @@ const chart_data = {
             borderColor: '#996600',
             data:
             <?php
-                // Gettin poo count data
+                // Getting poo count data
                 // Format example: [1, 11, 6, 3, 21, 31, 26]
                 
             ?>
@@ -139,7 +139,7 @@ const chart_data = {
             borderColor: '#399cbd',
             data:
             <?php
-                // Gettin milk count data
+                // Getting milk count data
                 // Format example: [0, 10, 5, 2, 20, 30, 25]
                 
             ?>
@@ -152,7 +152,7 @@ const chart_data = {
             borderColor: '#add8e6',
             data: 
             <?php
-                // Gettin milk duration data
+                // Getting milk duration data
                 // Format example: [15, 15, 15, 10, 20, 15, 5]
                 
             ?>
