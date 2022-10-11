@@ -16,6 +16,13 @@ if(!isset($_POST['weeks'])){
 // Get SQL data
 $sql_data = get_sql_data($weeks,"ASC");
 
+// Get Chart data
+// $chart_data in JSON format
+//  $x_labels = array();
+//  $data_pee_count = array();
+//  $data_poo_count = array();
+//  $data_fed_count = array();
+//  $data_fed_duration = array();
 $chart_data = get_chart_data($sql_data);
 
 ?>
@@ -23,7 +30,6 @@ $chart_data = get_chart_data($sql_data);
 <!DOCTYPE html>
 <html lang="en">
 
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
 
 <head>
@@ -48,36 +54,6 @@ $chart_data = get_chart_data($sql_data);
     }
     </style>
 
-    <script>
-    // Get chart data from MySQL --> 'chart_data.php'
-    console.log("Start AJAX call");
-
-    $.ajax({
-        type: 'POST',
-        url: 'chart_data.php',
-        dataType: 'json',
-        success: function (data) {
-            var chart_data = data;
-            console.log(JSON.stringify(chart_data));
-            // Verify if it's valid JSON
-                try{
-                    JSON.parse(chart_data);
-                    console.log("Valid JSON");
-                }catch (e){
-                    //Error - JSON is not okay
-                    console.log("Not a valid JSON!");
-                }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(JSON.stringfy(jqXHR));
-            console.log("Response" + responseText);
-            console.log("Error" + errorThrown);
-        }
-    });
-
-    console.log("AJAX call completed");
-
-    </script>
 </head>
 
 <body>
@@ -117,31 +93,14 @@ Creating canvas -->
 </div>
 
 <script>
-
-//JSON.parse(chart_data).tostring();
-
-/*
-//var myLine = new Chart(document.getElementById("BabyStatChart").getContext("2d")).scatter(chart_data);
-
-ctx = document.getElementById("BabyStatChart").getContext("2d");
-
-        var MyBabyStatChart = new Chart(ctx,
-        {
-            type: 'scatter',
-            data: JSON.parse(chart_data),
-            options: chart_option
-        }
-        );
-
-
 // --------------------------
 // --- Chart config - start
 // --------------------------
 
-
 // Chart -> Data -> Labels - used for all data in dataset
-const x_labels = x_labels;
-// Data example: ['January', 'February', 'March', 'April', 'May','June'];
+const x_labels = 
+// Data example: 
+['January', 'February', 'March', 'April', 'May','June'];
 
 // --------------------------
 // Chart -> Config -> Data = 
@@ -165,7 +124,7 @@ const chart_data = {
             borderColor: '#ffff66',
             data:
                 // Getting pee count data
-                // Format example:
+                // Data example:
                 [3, 13, 8, 5, 23, 33, 28]
 
         },
@@ -177,7 +136,7 @@ const chart_data = {
             borderColor: '#996600',
             data:
                 // Getting poo count data
-                // Format example:
+                // Data example:
                 [1, 11, 6, 3, 21, 31, 26]                
         },
         // Chart -> Config -> Data -> Dataset #3 -> Milk count
@@ -188,7 +147,7 @@ const chart_data = {
             borderColor: '#399cbd',
             data:
                 // Getting milk count data
-                // Format example:
+                // Data example:
                 [0, 10, 5, 2, 20, 30, 25]
                 
         },
@@ -200,10 +159,20 @@ const chart_data = {
             borderColor: '#add8e6',
             data: 
                 // Getting milk duration data
-                // Format example:
+                // Data example:
                 [15, 15, 15, 10, 20, 15, 5]                
         }
     ]
+};
+
+// --------------------------
+// Chart -> Config -> Options
+const chart_option = {
+    scales: {
+        y:{
+            beginAtZero: true
+        }
+    }
 };
 
 // --------------------------
@@ -219,21 +188,19 @@ const chart_config = {
     data: chart_data,
     options: chart_option
 };
-*/
-
-// Chart -> Options
-const chart_option = {
-    scales: {
-        y:{
-            beginAtZero: true
-        }
-    }
-};
 
 // --------------------------
 // --- Chart config - end
 // --------------------------
 
+// Get context
+ctx = document.getElementById("BabyStatChart").getContext("2d");
+
+// Draw chart
+var MyBabyStatChart = new Chart(
+    ctx,
+    chart_config
+);
 
 /*
 // Create chart

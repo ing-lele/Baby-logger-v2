@@ -101,8 +101,6 @@ Show stats for past <select name='weeks'>
 <th class='fed'>&#x1f37c; Duration</th>
 <tr>
 
-
-
 <?php
 $event_count = 0;
 // loop all the results that were read from database and "draw" to web page
