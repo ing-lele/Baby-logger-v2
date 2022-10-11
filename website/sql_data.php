@@ -58,7 +58,7 @@ function get_sql_data(int $weeks, string $sort) {
     }
 
     // return JSON format
-    return json_encode($row_results);
+    return json_encode($row_results, JSON_PRETTY_PRINT);
 
 }
 

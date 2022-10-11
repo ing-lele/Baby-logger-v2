@@ -118,18 +118,25 @@ echo ("</pre>");
 
 // read JSON data
 $event_count = 0;
-// loop all the results that were read from database and "draw" to web page
+// loop all the results from DB and create table
 foreach($sql_data as $event){
 	$event_count++;
 	echo "<tr>";
-	
+
+	// data_structure[
+	//	day DATE,
+	//	pee_count INT,
+	//	poo_count INT,
+	//  fed_count INT,
+	//	fed_time TIME]
+
 	try {
 		echo "<td>". date("d M y", strtotime($event['day'])) ."</td>";		
 		echo "<td class='pee'>". $event['pee_count'] ."</td>";
 		echo "<td class='poo'>". $event['poo_count'] ."</td>";
 		echo "<td class='fed'>". $event['fed_count'] ."</td>";
 		echo "<td class='fed'>". $event['fed_duration'] ."</td>";
-		}
+	}
 	catch (Exception $ex) {
 		echo "<td><center>Failed to create table</center></td>";
 		echo "<td><center>$er</center></td>";

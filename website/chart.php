@@ -5,6 +5,7 @@
 
 // Include sql data function
 include_once 'chart_data.php';
+include_once 'sql_data.php';
 
 // Query stat from the current date
 if(!isset($_POST['weeks'])){
@@ -13,6 +14,13 @@ if(!isset($_POST['weeks'])){
 	$weeks = floatval($_POST['weeks']);
 }
 
+// ---------------------
+// Daily entry with:
+// Date | Pee Count | Poo Count | Milk Count | Milk Duration
+
+// Get SQL data in JSON format
+$sql_json_data = get_sql_data($weeks,"DESC");
+
 // Get Chart data
 // $chart_data in JSON format
 //  $x_labels = array();
@@ -20,7 +28,10 @@ if(!isset($_POST['weeks'])){
 //  $data_poo_count = array();
 //  $data_fed_count = array();
 //  $data_fed_duration = array();
-$chart_data = get_chart_data($sql_data);
+$chart_json_data = get_chart_data($sql_json_data);
+
+// decode JSON to array
+$chart_data = json_decode($chart_json_data, true);
 
 ?>
 

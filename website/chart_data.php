@@ -9,9 +9,7 @@
 // ini_set("log_errors", 1);
 // ini_set("html_errors", 1);
 
-include_once 'sql_data.php';
-
-function get_chart_data(mysqli_result $sql_data) {
+function get_chart_data(string|array $sql_data) {
 
     // Get SQL data
     $sql_data = get_sql_data($weeks,"ASC");
@@ -29,23 +27,28 @@ function get_chart_data(mysqli_result $sql_data) {
     $data_fed_count = array();
     $data_fed_duration = array();
 
-    // loop all the results that were read from database
-    while($sql_data->$event mysqli_fetch_assoc($sql_data)){
-        // Query result structure  (
-        //  	day DATE,
-        //	    pee_count INT,
-        //	    poo_count INT,
-        //  	fed_count INT,
-        //	    fed_time TIME)
-
+    // loop all the results from DB and save to individual array
+    foreach($sql_data as $event){
         $event_count++;
 
-        $x_labels[] = date("d M y", strtotime($event['day']));
-        $data_pee_count[]  = $event['pee_count'];
-        $data_poo_count[] = $event['poo_count'];
-        $data_fed_count[] = $event['fed_count'];
-        $data_fed_duration[] = $event['fed_duration'];
+        // data_structure[
+        //	day DATE,
+        //	pee_count INT,
+        //	poo_count INT,
+        //  fed_count INT,
+        //	fed_time TIME]
 
+        try {
+            $x_labels[] = date("d M y", strtotime($event['day']));
+            $data_pee_count[]  = $event['pee_count'];
+            $data_poo_count[] = $event['poo_count'];
+            $data_fed_count[] = $event['fed_count'];
+            $data_fed_duration[] = $event['fed_duration'];
+        }
+        catch (Exception $ex) {
+            echo "<td><center>Failed to create table</center></td>";
+            echo "<td><center>$er</center></td>";
+        }
     }
     
     // Print to check arrays values
@@ -153,11 +156,5 @@ function get_chart_data(mysqli_result $sql_data) {
     // Encode in JSON format and print
     return  json_encode($chart_data, JSON_PRETTY_PRINT);
 }
-
-// Test chart_data function
-include_once 'sql_data.php';
-$sql_data = get_sql_data($weeks,"ASC");
-$chart_data = get_chart_data($sql_data);
-ehco json_encode($chart_data, JSON_PRETTY_PRINT);
 
 ?>
