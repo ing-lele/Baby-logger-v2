@@ -150,12 +150,13 @@ const data_poo_count = (<?php echo json_encode($data_poo_count); ?>);
 const data_fed_count = (<?php echo json_encode($data_fed_count); ?>);
 const data_fed_duration = (<?php echo json_encode($data_fed_duration); ?>);
 
-// Print array
-console.log(x_lables);
+/* Print array
+console.log(x_labels);
 console.log(data_pee_count);
 console.log(data_poo_count);
 console.log(data_fed_count);
 console.log(data_fed_duration);
+*/
 
 // --------------------------
 // --- Chart config - start
