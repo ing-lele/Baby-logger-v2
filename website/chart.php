@@ -33,6 +33,10 @@ $chart_json_data = get_chart_data($sql_json_data);
 // decode JSON to array
 $chart_data = json_decode($chart_json_data, true);
 
+// print Chart data
+echo "<pre>";
+print_r($chart_data);
+echo "</pre>";
 ?>
 
 <!DOCTYPE html>
