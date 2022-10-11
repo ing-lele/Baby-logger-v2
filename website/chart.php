@@ -41,9 +41,9 @@ include_once 'sql_data.php';
         padding: 2px;
     }
     .wrapper{
-        align: center;
-        height: 500px;
         width: 500px;
+        text-align: center;
+        display: inline-block;
     }
     </style>
 
@@ -80,10 +80,11 @@ Show stats for past <select name='weeks'>
 https://www.chartjs.org/docs/latest/getting-started/
 
 Creating canvas -->
-<div class="wrapper">
-    <canvas id='BabyStatChart'></canvas>
+<div style="text-align: center">
+    <div class="wrapper">
+        <canvas id='BabyStatChart'></canvas>
+    </div>
 </div>
-
 
 <?php
 // ---------------------
