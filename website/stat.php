@@ -108,7 +108,7 @@ if(!isset($_POST['weeks'])){
 $sql_json_data = get_sql_data($weeks,"DESC");
 
 // decode JSON to array
-$sql_data = json_decode($sql_json_data, true)
+$sql_data = json_decode($sql_json_data, true);
 print_r($sql_data);
 
 // read JSON data
