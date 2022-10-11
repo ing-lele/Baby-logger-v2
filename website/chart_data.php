@@ -9,8 +9,13 @@
 // ini_set("log_errors", 1);
 // ini_set("html_errors", 1);
 
+include_once 'sql_data.php';
+
 function get_chart_data(mysqli_result $sql_data) {
 
+    // Get SQL data
+    $sql_data = get_sql_data($weeks,"ASC");
+    
     // Check if valid
     if (!isset($sql_data)){
         die("No SQL data provided");

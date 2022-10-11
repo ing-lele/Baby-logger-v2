@@ -14,16 +14,6 @@
 // Include sql data function
 include_once 'sql_data.php';
 
-// Query stat from the current date
-if(!isset($_POST['weeks'])){
-	$weeks = 2;
-}else{
-	$weeks = floatval($_POST['weeks']);
-}
-
-// Get SQL data
-$sql_data = get_sql_data($weeks,"DESC");
-
 ?>
 
 <!DOCTYPE html>
@@ -102,6 +92,27 @@ Show stats for past <select name='weeks'>
 <tr>
 
 <?php
+
+// Query stat from the current date
+if(!isset($_POST['weeks'])){
+	$weeks = 2;
+}else{
+	$weeks = int($_POST['weeks']);
+}
+
+// ---------------------
+// Daily entry with:
+// Date | Pee Count | Poo Count | Milk Count | Milk Duration
+
+// Get SQL data in JSON format
+$sql_json_data = get_sql_data($weeks,"DESC");
+
+// decode JSON to array
+$sql_data = json_decode($sql_json_data, true)
+print_r($sql_data);
+
+// read JSON data
+
 $event_count = 0;
 // loop all the results that were read from database and "draw" to web page
 while($event = mysqli_fetch_assoc($sql_data)){

@@ -3,6 +3,8 @@
 // Parameters: 
 //      int $weeks
 //      string $sort = ["ASC,"DESC"]
+// Return:
+//      JSON data
 // =========================================================
 
 // For debug, enable the following
@@ -48,8 +50,16 @@ function get_sql_data(int $weeks, string $sort) {
     
     // query SQL result
     $sql_results = mysqli_query($connectdb, $sql_query) or die(mysql_error());
+    
+    // convert to array
+    $row_results = array();
+    while($record = mysqli_fetch_assoc($sql_results)) {
+        $row_results[] = $record;
+    }
 
-    return $sql_results;
+    // return JSON format
+    return json_encode($row_results);
+
 }
 
 ?>
