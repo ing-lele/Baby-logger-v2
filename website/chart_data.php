@@ -9,29 +9,12 @@
 // ini_set("log_errors", 1);
 // ini_set("html_errors", 1);
 
-
-print_r($sql_data);
-// $results = $sql_data;
-
-function get_chart_data($sql_data) {
+function get_chart_data(mysqli_result $sql_data) {
 
     // Check if valid
     if (!isset($sql_data)){
         die("No SQL data provided");
     }
-
-
-    // --------------------------
-    // Chart -> Config -> Data = 
-    // {
-    //      labels:
-    //      dataset: [
-    //          {type1, label1, data1},
-    //          {type2, label2, data2},
-    //          {...}
-    //      ]
-    // }
-    // --------------------------
 
     // Initialize variables
     $event_count = 0;
@@ -59,8 +42,7 @@ function get_chart_data($sql_data) {
         $data_fed_duration[] = $event['fed_duration'];
 
     }
-
-    /*
+    
     // Print to check arrays values
     echo "<br>Label array: ";
     print_r($x_labels);
@@ -76,7 +58,19 @@ function get_chart_data($sql_data) {
 
     echo "<br>Duration array: ";
     print_r($data_fed_duration);
-    */
+    
+
+    // --------------------------
+    // Chart -> Config -> Data = 
+    // {
+    //      labels:
+    //      dataset: [
+    //          {type1, label1, data1},
+    //          {type2, label2, data2},
+    //          {...}
+    //      ]
+    // }
+    // --------------------------
 
     // --------------------------
     // Initialize dataset
@@ -117,7 +111,6 @@ function get_chart_data($sql_data) {
         'data' => $data_fed_duration
     );
 
-    /*
     echo "<br>Pee count dataset: ";
     print_r($datasets_pee_count);
 
@@ -129,7 +122,6 @@ function get_chart_data($sql_data) {
 
     echo "<br>Fed duration dataset: ";
     print_r($datasets_fed_duration);
-    */
 
     // --------------------------
     // Initialize Chart Data
@@ -156,5 +148,11 @@ function get_chart_data($sql_data) {
     // Encode in JSON format and print
     return  json_encode($chart_data, JSON_PRETTY_PRINT);
 }
+
+// Test chart_data function
+include_once 'sql_data.php';
+$sql_data = get_sql_data($weeks,"ASC");
+$chart_data = get_chart_data($sql_data);
+ehco json_encode($chart_data, JSON_PRETTY_PRINT);
 
 ?>
