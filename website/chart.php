@@ -139,23 +139,16 @@ foreach($sql_data as $event){
     }
 }
 
-//Convert to JSON
-$x_labels_json = json_encode($x_labels);
-$data_pee_count_json = json_encode($data_pee_count);
-$data_poo_count_json = json_encode($data_poo_count);
-$data_fed_count_json = json_encode($data_fed_count);
-$data_fed_duration_json = json_encode($data_fed_duration);
-
 ?>
 
 <script>
 
-// Set data variable
-const x_lables = JSON.parse(<?php print_r($x_labels_json);?>);
-const data_pee_count = JSON.parse(<?php print_r($data_pee_count_json);?>);
-const data_poo_count = JSON.parse(<?php print_r($data_poo_count_json);?>);
-const data_fed_count = JSON.parse(<?php print_r($data_fed_count_json);?>);
-const data_fed_duration = JSON.parse(<?php print_r($data_fed_duration_json);?>);
+// Set data variable from PHP via JSON format
+const x_lables = JSON.parse(<?php echo json_encode($x_labels); ?>);
+const data_pee_count = JSON.parse(<?php echo json_encode($data_pee_count); ?>);
+const data_poo_count = JSON.parse(<?php echo json_encode($data_poo_count); ?>);
+const data_fed_count = JSON.parse(<?php echo json_encode($data_fed_count); ?>);
+const data_fed_duration = JSON.parse(<?php echo json_encode($data_fed_duration); ?>);
 
 // Print array
 console.log(x_lables);
