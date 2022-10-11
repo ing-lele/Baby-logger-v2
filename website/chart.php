@@ -107,6 +107,7 @@ Show stats for past <select name='weeks'>
 </center>
 </form>
 
+
 <!-- chart.js to create chart
 https://www.chartjs.org/docs/latest/getting-started/
 
