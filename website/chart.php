@@ -100,7 +100,7 @@ if(!isset($_POST['weeks'])){
 // Date | Pee Count | Poo Count | Milk Count | Milk Duration
 
 // Get SQL data in JSON format
-$sql_json_data = get_sql_data($weeks,"DESC");
+$sql_json_data = get_sql_data($weeks,"ASC");
 
 // decode JSON to array
 $sql_data = json_decode($sql_json_data, true);
