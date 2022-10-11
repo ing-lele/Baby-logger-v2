@@ -4,7 +4,6 @@
 // =========================================================
 
 // Include sql data function
-include_once 'sql_data.php';
 include_once 'chart_data.php';
 
 // Query stat from the current date
@@ -13,9 +12,6 @@ if(!isset($_POST['weeks'])){
 }else{
 	$weeks = floatval($_POST['weeks']);
 }
-
-// Get SQL data
-$sql_data = get_sql_data($weeks,"ASC");
 
 // Get Chart data
 // $chart_data in JSON format
