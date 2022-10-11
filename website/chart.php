@@ -3,6 +3,9 @@
 // Info: https://www.chartjs.org/
 // =========================================================
 
+// Include data for chart
+include_once(chart_data.php);
+
 ?>
 
 <!DOCTYPE html>
