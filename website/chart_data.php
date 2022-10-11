@@ -10,9 +10,6 @@
 // ini_set("html_errors", 1);
 
 function get_chart_data($sql_data) {
-
-    // Get SQL data
-    $sql_data = get_sql_data($weeks,"ASC");
     
     // Check if valid
     if (!isset($sql_data)){
