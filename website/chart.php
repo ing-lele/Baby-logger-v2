@@ -139,9 +139,24 @@ foreach($sql_data as $event){
     }
 }
 
+//Convert to JSON
+$X_labels_json = json_encode($x_labels, JSON_PRETTY_PRINT);
+$data_pee_count_json = json_encode($data_pee_count, JSON_PRETTY_PRINT);
+$data_poo_count_json = json_encode($data_poo_count, JSON_PRETTY_PRINT);
+$data_fed_count_json = json_encode($data_fed_count, JSON_PRETTY_PRINT);
+$data_fed_duration_json = json_encode($data_fed_duration, JSON_PRETTY_PRINT);
+
 ?>
 
 <script>
+
+// Set data variable
+const x_lables = JSON.parse(<?php print_r($x_labels_json);?>);
+const data_pee_count = JSON.parse(<?php print_r($data_pee_count_json);?>);
+const data_poo_count = JSON.parse(<?php print_r($data_poo_count_json);?>);
+const data_fed_count = JSON.parse(<?php print_r($data_fed_count_json);?>);
+const data_fed_duration = JSON.parse(<?php print_r($data_fed_duration_json);?>;
+
 // --------------------------
 // --- Chart config - start
 // --------------------------
@@ -157,7 +172,7 @@ foreach($sql_data as $event){
 // --------------------------
 const chart_data = {
     // Data example: ['January', 'February', 'March', 'April', 'May','June'];
-    labels: <?php print_r($x_labels);?>,
+    labels: x_lables;
     datasets: [
         // Chart -> Config -> Data -> Dataset #1 -> Pee count
         {
@@ -165,10 +180,7 @@ const chart_data = {
             label: 'Pee Count',
             backgroundColor: '#ffff66',
             borderColor: '#ffff66',
-            data:
-                // Getting pee count data
-                // Data example: [3, 13, 8, 5, 23, 33, 28]
-                <?php print_r($data_pee_count);?>
+            data: data_pee_count
         },
         // Chart -> Config -> Data -> Dataset #2 -> Poo count
         {
@@ -176,10 +188,7 @@ const chart_data = {
             label: 'Poo Count',
             backgroundColor: '#996600',
             borderColor: '#996600',
-            data:
-                // Getting poo count data
-                // Data example: [1, 11, 6, 3, 21, 31, 26]                
-                <?php print_r($data_poo_count);?>
+            data: data_poo_count
         },
         // Chart -> Config -> Data -> Dataset #3 -> Milk count
         {
@@ -187,10 +196,7 @@ const chart_data = {
             label: 'Milk Count',
             backgroundColor: '#399cbd',
             borderColor: '#399cbd',
-            data:
-                // Getting milk count data
-                // Data example: [0, 10, 5, 2, 20, 30, 25]
-                <?php print_r($data_fed_count);?>                
+            data: data_fed_count
         },
         // Chart -> Config -> Data -> Dataset #4 -> Milk duration
         {
@@ -198,10 +204,7 @@ const chart_data = {
             label: 'Milk Duration',
             backgroundColor: '#add8e6',
             borderColor: '#add8e6',
-            data: 
-                // Getting milk duration data
-                // Data example:[15, 15, 15, 10, 20, 15, 5]
-                <?php print_r($data_fed_duration);?>
+            data: data_fed_duration
         }
     ]
 };
