@@ -140,7 +140,7 @@ foreach($sql_data as $event){
 }
 
 //Convert to JSON
-$X_labels_json = json_encode($x_labels);
+$x_labels_json = json_encode($x_labels);
 $data_pee_count_json = json_encode($data_pee_count);
 $data_poo_count_json = json_encode($data_poo_count);
 $data_fed_count_json = json_encode($data_fed_count);
