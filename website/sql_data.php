@@ -1,6 +1,8 @@
 <?php
-// Collect SQL data for count and duration to use in stat.php and chart.php
-// Parameters: int $weeks
+// Collect SQL data for count and duration
+// Parameters: 
+//      int $weeks
+//      string $sort = ["ASC,"DESC"]
 // =========================================================
 
 // For debug, enable the following
@@ -23,17 +25,17 @@ function get_sql_data(int $weeks, string $sort) {
     mysqli_select_db($connectdb,$db_name) or die ("ERROR - Cannot select database");
 
     // Validate week
-    if(!isset($weeks)){
+    if(!isset($weeks) && is_int($weeks)){
         $weeks = 2;
     }
 
     // Validate sort
-    if(!isset($sort)){
+    if(!isset($sort) && in_array($sort, ["ASC","DESC"])){
         $sort = "DESC";
     }
 
     // Show count of pee, poo, fed, fed_duration by day
-    $sql = "SELECT 
+    $sql_query = "SELECT 
         DATE(ts_start) AS day, 
         COUNT(CASE WHEN category = 'pee' THEN id END) AS pee_count,
         COUNT(CASE WHEN category = 'poo' THEN id END) AS poo_count,
@@ -45,9 +47,9 @@ function get_sql_data(int $weeks, string $sort) {
         ORDER BY DATE(ts_start) ".($sort).";";
     
     // query SQL result
-    $results = mysqli_query($connectdb, $sql) or die(mysql_error());
+    $sql_results = mysqli_query($connectdb, $sql_query) or die(mysql_error());
 
-    return $results;
+    return $sql_results;
 }
 
 ?>

@@ -1,5 +1,6 @@
 <?php
-// Collect data for count and duration to use in chart.php
+// Transform SQL data to match chart data
+// Parameters: int $weeks
 // =========================================================
 
 // For debug, enable the following
@@ -8,8 +9,15 @@
 // ini_set("log_errors", 1);
 // ini_set("html_errors", 1);
 
-header("Content-Type: application/json");
-http_response_code(200);
+//header("Content-Type: application/json");
+//http_response_code(200);
+
+function get_chart_data() {
+
+
+
+
+}
 
 // DB Connection settings - mysql_variables.php
 //$db_host

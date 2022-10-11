@@ -3,8 +3,20 @@
 // Info: https://www.chartjs.org/
 // =========================================================
 
-// Include data for chart
-include_once(chart_data.php);
+// Include sql data function
+include_once 'sql_data.php';
+
+// Query stat from the current date
+if(!isset($_POST['weeks'])){
+	$weeks = 2;
+}else{
+	$weeks = floatval($_POST['weeks']);
+}
+
+// Get SQL data
+$sql_data = get_sql_data($weeks,"ASC");
+
+$chart_data = get_chart_data($sql_data);
 
 ?>
 
