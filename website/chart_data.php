@@ -12,7 +12,7 @@
 function get_chart_data($sql_json_data) {
     
     // decode JSON to array
-    $sql_data = json_decode($chart_json_data, true);
+    $sql_data = json_decode($sql_json_data, true);
 
     // Check if valid
     if (!isset($sql_data)){
