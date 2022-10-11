@@ -40,6 +40,10 @@ include_once 'sql_data.php';
         font-size: 32px;
         padding: 2px;
     }
+    .wrapper{
+        height: 500px;
+        width: 500px;
+    }
     </style>
 
 </head>
@@ -75,8 +79,8 @@ Show stats for past <select name='weeks'>
 https://www.chartjs.org/docs/latest/getting-started/
 
 Creating canvas -->
-<div>
-    <canvas id='BabyStatChart' width="500px" height="500px"></canvas>
+<div class="wrapper">
+    <canvas id='BabyStatChart'></canvas>
 </div>
 
 
@@ -205,6 +209,7 @@ const chart_data = {
 // --------------------------
 // Chart -> Config -> Options
 const chart_option = {
+    responsive:true,
     scales: {
         y:{
             beginAtZero: true
