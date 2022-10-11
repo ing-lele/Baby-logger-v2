@@ -144,7 +144,7 @@ foreach($sql_data as $event){
 <script>
 
 // Set data variable from PHP via JSON format
-const x_lables = (<?php echo json_encode($x_labels); ?>);
+const x_labels = (<?php echo json_encode($x_labels); ?>);
 const data_pee_count = (<?php echo json_encode($data_pee_count); ?>);
 const data_poo_count = (<?php echo json_encode($data_poo_count); ?>);
 const data_fed_count = (<?php echo json_encode($data_fed_count); ?>);
@@ -157,7 +157,6 @@ console.log(data_poo_count);
 console.log(data_fed_count);
 console.log(data_fed_duration);
 
-/*
 // --------------------------
 // --- Chart config - start
 // --------------------------
@@ -173,7 +172,7 @@ console.log(data_fed_duration);
 // --------------------------
 const chart_data = {
     // Data example: ['January', 'February', 'March', 'April', 'May','June'];
-    labels: x_lables;
+    labels: x_labels,
     datasets: [
         // Chart -> Config -> Data -> Dataset #1 -> Pee count
         {
