@@ -9,8 +9,11 @@
 // ini_set("log_errors", 1);
 // ini_set("html_errors", 1);
 
-function get_chart_data($sql_data) {
+function get_chart_data($sql_json_data) {
     
+    // decode JSON to array
+    $sql_data = json_decode($chart_json_data, true);
+
     // Check if valid
     if (!isset($sql_data)){
         die("No SQL data provided");
