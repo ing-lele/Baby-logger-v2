@@ -110,9 +110,11 @@ $sql_json_data = get_sql_data($weeks,"DESC");
 // decode JSON to array
 $sql_data = json_decode($sql_json_data, true);
 
+/* Print SQL data
 echo ("<pre>");
 print_r($sql_data);
 echo ("</pre>");
+*/
 
 // read JSON data
 $event_count = 0;
