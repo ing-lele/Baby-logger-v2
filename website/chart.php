@@ -144,11 +144,11 @@ foreach($sql_data as $event){
 <script>
 
 // Set data variable from PHP via JSON format
-const x_lables = JSON.parse(<?php echo json_encode($x_labels); ?>);
-const data_pee_count = JSON.parse(<?php echo json_encode($data_pee_count); ?>);
-const data_poo_count = JSON.parse(<?php echo json_encode($data_poo_count); ?>);
-const data_fed_count = JSON.parse(<?php echo json_encode($data_fed_count); ?>);
-const data_fed_duration = JSON.parse(<?php echo json_encode($data_fed_duration); ?>);
+const x_lables = (<?php echo json_encode($x_labels); ?>);
+const data_pee_count = (<?php echo json_encode($data_pee_count); ?>);
+const data_poo_count = (<?php echo json_encode($data_poo_count); ?>);
+const data_fed_count = (<?php echo json_encode($data_fed_count); ?>);
+const data_fed_duration = (<?php echo json_encode($data_fed_duration); ?>);
 
 // Print array
 console.log(x_lables);
