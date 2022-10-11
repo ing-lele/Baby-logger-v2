@@ -14,11 +14,6 @@
 
 function get_chart_data() {
 
-
-
-
-}
-
 // DB Connection settings - mysql_variables.php
 //$db_host
 //$db_user
@@ -185,6 +180,7 @@ $chart_data = array(
 );
 
 // Encode in JSON format and print
-echo json_encode($chart_data, JSON_PRETTY_PRINT);
+return  json_encode($chart_data, JSON_PRETTY_PRINT);
+}
 
 ?>
