@@ -41,6 +41,7 @@ include_once 'sql_data.php';
         padding: 2px;
     }
     .wrapper{
+        align: center;
         height: 500px;
         width: 500px;
     }
