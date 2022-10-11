@@ -157,6 +157,7 @@ console.log(data_poo_count);
 console.log(data_fed_count);
 console.log(data_fed_duration);
 
+/*
 // --------------------------
 // --- Chart config - start
 // --------------------------
@@ -245,7 +246,7 @@ var MyBabyStatChart = new Chart(
     ctx,
     chart_config
 );
-
+*/
 </script>
 
 </body>
