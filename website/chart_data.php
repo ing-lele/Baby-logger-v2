@@ -9,7 +9,7 @@
 // ini_set("log_errors", 1);
 // ini_set("html_errors", 1);
 
-function get_chart_data(string|array $sql_data) {
+function get_chart_data($sql_data) {
 
     // Get SQL data
     $sql_data = get_sql_data($weeks,"ASC");
