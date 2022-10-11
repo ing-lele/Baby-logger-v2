@@ -22,7 +22,7 @@ if(!isset($_POST['weeks'])){
 }
 
 // Get SQL data
-$sql_data = get_sql_data($weeks);
+$sql_data = get_sql_data($weeks,"DESC");
 
 ?>
 

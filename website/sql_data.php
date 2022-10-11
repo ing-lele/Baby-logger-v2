@@ -9,7 +9,7 @@
 // ini_set("log_errors", 1);
 // ini_set("html_errors", 1);
 
-function get_sql_data(int $weeks) {
+function get_sql_data(int $weeks, string $sort) {
     // DB Connection settings - mysql_variables.php
     //$db_host
     //$db_user
@@ -27,6 +27,11 @@ function get_sql_data(int $weeks) {
         $weeks = 2;
     }
 
+    // Validate sort
+    if(!isset($sort)){
+        $sort = "DESC";
+    }
+
     // Show count of pee, poo, fed, fed_duration by day
     $sql = "SELECT 
         DATE(ts_start) AS day, 
@@ -37,7 +42,7 @@ function get_sql_data(int $weeks) {
         FROM switchdata
         WHERE ts_start>= CURRENT_DATE() - INTERVAL ".($weeks)." WEEK 
         GROUP BY DATE(ts_start)
-        ORDER BY DATE(ts_start) ASC;";
+        ORDER BY DATE(ts_start) ".($sort).";";
     
     // query SQL result
     $results = mysqli_query($connectdb, $sql) or die(mysql_error());
