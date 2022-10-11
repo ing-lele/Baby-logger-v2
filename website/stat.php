@@ -102,7 +102,7 @@ Show stats for past <select name='weeks'>
 <?php
 $event_count = 0;
 // loop all the results that were read from database and "draw" to web page
-while($event = mysqli_fetch_assoc($results)){
+while($event = mysqli_fetch_assoc($sql_data)){
 	$event_count++;
 	echo "<tr>";
 	
