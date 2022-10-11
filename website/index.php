@@ -120,6 +120,8 @@ events for past <select name='days'>
 </center>
 </form>
 
+<br>
+
 <table border="1" cellpadding="1" cellspacing="1" align="center">
 <tr>
 <th>Start</th>

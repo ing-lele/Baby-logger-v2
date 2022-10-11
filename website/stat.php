@@ -90,6 +90,8 @@ Show stats for past <select name='weeks'>
 </center>
 </form>
 
+<br>
+
 <table border="1" cellpadding="1" cellspacing="1" align="center">
 <tr>
 <th>Day</th>
@@ -98,6 +100,8 @@ Show stats for past <select name='weeks'>
 <th class='fed'>&#x1f37c; Count</th>
 <th class='fed'>&#x1f37c; Duration</th>
 <tr>
+
+
 
 <?php
 $event_count = 0;
