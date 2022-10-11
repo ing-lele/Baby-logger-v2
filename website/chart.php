@@ -3,11 +3,12 @@
 // Info: https://www.chartjs.org/
 // =========================================================
 
-// For debug, enable the following
+/* For debug, enable the following
  ini_set("display_error", "stderr");
  ini_set("display_startup_errors", 1);
  ini_set("log_errors", 1);
  ini_set("html_errors", 1);
+*/
 
 // Include sql data function
 include_once 'sql_data.php';
@@ -104,16 +105,8 @@ print_r($chart_data);
 echo "</pre>";
 */
 
-
 // Initialize variables
 $event_count = 0;
-/*
-$x_labels = array();
-$data_pee_count = array();
-$data_poo_count = array();
-$data_fed_count = array();
-$data_fed_duration = array();
-*/
 
 // loop all the results from DB and save to individual array
 foreach($sql_data as $event){
@@ -172,7 +165,6 @@ console.log(data_fed_duration);
 // }
 // --------------------------
 const chart_data = {
-    // Data example: ['January', 'February', 'March', 'April', 'May','June'];
     labels: x_labels,
     datasets: [
         // Chart -> Config -> Data -> Dataset #1 -> Pee count
