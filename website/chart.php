@@ -75,7 +75,7 @@ https://www.chartjs.org/docs/latest/getting-started/
 
 Creating canvas -->
 <div>
-    <canvas id='BabyStatChart' width="500" height="500"></canvas>
+    <canvas id='BabyStatChart' width="500px" height="500px"></canvas>
 </div>
 
 
