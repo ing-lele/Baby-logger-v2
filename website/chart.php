@@ -157,6 +157,13 @@ const data_poo_count = JSON.parse(<?php print_r($data_poo_count_json);?>);
 const data_fed_count = JSON.parse(<?php print_r($data_fed_count_json);?>);
 const data_fed_duration = JSON.parse(<?php print_r($data_fed_duration_json);?>);
 
+// Print array
+console.log(x_lables);
+console.log(data_pee_count);
+console.log(data_poo_count);
+console.log(data_fed_count);
+console.log(data_fed_duration);
+
 // --------------------------
 // --- Chart config - start
 // --------------------------
