@@ -4,39 +4,8 @@
 // =========================================================
 
 // Include sql data function
-include_once 'chart_data.php';
 include_once 'sql_data.php';
 
-// Query stat from the current date
-if(!isset($_POST['weeks'])){
-	$weeks = 2;
-}else{
-	$weeks = floatval($_POST['weeks']);
-}
-
-// ---------------------
-// Daily entry with:
-// Date | Pee Count | Poo Count | Milk Count | Milk Duration
-
-// Get SQL data in JSON format
-$sql_json_data = get_sql_data($weeks,"DESC");
-
-// Get Chart data
-// $chart_data in JSON format
-//  $x_labels = array();
-//  $data_pee_count = array();
-//  $data_poo_count = array();
-//  $data_fed_count = array();
-//  $data_fed_duration = array();
-$chart_json_data = get_chart_data($sql_json_data);
-
-// decode JSON to array
-$chart_data = json_decode($chart_json_data, true);
-
-// print Chart data
-echo "<pre>";
-print_r($chart_data);
-echo "</pre>";
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +64,6 @@ Show stats for past <select name='weeks'>
 </center>
 </form>
 
-
 <!-- chart.js to create chart
 https://www.chartjs.org/docs/latest/getting-started/
 
@@ -104,16 +72,72 @@ Creating canvas -->
     <canvas id='BabyStatChart' width="500" height="500"></canvas>
 </div>
 
+
+<?php
+// ---------------------
+// Query stat from the current date
+if(!isset($_POST['weeks'])){
+	$weeks = 2;
+}else{
+	$weeks = floatval($_POST['weeks']);
+}
+
+// ---------------------
+// Daily entry with:
+// Date | Pee Count | Poo Count | Milk Count | Milk Duration
+
+// Get SQL data in JSON format
+$sql_json_data = get_sql_data($weeks,"DESC");
+
+// decode JSON to array
+$sql_data = json_decode($sql_json_data, true);
+
+/* print Chart data
+echo "<pre>";
+print_r($chart_data);
+echo "</pre>";
+*/
+
+
+// Initialize variables
+$event_count = 0;
+/*
+$x_labels = array();
+$data_pee_count = array();
+$data_poo_count = array();
+$data_fed_count = array();
+$data_fed_duration = array();
+*/
+
+// loop all the results from DB and save to individual array
+foreach($sql_data as $event){
+    $event_count++;
+
+    // data_structure[
+    //	day DATE,
+    //	pee_count INT,
+    //	poo_count INT,
+    //  fed_count INT,
+    //	fed_time TIME]
+
+    try {
+        $x_labels[] = date("d M y", strtotime($event['day']));
+        $data_pee_count[]  = $event['pee_count'];
+        $data_poo_count[] = $event['poo_count'];
+        $data_fed_count[] = $event['fed_count'];
+        $data_fed_duration[] = $event['fed_duration'];
+    }
+    catch (Exception $ex) {
+        echo "<td><center>Failed to create table</center></td>";
+        echo "<td><center>$er</center></td>";
+    }
+}
+
+?>
+
 <script>
 // --------------------------
 // --- Chart config - start
-// --------------------------
-
-// Chart -> Data -> Labels - used for all data in dataset
-const x_labels = 
-// Data example: 
-['January', 'February', 'March', 'April', 'May','June'];
-
 // --------------------------
 // Chart -> Config -> Data = 
 // {
@@ -126,7 +150,8 @@ const x_labels =
 // }
 // --------------------------
 const chart_data = {
-    labels: x_labels,
+    // Data example: ['January', 'February', 'March', 'April', 'May','June'];
+    labels: <?php print_r($x_labels);?>,
     datasets: [
         // Chart -> Config -> Data -> Dataset #1 -> Pee count
         {
@@ -136,9 +161,8 @@ const chart_data = {
             borderColor: '#ffff66',
             data:
                 // Getting pee count data
-                // Data example:
-                [3, 13, 8, 5, 23, 33, 28]
-
+                // Data example: [3, 13, 8, 5, 23, 33, 28]
+                <?php print_r($data_pee_count);?>
         },
         // Chart -> Config -> Data -> Dataset #2 -> Poo count
         {
@@ -148,8 +172,8 @@ const chart_data = {
             borderColor: '#996600',
             data:
                 // Getting poo count data
-                // Data example:
-                [1, 11, 6, 3, 21, 31, 26]                
+                // Data example: [1, 11, 6, 3, 21, 31, 26]                
+                <?php print_r($data_poo_count);?>
         },
         // Chart -> Config -> Data -> Dataset #3 -> Milk count
         {
@@ -159,9 +183,8 @@ const chart_data = {
             borderColor: '#399cbd',
             data:
                 // Getting milk count data
-                // Data example:
-                [0, 10, 5, 2, 20, 30, 25]
-                
+                // Data example: [0, 10, 5, 2, 20, 30, 25]
+                <?php print_r($data_fed_count);?>                
         },
         // Chart -> Config -> Data -> Dataset #4 -> Milk duration
         {
@@ -171,8 +194,8 @@ const chart_data = {
             borderColor: '#add8e6',
             data: 
                 // Getting milk duration data
-                // Data example:
-                [15, 15, 15, 10, 20, 15, 5]                
+                // Data example:[15, 15, 15, 10, 20, 15, 5]
+                <?php print_r($data_fed_duration);?>
         }
     ]
 };
@@ -213,14 +236,6 @@ var MyBabyStatChart = new Chart(
     ctx,
     chart_config
 );
-
-/*
-// Create chart
-const MyBabyStatChart = new Chart(
-    document.getElementById('BabyStatChart').getContext("2d"),
-    chart_config
-);
-*/
 
 </script>
 

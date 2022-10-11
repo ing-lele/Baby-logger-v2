@@ -69,87 +69,24 @@ function get_chart_data($sql_json_data) {
     
 
     // --------------------------
-    // Chart -> Config -> Data = 
-    // {
-    //      labels:
-    //      dataset: [
-    //          {type1, label1, data1},
-    //          {type2, label2, data2},
-    //          {...}
-    //      ]
-    // }
-    // --------------------------
-
-    // --------------------------
-    // Initialize dataset
-
-    // Chart -> Config -> Data -> Dataset #1 -> Pee count
-    $datasets_pee_count = array (
-        'type' => "line",
-        'label' => "Pee Count",
-        'backgroundColor' => "#ffff66",
-        'borderColor' => "#ffff66",
-        'data' => $data_pee_count
-    );
-
-    // Chart -> Config -> Data -> Dataset #2 -> Poo count
-    $datasets_poo_count = array(
-        'type' => "line",
-        'label' => "Poo Count",
-        'backgroundColor' => "#996600",
-        'borderColor' => "#996600",
-        'data' => $data_poo_count
-    );
-
-    // Chart -> Config -> Data -> Dataset #3 -> Milk count
-    $datasets_fed_count = array(
-        'type' => "line",
-        'label' => "Milk Count",
-        'backgroundColor' => "#399cbd",
-        'borderColor' => "#399cbd",
-        'data' => $data_fed_count
-    );
-
-    // Chart -> Config -> Data -> Dataset #4 -> Milk duration
-    $datasets_fed_duration = array(
-        'type' => "bar",
-        'label' => "Milk Duration",
-        'backgroundColor' => "#add8e6",
-        'borderColor' => "#add8e6",
-        'data' => $data_fed_duration
-    );
-
-    echo "<br>Pee count dataset: ";
-    print_r($datasets_pee_count);
-
-    echo "<br>Poo count dataset: ";
-    print_r($datasets_poo_count);
-
-    echo "<br>Fed count dataset: ";
-    print_r($datasets_fed_count);
-
-    echo "<br>Fed duration dataset: ";
-    print_r($datasets_fed_duration);
-
-    // --------------------------
-    // Initialize Chart Data
+    // Return Chart Data
     //
     // Chart -> Config -> Data = 
     // {
     //      labels:
     //      dataset: [
-    //          {type1, label1, data1},
-    //          {type2, label2, data2},
-    //          {...}
+    //          data1[value11,value12,...],
+    //          data2[value21,value22,...],
+    //          dataN[valueN1,valueN1,...]
     //      ]
     // }
     $chart_data = array(
         'labels' => $x_labels,
-        'datasets' => array(
-            $datasets_pee_count,
-            $datasets_poo_count,
-            $datasets_fed_count,
-            $datasets_fed_duration
+        'data' => array(
+            $data_pee_count,
+            $data_poo_count,
+            $data_fed_count,
+            $data_fed_duration
         )
     );
 
