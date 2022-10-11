@@ -245,7 +245,7 @@ var MyBabyStatChart = new Chart(
     ctx,
     chart_config
 );
-*/
+
 </script>
 
 </body>
