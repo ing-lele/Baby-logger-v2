@@ -113,6 +113,7 @@ print_r($sql_data);
 
 // read JSON data
 
+/*
 $event_count = 0;
 // loop all the results that were read from database and "draw" to web page
 while($event = mysqli_fetch_assoc($sql_data)){
@@ -135,6 +136,7 @@ while($event = mysqli_fetch_assoc($sql_data)){
 }
 echo "</table>";
 echo "<p align='center'>Event count: $event_count<br></p>";
+*/
 
 ?>
 </body>
