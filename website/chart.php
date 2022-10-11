@@ -5,6 +5,7 @@
 
 // Include sql data function
 include_once 'sql_data.php';
+include_once 'chart_data.php';
 
 // Query stat from the current date
 if(!isset($_POST['weeks'])){
