@@ -1,5 +1,5 @@
 <?php
-// Generate JS array for count and duration to use in chart.php
+// Collect data for count and duration to use in chart.php
 // =========================================================
 
 // For debug, enable the following
