@@ -135,7 +135,7 @@ foreach($sql_data as $event){
 		echo "<td class='pee'>". $event['pee_count'] ."</td>";
 		echo "<td class='poo'>". $event['poo_count'] ."</td>";
 		echo "<td class='fed'>". $event['fed_count'] ."</td>";
-		echo "<td class='fed'>". $event['fed_duration'] ."</td>";
+		echo "<td class='fed'>". gmdate("G:i:s", $event['fed_duration']) ."</td>";
 	}
 	catch (Exception $ex) {
 		echo "<td><center>Failed to create table</center></td>";
