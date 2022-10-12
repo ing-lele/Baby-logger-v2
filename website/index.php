@@ -135,22 +135,22 @@ while($event = mysqli_fetch_assoc($results)){
 	$event_count++;
 	echo "<tr>";
 	if ($event['category'] == "fed"){
-		echo "<td class='fed'>". date("d M y G:i", strtotime($event['ts_start'])) ."</td>";
+		echo "<td class='fed'>". date("d M Y G:i", strtotime($event['ts_start'])) ."</td>";
 		echo "<td class='fed'>&#x1f37c;</td>"; //Show baby bottle emoji
 		echo "<td class='fed'>". date("G:i:s", strtotime($event['duration'])) ."</td>";
 
 	}else if ($event['category'] == "pee"){
-		echo "<td class='pee'>". date("d M y G:i", strtotime($event['ts_start'])) ."</td>";
+		echo "<td class='pee'>". date("d M Y G:i", strtotime($event['ts_start'])) ."</td>";
 		echo "<td class='pee'>&#128166;</td>";  //Show pee emoji
 		echo "<td class='pee'>". date("G:i:s", strtotime($event['duration'])) ."</td>";
 
 	}else if ($event['category'] == "poo"){
-		echo "<td class='poo'>". date("d M y G:i", strtotime($event['ts_start'])) ."</td>";
+		echo "<td class='poo'>". date("d M Y G:i", strtotime($event['ts_start'])) ."</td>";
 		echo "<td class='poo'>&#128169;</td>";  //Show poop emoji
 		echo "<td class='poo'>". date("G:i:s", strtotime($event['duration'])) ."</td>";
 
 	}else{
-		echo "<td>". date("d M y G:i", strtotime($event['ts_start'])) ."</td>";
+		echo "<td>". date("d M Y G:i", strtotime($event['ts_start'])) ."</td>";
 		echo "<td>&#10060;</td>"; //Show cross mark emoji
 		echo "<td style='background-color: red;'><center><b>Error</b></center></td>";		
 	}
