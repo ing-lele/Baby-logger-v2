@@ -225,7 +225,7 @@ const chart_option = {
             id: 'time',
             type: 'linear',
             position: 'right',
-        }]
+        }],
         y:{
             beginAtZero: true
         }
