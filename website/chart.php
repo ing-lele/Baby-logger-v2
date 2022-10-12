@@ -130,7 +130,7 @@ foreach($sql_data as $event){
         $data_pee_count[]  = $event['pee_count'];
         $data_poo_count[] = $event['poo_count'];
         $data_fed_count[] = $event['fed_count'];
-        $data_fed_duration[] = date("G:i:s", $event['fed_duration'];)
+        $data_fed_duration[] = date("G:i:s", $event['fed_duration']);
     }
     catch (Exception $ex) {
         echo "<td><center>Failed to create table</center></td>";
