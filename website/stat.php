@@ -131,7 +131,7 @@ foreach($sql_data as $event){
 	//	fed_time TIME]
 
 	try {
-		echo "<td>". date("d M y", $event['day']) ."</td>";		
+		echo "<td>". date("d M Y", $event['day']) ."</td>";		
 		echo "<td class='pee'>". $event['pee_count'] ."</td>";
 		echo "<td class='poo'>". $event['poo_count'] ."</td>";
 		echo "<td class='fed'>". $event['fed_count'] ."</td>";
