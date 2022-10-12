@@ -177,6 +177,7 @@ const chart_data = {
         {
             type: 'line',
             label: 'Pee Count',
+            yAxisID: 'count',
             backgroundColor: '#ffff66',
             borderColor: '#ffff66',
             data: data_pee_count
@@ -185,6 +186,7 @@ const chart_data = {
         {
             type: 'line',
             label: 'Poo Count',
+            yAxisID: 'count',
             backgroundColor: '#996600',
             borderColor: '#996600',
             data: data_poo_count
@@ -193,6 +195,7 @@ const chart_data = {
         {
             type: 'line',
             label: 'Milk Count',
+            yAxisID: 'count',
             backgroundColor: '#399cbd',
             borderColor: '#399cbd',
             data: data_fed_count
@@ -201,6 +204,7 @@ const chart_data = {
         {
             type: 'bar',
             label: 'Milk Duration',
+            yAxisID: 'time',
             backgroundColor: '#add8e6',
             borderColor: '#add8e6',
             data: data_fed_duration
@@ -213,6 +217,15 @@ const chart_data = {
 const chart_option = {
     responsive:true,
     scales: {
+        yAxes: [{
+            id: 'count',
+            type: 'linear',
+            position: 'left',
+        }, {
+            id: 'time',
+            type: 'linear',
+            position: 'right',
+        }]
         y:{
             beginAtZero: true
         }
