@@ -2,11 +2,12 @@
 // --- Show statistics about metrics
 // =========================================================
 
-/* For debug, enable the following */
+/* For debug, enable the following
 ini_set("display_error", "stderr");
 ini_set("display_startup_errors", 1);
 ini_set("log_errors", 1);
 ini_set("html_errors", 1);
+*/
 
 // Daily entry with:
 // Date | Pee Count | Poo Count | Milk Count | Milk Duration
