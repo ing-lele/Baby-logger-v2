@@ -13,6 +13,29 @@
 // Include sql data function
 include_once 'sql_data.php';
 
+// Query stat from the current date
+if(!isset($_POST['weeks'])){
+	$weeks = 2;
+}else{
+	$weeks = int($_POST['weeks']);
+}
+
+// ---------------------
+// Daily entry with:
+// Date | Pee Count | Poo Count | Milk Count | Milk Duration
+
+// Get SQL data in JSON format
+$sql_json_data = get_sql_data($weeks,"ASC");
+
+// decode JSON to array
+$sql_data = json_decode($sql_json_data, true);
+
+/* print Chart data
+echo "<pre>";
+print_r($chart_data);
+echo "</pre>";
+*/
+
 ?>
 
 <!DOCTYPE html>
@@ -60,8 +83,7 @@ include_once 'sql_data.php';
 <center>
 
 <?php
-	$updated_date = date_modify(new DateTime(), "-". $weeks ." week");
-	echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date_format($updated_date, "d M y") .".</P>";
+echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date("d M y", strtotime('-'.$weeks.' weeks')) .".</P>";
 ?>
 
 Show stats for past <select name='weeks'>
@@ -87,29 +109,6 @@ Creating canvas -->
 </div>
 
 <?php
-// ---------------------
-// Query stat from the current date
-if(!isset($_POST['weeks'])){
-	$weeks = 2;
-}else{
-	$weeks = floatval($_POST['weeks']);
-}
-
-// ---------------------
-// Daily entry with:
-// Date | Pee Count | Poo Count | Milk Count | Milk Duration
-
-// Get SQL data in JSON format
-$sql_json_data = get_sql_data($weeks,"ASC");
-
-// decode JSON to array
-$sql_data = json_decode($sql_json_data, true);
-
-/* print Chart data
-echo "<pre>";
-print_r($chart_data);
-echo "</pre>";
-*/
 
 // Initialize variables
 $event_count = 0;
