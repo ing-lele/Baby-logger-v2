@@ -115,8 +115,6 @@ $event_count = 0;
 
 // loop all the results from DB and save to individual array
 foreach($sql_data as $event){
-    $event_count++;
-
     // data_structure[
     //	day UNIX_TIMESTAMP(DATE),
     //	pee_count INT,
