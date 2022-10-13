@@ -83,7 +83,7 @@ echo ("</pre>");
 	include_once 'navigation.php';
 ?>
 
-<form method='POST'>
+<form method='POST' action='stat.php'>
 <center>
 
 <?php
@@ -98,7 +98,7 @@ Show stats for past <select name='weeks'>
 <option value='26'>26</option>
 <option value='52'>52</option>
 </select> weeks.
-<input type='submit' value='Update' name='submit' onClick="window.location.reload()">
+<input type='submit' value='Update'>
 </center>
 </form>
 
