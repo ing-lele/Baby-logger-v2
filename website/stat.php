@@ -22,17 +22,13 @@ ini_set("html_errors", 1);
 include_once 'sql_data.php';
 
 // Check page parameters
-if(isset($_POST['weeks'])) {
-	// Get from FORM
-	$weeks = int($_POST['weeks']);
-} 
-elseif(isset($_GET['weeks'])) {
-	// get from Page variables
-	$weeks = int($_GET['weeks']);
-}
-else{
+if(!isset($_POST['weeks'])) {
 	// default to 2 weeks
 	$weeks = 2;
+}
+else {
+	// Get from FORM
+	$weeks = int($_POST['weeks']);
 }
 
 // ---------------------
@@ -97,7 +93,7 @@ echo ("</pre>");
 	include_once 'navigation.php';
 ?>
 
-<form method='POST' action='stat.php'>
+<form method='POST' name="weeks_form">
 <center>
 
 <?php
@@ -117,8 +113,8 @@ Show stats for past <select name='weeks'>
 </form>
 
 <script>
-  $('#my_form').submit(function(){
-    var post_params = $('#my_form').serialize();
+  $('#weeks_form').submit(function(){
+    var post_params = $('#weeks_form').serialize();
     $('#waiting').show();
     $.post('stat.php', post_params, function(data) {
       $('#waiting').hide();
