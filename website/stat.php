@@ -21,11 +21,18 @@ ini_set("html_errors", 1);
 // Include sql data function
 include_once 'sql_data.php';
 
-// Query stat from the current date
-if(!isset($_POST['weeks'])){
-	$weeks = 2;
-}else{
+// Check page parameters
+if(isset($_POST['weeks'])) {
+	// Get from FORM
 	$weeks = int($_POST['weeks']);
+} 
+elseif(isset($_GET['weeks'])) {
+	// get from Page variables
+	$weeks = int($_GET['weeks']);
+}
+else{
+	// default to 2 weeks
+	$weeks = 2;
 }
 
 // ---------------------
@@ -108,6 +115,17 @@ Show stats for past <select name='weeks'>
 <input type='submit' value='Update'>
 </center>
 </form>
+
+<script>
+  $('#my_form').submit(function(){
+    var post_params = $('#my_form').serialize();
+    $('#waiting').show();
+    $.post('stat.php', post_params, function(data) {
+      $('#waiting').hide();
+      return false;
+    })
+  });
+</script>
 
 <br>
 
