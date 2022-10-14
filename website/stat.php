@@ -93,50 +93,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		// Get from FORM
 		$weeks = intval($_POST['weeks']);
 	}	
-
-	// ---------------------
-	// Daily entry with:
-	// Date | Pee Count | Poo Count | Milk Count | Milk Duration
-	echo 'form POST';
-	// Get SQL data in JSON format
-	$sql_json_data = get_sql_data($weeks,"DESC");
-
-	// decode JSON to array
-	$sql_data = json_decode($sql_json_data, true);
-}
-else { 
-
-	// ---------------------
-	// Daily entry with:
-	// Date | Pee Count | Poo Count | Milk Count | Milk Duration
-	echo 'Else POST';
-	// Get SQL data in JSON format
-	$sql_json_data = get_sql_data($weeks,"DESC");
-
-	// decode JSON to array
-	$sql_data = json_decode($sql_json_data, true);
-
-	/* Print SQL data
-	echo ("<pre>");
-	print_r($sql_data);
-	echo ("</pre>");
-	*/
 }
 
-?>
+// ---------------------
+// Daily entry with:
+// Date | Pee Count | Poo Count | Milk Count | Milk Duration
 
-<br>
+// Get SQL data in JSON format
+$sql_json_data = get_sql_data($weeks,"DESC");
 
-<table border="1" cellpadding="1" cellspacing="1" align="center">
-<tr>
-<th>Day</th>
-<th class='pee'>&#128166; Count</th>
-<th class='poo'>&#128169; Count</th>
-<th class='fed'>&#x1f37c; Count</th>
-<th class='fed'>&#x1f37c; Duration</th>
-<tr>
+// decode JSON to array
+$sql_data = json_decode($sql_json_data, true);
 
-<?php
+/* Print SQL data
+echo ("<pre>");
+print_r($sql_data);
+echo ("</pre>");
+*/
+
+// Table header
+echo '<br>';
+
+echo '<table border="1" cellpadding="1" cellspacing="1" align="center">';
+echo '<tr>';
+echo '<th>Day</th>';
+echo '<th class='pee'>&#128166; Count</th>';
+echo '<th class='poo'>&#128169; Count</th>';
+echo '<th class='fed'>&#x1f37c; Count</th>';
+echo '<th class='fed'>&#x1f37c; Duration</th>';
+echo '<tr>';
 
 // read JSON data
 $event_count = 0;
