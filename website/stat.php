@@ -71,7 +71,7 @@ $weeks = 2;
 ?>
 
 <center>
-	<form method='POST'>
+	<form method='POST' action="<?php echo $_SERVER['PHP_SELF'];?>">
 		<?php echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date("d M Y", strtotime('-'.$weeks.' weeks')) .".</P>"; ?>
 
 		Show stats for past <select name='weeks'>
@@ -87,11 +87,13 @@ $weeks = 2;
 </center>
 
 <?php
-// Get weeks
-if(isset($_POST['weeks'])) {
-	// Get from FORM
-	$weeks = int($_POST['weeks']);
-	echo $weeks;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	// Get weeks
+	if(isset($_POST['weeks'])) {
+		// Get from FORM
+		$weeks = intval($_POST['weeks']);
+		echo $weeks;
+	}	
 }
 
 // ---------------------
