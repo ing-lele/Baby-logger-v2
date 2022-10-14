@@ -19,7 +19,7 @@ ini_set("html_errors", 1);
 // * Current semester
 
 // Include sql data function
-include_once 'sql_data.php';
+include 'sql_data.php';
 
 // default to 2 weeks
 $weeks = 2;
@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// ---------------------
 	// Daily entry with:
 	// Date | Pee Count | Poo Count | Milk Count | Milk Duration
-
+	echo 'form POST';
 	// Get SQL data in JSON format
 	$sql_json_data = get_sql_data($weeks,"DESC");
 
@@ -109,7 +109,7 @@ else {
 	// ---------------------
 	// Daily entry with:
 	// Date | Pee Count | Poo Count | Milk Count | Milk Duration
-
+	echo 'Else POST';
 	// Get SQL data in JSON format
 	$sql_json_data = get_sql_data($weeks,"DESC");
 
