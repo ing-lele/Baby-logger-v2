@@ -21,32 +21,6 @@ ini_set("html_errors", 1);
 // Include sql data function
 include_once 'sql_data.php';
 
-// Check page parameters
-if(!isset($_POST['weeks'])) {
-	// default to 2 weeks
-	$weeks = 2;
-}
-else {
-	// Get from FORM
-	$weeks = int($_POST['weeks']);
-}
-
-// ---------------------
-// Daily entry with:
-// Date | Pee Count | Poo Count | Milk Count | Milk Duration
-
-// Get SQL data in JSON format
-$sql_json_data = get_sql_data($weeks,"DESC");
-
-// decode JSON to array
-$sql_data = json_decode($sql_json_data, true);
-
-/* Print SQL data
-echo ("<pre>");
-print_r($sql_data);
-echo ("</pre>");
-*/
-
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +67,7 @@ echo ("</pre>");
 	include_once 'navigation.php';
 ?>
 
-<form method='POST' name="weeks_form">
+<form method='POST'>
 <center>
 
 <?php
@@ -112,16 +86,35 @@ Show stats for past <select name='weeks'>
 </center>
 </form>
 
-<script>
-  $('#weeks_form').submit(function(){
-    var post_params = $('#weeks_form').serialize();
-    $('#waiting').show();
-    $.post('stat.php', post_params, function(data) {
-      $('#waiting').hide();
-      return false;
-    })
-  });
-</script>
+<?php
+// Check page parameters
+if(!isset($_POST['weeks'])) {
+	// default to 2 weeks
+	$weeks = 2;
+}
+else {
+	// Get from FORM
+	$weeks = int($_POST['weeks']);
+}
+
+// ---------------------
+// Daily entry with:
+// Date | Pee Count | Poo Count | Milk Count | Milk Duration
+
+// Get SQL data in JSON format
+$sql_json_data = get_sql_data($weeks,"DESC");
+
+// decode JSON to array
+$sql_data = json_decode($sql_json_data, true);
+
+/* Print SQL data
+echo ("<pre>");
+print_r($sql_data);
+echo ("</pre>");
+*/
+
+?>
+
 
 <br>
 

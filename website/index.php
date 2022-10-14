@@ -39,7 +39,7 @@ if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo", "fed
 	$sql = "SELECT ts_start, category, TIMEDIFF(ts_end,ts_start) AS duration FROM $db_table WHERE ts_start >= CURRENT_DATE() - INTERVAL ".($days-1)." day ORDER BY id DESC;";
 }
 
-$results = mysqli_query($connectdb, $sql) or die(mysql_error());
+$results = mysqli_query($connectdb, $sql) or die();
 ?>
 
 <!DOCTYPE html>
