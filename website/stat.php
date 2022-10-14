@@ -95,6 +95,7 @@ if(!isset($_POST['weeks'])) {
 else {
 	// Get from FORM
 	$weeks = int($_POST['weeks']);
+	echo $weeks;
 }
 
 // ---------------------
