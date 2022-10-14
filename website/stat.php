@@ -112,16 +112,16 @@ echo ("</pre>");
 */
 
 // Table header
-echo '<br>';
+echo "<br>";
 
-echo '<table border="1" cellpadding="1" cellspacing="1" align="center">';
-echo '<tr>';
-echo '<th>Day</th>';
-echo '<th class='pee'>&#128166; Count</th>';
-echo '<th class='poo'>&#128169; Count</th>';
-echo '<th class='fed'>&#x1f37c; Count</th>';
-echo '<th class='fed'>&#x1f37c; Duration</th>';
-echo '<tr>';
+echo "<table border='1' cellpadding='1' cellspacing='1' align='center'>";
+echo "<tr>";
+echo "<th>Day</th>";
+echo "<th class='pee'>&#128166; Count</th>";
+echo "<th class='poo'>&#128169; Count</th>";
+echo "<th class='fed'>&#x1f37c; Count</th>";
+echo "<th class='fed'>&#x1f37c; Duration</th>";
+echo "<tr>";
 
 // read JSON data
 $event_count = 0;
