@@ -92,25 +92,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if(isset($_POST['weeks'])) {
 		// Get from FORM
 		$weeks = intval($_POST['weeks']);
-		echo $weeks;
 	}	
+
+	// ---------------------
+	// Daily entry with:
+	// Date | Pee Count | Poo Count | Milk Count | Milk Duration
+
+	// Get SQL data in JSON format
+	$sql_json_data = get_sql_data($weeks,"DESC");
+
+	// decode JSON to array
+	$sql_data = json_decode($sql_json_data, true);
 }
+else { 
 
-// ---------------------
-// Daily entry with:
-// Date | Pee Count | Poo Count | Milk Count | Milk Duration
+	// ---------------------
+	// Daily entry with:
+	// Date | Pee Count | Poo Count | Milk Count | Milk Duration
 
-// Get SQL data in JSON format
-$sql_json_data = get_sql_data($weeks,"DESC");
+	// Get SQL data in JSON format
+	$sql_json_data = get_sql_data($weeks,"DESC");
 
-// decode JSON to array
-$sql_data = json_decode($sql_json_data, true);
+	// decode JSON to array
+	$sql_data = json_decode($sql_json_data, true);
 
-/* Print SQL data
-echo ("<pre>");
-print_r($sql_data);
-echo ("</pre>");
-*/
+	/* Print SQL data
+	echo ("<pre>");
+	print_r($sql_data);
+	echo ("</pre>");
+	*/
+}
 
 ?>
 
