@@ -21,6 +21,9 @@ ini_set("html_errors", 1);
 // Include sql data function
 include_once 'sql_data.php';
 
+// default to 2 weeks
+$weeks = 2;
+
 ?>
 
 <!DOCTYPE html>
@@ -67,32 +70,25 @@ include_once 'sql_data.php';
 	include_once 'navigation.php';
 ?>
 
-<form method='POST'>
 <center>
+	<form method='POST'>
+		<?php echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date("d M Y", strtotime('-'.$weeks.' weeks')) .".</P>"; ?>
 
-<?php
-echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date("d M Y", strtotime('-'.$weeks.' weeks')) .".</P>";
-?>
-
-Show stats for past <select name='weeks'>
-<option value='2'>2</option>
-<option value='4'>4</option> 
-<option value='9'>9</option>
-<option value='13'>13</option>
-<option value='26'>26</option>
-<option value='52'>52</option>
-</select> weeks.
-<input type='submit' value='Update'>
+		Show stats for past <select name='weeks'>
+		<option value='2'>2</option>
+		<option value='4'>4</option> 
+		<option value='9'>9</option>
+		<option value='13'>13</option>
+		<option value='26'>26</option>
+		<option value='52'>52</option>
+		</select> weeks.
+		<input type='submit' value='Update'>
+	</form>
 </center>
-</form>
 
 <?php
-// Check page parameters
-if(!isset($_POST['weeks'])) {
-	// default to 2 weeks
-	$weeks = 2;
-}
-else {
+// Get weeks
+if(isset($_POST['weeks'])) {
 	// Get from FORM
 	$weeks = int($_POST['weeks']);
 	echo $weeks;
@@ -115,7 +111,6 @@ echo ("</pre>");
 */
 
 ?>
-
 
 <br>
 
