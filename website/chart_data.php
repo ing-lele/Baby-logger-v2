@@ -14,7 +14,7 @@ include_once 'sql_data.php';
 if(!isset($_POST['weeks'])){
 	$weeks = 2;
 }else{
-	$weeks = int($_POST['weeks']);
+	$weeks = intval($_POST['weeks']);
 }
 
 // ---------------------
@@ -48,11 +48,11 @@ foreach($sql_data as $event){
         $data_pee_count[]  = $event['pee_count'];
         $data_poo_count[] = $event['poo_count'];
         $data_fed_count[] = $event['fed_count'];
-        $data_fed_duration[] = gmdate("G:i:s", $event['fed_duration']);
+        $data_fed_duration[] = $event['fed_duration'];
     }
     catch (Exception $ex) {
         echo "<h1><center>Failed to create table</center></h1>";
-        echo "<p><center>$er</center></p>";
+        echo "<p><center>$ex</center></p>";
     }
 }
 
@@ -110,7 +110,7 @@ $chart_config = "{
             "{
                 type: 'bar',
                 label: 'Milk Duration',
-                yAxisID: 'time',
+                yAxisID: 'duration',
                 backgroundColor: '#add8e6',
                 borderColor: '#add8e6',
                 data:". json_encode($data_fed_duration, JSON_PRETTY_PRINT) ."
@@ -125,8 +125,8 @@ $chart_config = "{
                 type: 'linear',
                 position: 'left',
             }, {
-                id: 'time',
-                type: 'linear',
+                id: 'duration',
+                type: 'time',
                 position: 'right',
             }],
             y:{

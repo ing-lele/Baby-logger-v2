@@ -146,7 +146,7 @@ foreach($sql_data as $event){
 	}
 	catch (Exception $ex) {
 		echo "<td><center>Failed to create table</center></td>";
-		echo "<td><center>$er</center></td>";
+		echo "<td><center>$ex</center></td>";
 	}
 	
 	echo "</tr>";

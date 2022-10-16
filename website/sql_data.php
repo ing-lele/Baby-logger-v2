@@ -49,7 +49,7 @@ function get_sql_data(int $weeks, string $sort) {
         ORDER BY DATE(ts_start) ".($sort).";";
     
     // query SQL result
-    $sql_results = mysqli_query($connectdb, $sql_query) or die(mysql_error());
+    $sql_results = mysqli_query($connectdb, $sql_query) or die();
     
     // convert to array
     $row_results = array();
