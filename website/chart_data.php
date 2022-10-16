@@ -86,6 +86,7 @@ $chart_config = "{
                 yAxisID: 'count',
                 backgroundColor: '#ffff66',
                 borderColor: '#000000',
+                borderWidth: '0.5',
                 data:". json_encode($data_pee_count, JSON_PRETTY_PRINT) ."
             },".
             // Chart -> Config -> Data -> Dataset #2 -> Poo count
