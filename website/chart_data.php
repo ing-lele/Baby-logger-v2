@@ -83,7 +83,7 @@ $chart_config = "{
             "{
                 type: 'line',
                 label: 'Pee Count',
-                yAxisID: 'y',
+                yAxisID: 'y-axis-count',
                 backgroundColor: '#ffff66',
                 borderColor: '#000000',
                 borderWidth: '0.5',
@@ -93,7 +93,7 @@ $chart_config = "{
             "{
                 type: 'line',
                 label: 'Poo Count',
-                yAxisID: 'y',
+                yAxisID: 'y-axis-count',
                 backgroundColor: '#996600',
                 borderColor: '#996600',
                 data:". json_encode($data_poo_count, JSON_PRETTY_PRINT) ."
@@ -102,7 +102,7 @@ $chart_config = "{
             "{
                 type: 'line',
                 label: 'Milk Count',
-                yAxisID: 'y',
+                yAxisID: 'y-axis-count',
                 backgroundColor: '#399cbd',
                 borderColor: '#399cbd',
                 data:". json_encode($data_fed_count, JSON_PRETTY_PRINT) ."
@@ -111,7 +111,7 @@ $chart_config = "{
             "{
                 type: 'bar',
                 label: 'Milk Duration',
-                yAxisID: 'duration',
+                yAxisID: 'y-axis-duration',
                 backgroundColor: '#add8e6',
                 borderColor: '#add8e6',
                 data:". json_encode($data_fed_duration, JSON_PRETTY_PRINT) ."
@@ -119,22 +119,27 @@ $chart_config = "{
         ]
     },
     options: {
-        responsive:true,
+        maintainAspectRatio: false,
+        responsive: true,
+        bezierCurveTension: 0,
         scales: {
-            yAxes: {[{
-                        id: 'y',
-                        type: 'linear',
-                        position: 'left'
-                    }, {
-                        id: 'duration',
-                        type: 'time',
-                        position: 'right'
-                    }],
-                beginAtZero: true
-            }
-            xAxes: {
+            xAxes: [{
+                display: true,
                 type: 'time',
-            }
+            }],
+            yAxes: [
+                {
+                    position: 'left',
+                    id: 'y-axis-count',
+                    type: 'linear',                    
+                    beginAtZero: true
+                }, {
+                    position: 'right',
+                    id: 'y-axis-duration',
+                    type: 'time',                    
+                    beginAtZero: true
+                }
+            ]
         }
     }
 }";
