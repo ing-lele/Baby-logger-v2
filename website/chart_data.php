@@ -123,23 +123,22 @@ $chart_config = "{
         responsive: true,
         bezierCurveTension: 0,
         scales: {
-            xAxes: [{
+            x: {
                 display: true,
                 type: 'time',
-            }],
-            yAxes: [
-                {
-                    position: 'left',
-                    'id': 'y-axis-count',
-                    type: 'linear',                    
-                    beginAtZero: true
-                }, {
-                    position: 'right',
-                    'id': 'y-axis-duration',
-                    type: 'time',                    
-                    beginAtZero: true
-                }
-            ]
+            },
+            y-axis-count: {
+                position: 'left',
+                'id': 'y-axis-count',
+                type: 'linear',                    
+                beginAtZero: true
+            },
+            y-axis-duration {
+                position: 'right',
+                'id': 'y-axis-duration',
+                type: 'time',                    
+                beginAtZero: true
+            }
         }
     }
 }";
