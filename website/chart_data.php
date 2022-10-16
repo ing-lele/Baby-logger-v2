@@ -130,12 +130,12 @@ $chart_config = "{
             yAxes: [
                 {
                     position: 'left',
-                    id: 'y-axis-count',
+                    'id': 'y-axis-count',
                     type: 'linear',                    
                     beginAtZero: true
                 }, {
                     position: 'right',
-                    id: 'y-axis-duration',
+                    'id': 'y-axis-duration',
                     type: 'time',                    
                     beginAtZero: true
                 }
