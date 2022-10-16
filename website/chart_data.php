@@ -77,7 +77,7 @@ foreach($sql_data as $event){
 $chart_config = "{
     type: 'scatter',
     data: {
-        labels: $x_labels,
+        labels:". json_encode($x_labels, JSON_PRETTY_PRINT) .",
         datasets: [".
             // Chart -> Config -> Data -> Dataset #1 -> Pee count
             "{
