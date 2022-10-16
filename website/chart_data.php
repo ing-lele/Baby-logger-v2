@@ -121,8 +121,7 @@ $chart_config = "{
     options: {
         responsive:true,
         scales: {
-            yAxes: {
-                    [{
+            yAxes: {[{
                         id: 'y',
                         type: 'linear',
                         position: 'left'
