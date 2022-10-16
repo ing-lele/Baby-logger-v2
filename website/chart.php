@@ -10,31 +10,6 @@
  ini_set("html_errors", 1);
 */
 
-// Include sql data function
-include_once 'sql_data.php';
-
-// Query stat from the current date
-if(!isset($_POST['weeks'])){
-	$weeks = 2;
-}else{
-	$weeks = int($_POST['weeks']);
-}
-
-// ---------------------
-// Daily entry with:
-// Date | Pee Count | Poo Count | Milk Count | Milk Duration
-
-// Get SQL data in JSON format
-$sql_json_data = get_sql_data($weeks,"ASC");
-
-// decode JSON to array
-$sql_data = json_decode($sql_json_data, true);
-
-/* print Chart data
-echo "<pre>";
-print_r($chart_data);
-echo "</pre>";
-*/
 
 ?>
 
@@ -108,144 +83,10 @@ Creating canvas -->
     </div>
 </div>
 
-<?php
-
-// Initialize variables
-$event_count = 0;
-
-// loop all the results from DB and save to individual array
-foreach($sql_data as $event){
-    // data_structure[
-    //	day UNIX_TIMESTAMP(DATE),
-    //	pee_count INT,
-    //	poo_count INT,
-    //  fed_count INT,
-    //	fed_time TIME_TO_SEC]
-    
-    try {
-        $x_labels[] = date("d M", $event['day']);
-        $data_pee_count[]  = $event['pee_count'];
-        $data_poo_count[] = $event['poo_count'];
-        $data_fed_count[] = $event['fed_count'];
-        $data_fed_duration[] = gmdate("G:i:s", $event['fed_duration']);
-    }
-    catch (Exception $ex) {
-        echo "<td><center>Failed to create table</center></td>";
-        echo "<td><center>$er</center></td>";
-    }
-}
-
-?>
-
 <script>
 
-// Set data variable from PHP via JSON format
-const x_labels = (<?php echo json_encode($x_labels); ?>);
-const data_pee_count = (<?php echo json_encode($data_pee_count); ?>);
-const data_poo_count = (<?php echo json_encode($data_poo_count); ?>);
-const data_fed_count = (<?php echo json_encode($data_fed_count); ?>);
-const data_fed_duration = (<?php echo json_encode($data_fed_duration); ?>);
-
-/* Print array
-console.log(x_labels);
-console.log(data_pee_count);
-console.log(data_poo_count);
-console.log(data_fed_count);
-console.log(data_fed_duration);
-*/
-
-// --------------------------
-// --- Chart config - start
-// --------------------------
-// Chart -> Config -> Data = 
-// {
-//      labels:
-//      dataset: [
-//          {type1, label1, data1},
-//          {type2, label2, data2},
-//          {...}
-//      ]
-// }
-// --------------------------
-const chart_data = {
-    labels: x_labels,
-    datasets: [
-        // Chart -> Config -> Data -> Dataset #1 -> Pee count
-        {
-            type: 'line',
-            label: 'Pee Count',
-            yAxisID: 'count',
-            backgroundColor: '#ffff66',
-            borderColor: '#ffff66',
-            data: data_pee_count
-        },
-        // Chart -> Config -> Data -> Dataset #2 -> Poo count
-        {
-            type: 'line',
-            label: 'Poo Count',
-            yAxisID: 'count',
-            backgroundColor: '#996600',
-            borderColor: '#996600',
-            data: data_poo_count
-        },
-        // Chart -> Config -> Data -> Dataset #3 -> Milk count
-        {
-            type: 'line',
-            label: 'Milk Count',
-            yAxisID: 'count',
-            backgroundColor: '#399cbd',
-            borderColor: '#399cbd',
-            data: data_fed_count
-        },
-        // Chart -> Config -> Data -> Dataset #4 -> Milk duration
-        {
-            type: 'bar',
-            label: 'Milk Duration',
-            yAxisID: 'time',
-            backgroundColor: '#add8e6',
-            borderColor: '#add8e6',
-            data: data_fed_duration
-        }
-    ]
-};
-
-// --------------------------
-// Chart -> Config -> Options
-const chart_option = {
-    responsive:true,
-    scales: {
-        yAxes: [{
-            id: 'count',
-            type: 'linear',
-            position: 'left',
-        }, {
-            id: 'time',
-            type: 'linear',
-            position: 'right',
-        }],
-        y:{
-            beginAtZero: true
-        }
-    }
-};
-
-// --------------------------
-// Chart -> Config
-// {
-//      type: 'scatter',
-//      data: chart_data,
-//      options: chart_option
-// }
-// --------------------------
-const chart_config = {
-    type: 'scatter',
-    data: chart_data,
-    options: chart_option
-};
-
-// --------------------------
-// --- Chart config - end
-// --------------------------
+// Get Data
+chart_config = <?php require 'chart_data.php' ?>;
 
 // Get context
 ctx = document.getElementById("BabyStatChart").getContext("2d");
