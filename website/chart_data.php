@@ -120,15 +120,17 @@ $chart_config = "{
     options: {
         responsive:true,
         scales: {
-            yAxes: [{
-                id: 'count',
-                type: 'linear',
-                position: 'left',
-            }, {
-                id: 'duration',
-                type: 'time',
-                position: 'right',
-            }],
+            yAxes: [
+                {
+                    id: 'count',
+                    type: 'linear',
+                    position: 'left'
+                }, {
+                    id: 'duration',
+                    type: 'time',
+                    position: 'right'
+                }
+            ],
             y:{
                 beginAtZero: true
             }
