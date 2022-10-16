@@ -142,5 +142,5 @@ $chart_config = "{
 // --------------------------
 
 // Return chart_config
-echo json_encode($chart_config);
+echo($chart_config);
 ?>
