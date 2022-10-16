@@ -142,5 +142,5 @@ $chart_config = "{
 // --------------------------
 
 // Return chart_config
-print (chart_config);
+print ($chart_config);
 ?>
