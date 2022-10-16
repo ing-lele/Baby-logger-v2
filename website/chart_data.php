@@ -10,6 +10,8 @@
 // Include sql data function
 include_once 'sql_data.php';
 
+echo '<!DOCTYPE JSON>';
+
 // Read weeks parameters or default to 2 weeks
 if(!isset($_POST['weeks'])){
 	$weeks = 2;
@@ -142,5 +144,5 @@ $chart_config = "{
 // --------------------------
 
 // Return chart_config
-echo json_encode($chart_config, JSON_PRETTY_PRINT);
+echo json_encode($chart_config,JSON_PRETTY_PRINT);
 ?>
