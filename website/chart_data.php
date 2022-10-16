@@ -44,11 +44,11 @@ foreach($sql_data as $event){
     //	fed_time TIME_TO_SEC]
     
     try {
-        $x_labels[] = date("d M", $event['day']);
+        $x_labels[] = $event['day'];    // keep it in UNIX_TIMESTAMP format
         $data_pee_count[]  = $event['pee_count'];
         $data_poo_count[] = $event['poo_count'];
         $data_fed_count[] = $event['fed_count'];
-        $data_fed_duration[] = $event['fed_duration'];
+        $data_fed_duration[] = $event['fed_duration']; // keep it in UNIX_TIMESTAMP format
     }
     catch (Exception $ex) {
         echo "<h1><center>Failed to create table</center></h1>";
@@ -83,7 +83,7 @@ $chart_config = "{
             "{
                 type: 'line',
                 label: 'Pee Count',
-                yAxisID: 'count',
+                yAxisID: 'y',
                 backgroundColor: '#ffff66',
                 borderColor: '#000000',
                 borderWidth: '0.5',
@@ -93,7 +93,7 @@ $chart_config = "{
             "{
                 type: 'line',
                 label: 'Poo Count',
-                yAxisID: 'count',
+                yAxisID: 'y',
                 backgroundColor: '#996600',
                 borderColor: '#996600',
                 data:". json_encode($data_poo_count, JSON_PRETTY_PRINT) ."
@@ -102,7 +102,7 @@ $chart_config = "{
             "{
                 type: 'line',
                 label: 'Milk Count',
-                yAxisID: 'count',
+                yAxisID: 'y',
                 backgroundColor: '#399cbd',
                 borderColor: '#399cbd',
                 data:". json_encode($data_fed_count, JSON_PRETTY_PRINT) ."
@@ -123,17 +123,18 @@ $chart_config = "{
         scales: {
             yAxes: [
                 {
-                    id: 'count',
+                    id: 'y',
                     type: 'linear',
                     position: 'left'
                 }, {
                     id: 'duration',
                     type: 'time',
                     position: 'right'
-                }
-            ],
-            y:{
+                }],
                 beginAtZero: true
+            ],
+            xAxes: {
+                type: 'time',
             }
         }
     }
