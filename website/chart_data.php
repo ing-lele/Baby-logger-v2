@@ -138,7 +138,7 @@ $chart_config = "{
                 type: 'linear',                    
                 beginAtZero: true,
             },
-            y_duration {
+            y_duration: {
                 position: 'right',
                 display: true,
                 type: 'time',                    
