@@ -44,11 +44,11 @@ foreach($sql_data as $event){
     //	fed_time TIME_TO_SEC]
     
     try {
-        $x_labels[] = $event['day'];    // keep it in UNIX_TIMESTAMP format
+        $x_labels[] = date("d M Y", $event['day']);
         $data_pee_count[]  = $event['pee_count'];
         $data_poo_count[] = $event['poo_count'];
         $data_fed_count[] = $event['fed_count'];
-        $data_fed_duration[] = $event['fed_duration']; // keep it in UNIX_TIMESTAMP format
+        $data_fed_duration[] = gmdate("H:i:s", $event['fed_duration']);
     }
     catch (Exception $ex) {
         echo "<h1><center>Failed to create table</center></h1>";
@@ -120,8 +120,8 @@ $chart_config = "{
     },
     options: {
         // maintainAspectRatio: false,
-        //bezierCurveTension: 0,
-        //stacked: false,
+        // bezierCurveTension: 0,
+        // stacked: false,
         responsive: true,
         interaction: {
             mode: 'index',
