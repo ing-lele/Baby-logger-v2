@@ -119,14 +119,23 @@ $chart_config = "{
         ]
     },
     options: {
-        maintainAspectRatio: false,
+        // maintainAspectRatio: false,
+        //bezierCurveTension: 0,
+        //stacked: false,
         responsive: true,
-        bezierCurveTension: 0,
         interaction: {
             mode: 'index',
             intersect: false,
         },
-        stacked: false,
+        plugins: {
+            title: {
+                display: true,
+                text: (ctx) => {
+                    const {axis = 'xy', intersect, mode} = ctx.chart.options.interaction;
+                    return 'Mode: ' + mode + ', axis: ' + axis + ', intersect: ' + intersect;
+                },
+            }
+        },
         scales: {
             x: {
                 display: true,
