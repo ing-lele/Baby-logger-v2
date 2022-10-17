@@ -126,6 +126,7 @@ $chart_config = "{
             mode: 'index',
             intersect: false,
         },
+        stacked: false,
         scales: {
             x: {
                 display: true,
@@ -135,7 +136,7 @@ $chart_config = "{
                 position: 'left',
                 display: true,
                 type: 'linear',                    
-                beginAtZero: true
+                beginAtZero: true,
             },
             y_duration {
                 position: 'right',
@@ -144,10 +145,10 @@ $chart_config = "{
                 beginAtZero: true,
                 grid: {
                     drawOnChartArea: false,
-                }
-            }
+                },
+            },
         }
-    }
+    },
 }";
 
 // --------------------------
