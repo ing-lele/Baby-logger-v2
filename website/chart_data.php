@@ -83,7 +83,7 @@ $chart_config = "{
             "{
                 type: 'line',
                 label: 'Pee Count',
-                yAxisID: 'y-axis-count',
+                yAxisID: 'y_count',
                 backgroundColor: '#ffff66',
                 borderColor: '#000000',
                 borderWidth: '0.5',
@@ -93,7 +93,7 @@ $chart_config = "{
             "{
                 type: 'line',
                 label: 'Poo Count',
-                yAxisID: 'y-axis-count',
+                yAxisID: 'y_count',
                 backgroundColor: '#996600',
                 borderColor: '#996600',
                 data:". json_encode($data_poo_count, JSON_PRETTY_PRINT) ."
@@ -102,7 +102,7 @@ $chart_config = "{
             "{
                 type: 'line',
                 label: 'Milk Count',
-                yAxisID: 'y-axis-count',
+                yAxisID: 'y_count',
                 backgroundColor: '#399cbd',
                 borderColor: '#399cbd',
                 data:". json_encode($data_fed_count, JSON_PRETTY_PRINT) ."
@@ -111,7 +111,7 @@ $chart_config = "{
             "{
                 type: 'bar',
                 label: 'Milk Duration',
-                yAxisID: 'y-axis-duration',
+                yAxisID: 'y_duration',
                 backgroundColor: '#add8e6',
                 borderColor: '#add8e6',
                 data:". json_encode($data_fed_duration, JSON_PRETTY_PRINT) ."
@@ -122,22 +122,29 @@ $chart_config = "{
         maintainAspectRatio: false,
         responsive: true,
         bezierCurveTension: 0,
+        interaction: {
+            mode: 'index',
+            intersect: false,
+        },
         scales: {
             x: {
                 display: true,
                 type: 'time',
             },
-            y-axis-count: {
+            y_count: {
                 position: 'left',
-                'id': 'y-axis-count',
+                display: true,
                 type: 'linear',                    
                 beginAtZero: true
             },
-            y-axis-duration {
+            y_duration {
                 position: 'right',
-                'id': 'y-axis-duration',
+                display: true,
                 type: 'time',                    
-                beginAtZero: true
+                beginAtZero: true,
+                grid: {
+                    drawOnChartArea: false,
+                }
             }
         }
     }
