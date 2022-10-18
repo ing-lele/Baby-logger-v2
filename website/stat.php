@@ -58,12 +58,12 @@ else {
 		<?php echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date("d M Y", strtotime('-'.$weeks.' weeks')) .".</P>"; ?>
 
 		Show stats for past <select name='weeks' id='weeks'>
-		<option value=2 <?php ($weeks==2) ? 'selected' : ''; ?>>2</option>
-		<option value=4 <?php ($weeks==4) ? 'selected' : ''; ?>>4</option> 
-		<option value=9 <?php ($weeks==9) ? 'selected' : ''; ?>>9</option>
-		<option value=13 <?php ($weeks==13) ? 'selected' : ''; ?>>13</option>
-		<option value=26 <?php ($weeks==26) ? 'selected' : ''; ?>>26</option>
-		<option value=52 <?php ($weeks==52) ? 'selected' : ''; ?>>52</option>
+		<option value=2 <?php ($weeks==2) ? print('selected') : ''; ?>>2</option>
+		<option value=4 <?php ($weeks==4) ? print('selected') : ''; ?>>4</option> 
+		<option value=9 <?php ($weeks==9) ? print('selected') : ''; ?>>9</option>
+		<option value=13 <?php ($weeks==13) ? print('selected') : ''; ?>>13</option>
+		<option value=26 <?php ($weeks==26) ? print('selected') : ''; ?>>26</option>
+		<option value=52 <?php ($weeks==52) ? print('selected') : ''; ?>>52</option>
 		</select> weeks.
 		<input type='submit' value='Update'>
 	</form>
