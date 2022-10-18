@@ -142,13 +142,6 @@ $chart_config = "{
             y_duration: {
                 position: 'right',
                 display: true,
-                type: 'time', 
-                time: {
-                    unit: 'minute',
-                    displayFormats: {
-                        minute: 'HH:mm:ss',
-                    },
-                },
                 beginAtZero: true,
                 grid: {
                     drawOnChartArea: false,
