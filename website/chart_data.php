@@ -145,10 +145,8 @@ $chart_config = "{
                 position: 'right',
                 display: true,
                 type: 'time', 
-                ticks: {
-                    min:". min($data_fed_duration) .",
-                    max:". max($data_fed_duration) ."
-                } 
+                min:". min($data_fed_duration) .",
+                max:". max($data_fed_duration) .",
                 time: {
                     unit: 'second',
                     displayFormats: {
