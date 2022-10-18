@@ -37,7 +37,7 @@ else {
         import 'chartjs-adapter-date-fns';
         // import date-fns locale:
         import {enUS} from 'date-fns/locale';
-        import format from 'date-fns/format';
+        import {format, fromUnixTime} from 'date-fns';
     </script>
 </head>
 

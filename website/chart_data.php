@@ -149,7 +149,7 @@ $chart_config = "{
                 beginAtZero: false,
                 ticks: {
                     callback: value => {
-                        return format(value, 'HH:mm:ss');
+                        return format(fromUnixTime(value), 'HH:mm:ss');
                         // return new Date(value).toISOString().match('T(.*).000Z')[1];
                     }
                 },
@@ -162,7 +162,7 @@ $chart_config = "{
             tooltip: {
                 callbacks: {
                     label: function(tooltipItem, data) {
-                        return data.datasets[tooltipItem.datasetIndex].label + ': ' + return format(value, 'HH:mm:ss');
+                        return data.datasets[tooltipItem.datasetIndex].label + ': ' + format(fromUnixTime(value), 'HH:mm:ss');
                     },
                 },
             },
