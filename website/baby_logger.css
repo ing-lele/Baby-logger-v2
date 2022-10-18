@@ -17,11 +17,14 @@ td{
 .pee{
     background-color: #ffff66;
 }
-
 .poo{
     background-color: #996600;
 }
-
 .fed{
     background-color: #add8e6;
+}
+.wrapper{
+    width: 600px;
+    text-align: center;
+    display: inline-block;
 }
