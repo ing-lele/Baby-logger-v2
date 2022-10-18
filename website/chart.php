@@ -62,7 +62,7 @@ $weeks = 2;
 <center>
 
 <?php
-echo "<P>Baby's stats for last <b>". $weeks ."weeks</b> since ". date("d M Y", strtotime('-'.$weeks.' weeks')) .".</P>";
+echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date("d M Y", strtotime('-'.$weeks.' weeks')) .".</P>";
 ?>
 
 Show stats for past <select name='weeks'>
