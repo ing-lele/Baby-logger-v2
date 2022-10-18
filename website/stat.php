@@ -130,6 +130,8 @@ foreach($sql_data as $event){
 echo "</table>";
 echo "<p align='center'>Event count: $event_count<br></p>";
 
+echo "<p align='center'>Variable: $weeks --- is integer? ". is_int($weeks) ." POST value:". intval($_POST['weeks']) ."</p>";
+
 ?>
 </body>
 </html>
