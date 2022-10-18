@@ -147,11 +147,6 @@ $chart_config = "{
                 max:". max($data_fed_duration) .",
                 type: 'linear',
                 beginAtZero: false,
-                time: {
-                    displayFormats: {
-                        second: 'HH:mm:ss'
-                    },
-                },
                 ticks: {
                     callback: value => {
                         return new Date(value).toISOString().match('T(.*).000Z')[1];
