@@ -32,6 +32,7 @@ if(!isset($_POST['days'])){
 }else{
 	$days = intval($_POST['days']);
 }
+
 if(isset($_POST['category']) && in_array($_POST['category'], ["pee", "poo", "fed"])){
 	$category = $_POST['category'];
 	$sql = "SELECT ts_start, category, TIMEDIFF(ts_end,ts_start) AS duration FROM $db_table WHERE category = '$category' AND ts_start >= CURRENT_DATE() - INTERVAL ".($days-1)." day ORDER BY id DESC;";
