@@ -50,7 +50,7 @@ foreach($sql_data as $event){
         $data_pee_count[]  = $event['pee_count'];
         $data_poo_count[] = $event['poo_count'];
         $data_fed_count[] = $event['fed_count'];
-        $data_fed_duration[] = $event['fed_duration']*1000 + $now_unix; //Duration + UNIX_TIMESTAMP of today
+        $data_fed_duration[] = $event['fed_duration']; //Duration in seconds
     }
     catch (Exception $ex) {
         echo "<h1><center>Failed to create table</center></h1>";
@@ -145,13 +145,16 @@ $chart_config = "{
                 position: 'right',
                 display: true,
                 type: 'time', 
+                ticks: {
+                    min:". min($data_fed_duration) .",
+                    max:". max($data_fed_duration) ."
+                } 
                 time: {
-                    unit: 'minute',
+                    unit: 'second',
                     displayFormats: {
-                        minute: 'HH:mm:ss',
+                        second: 'HH:mm:ss',
                     },
                 },
-                beginAtZero: true,
                 grid: {
                     drawOnChartArea: false,
                 },
