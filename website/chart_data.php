@@ -43,13 +43,14 @@ foreach($sql_data as $event){
     //  fed_count INT,
     //	fed_time [GMT Date Format]
     
+    $now_unix = gmdate('U'); // get UNIX TIMESTAMP of Current date
+
     try {
         $x_labels[] = ($event['day']*1000); //Keep UNIX_TIMESTAMP in milliseconds
         $data_pee_count[]  = $event['pee_count'];
         $data_poo_count[] = $event['poo_count'];
         $data_fed_count[] = $event['fed_count'];
-        //$data_fed_duration[] = gmdate("H:i:s", $event['fed_duration']); //Convert to GMT time
-        $data_fed_duration[] = $event['fed_duration']*1000; //Convert to GMT time in milliseconds
+        $data_fed_duration[] = $event['fed_duration']*1000 + $now_unix; //Duration + UNIX_TIMESTAMP of today
     }
     catch (Exception $ex) {
         echo "<h1><center>Failed to create table</center></h1>";
