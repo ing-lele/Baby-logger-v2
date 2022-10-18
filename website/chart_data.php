@@ -32,7 +32,7 @@ echo "<pre>";
 print_r($chart_data);
 echo "</pre>";
 */
-$now_unix = gmdate('U', date('dd mmm yyyy')); // get UNIX TIMESTAMP of Current date
+$now_unix = date_format(date_create('2022-02-22'), 'U'); // get baseline date and convert to UNIX TIMESTAMP
 
 // ---------------------
 // loop all the results from DB and save to individual array
