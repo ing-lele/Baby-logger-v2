@@ -43,31 +43,36 @@ $weeks = 2;
 ?>
 
 <center>
-	<form method='POST' action="<?php echo $_SERVER['PHP_SELF'];?>">
+	<form method='POST' action=<?php echo $_SERVER['PHP_SELF'];?>>
 		<?php echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date("d M Y", strtotime('-'.$weeks.' weeks')) .".</P>"; ?>
 
-		Show stats for past <select name='weeks'>
-		<option value='2'>2</option>
-		<option value='4'>4</option> 
-		<option value='9'>9</option>
-		<option value='13'>13</option>
-		<option value='26'>26</option>
-		<option value='52'>52</option>
+		Show stats for past <select name='weeks' id='weeks'>
+		<option value=2 <?php ($weeks==2) ? 'selected' : ''; ?>>2</option>
+		<option value=4 <?php ($weeks==4) ? 'selected' : ''; ?>>4</option> 
+		<option value=9 <?php ($weeks==9) ? 'selected' : ''; ?>>9</option>
+		<option value=13 <?php ($weeks==13) ? 'selected' : ''; ?>>13</option>
+		<option value=26 <?php ($weeks==26) ? 'selected' : ''; ?>>26</option>
+		<option value=52 <?php ($weeks==52) ? 'selected' : ''; ?>>52</option>
 		</select> weeks.
 		<input type='submit' value='Update'>
 	</form>
 </center>
 
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	// Get weeks
-	if(isset($_POST['weeks'])) {
-		// Get from FORM
-		$weeks = intval($_POST['weeks']);
-	}
-	else {
-		$weeks = 2;
-	}
+echo "<p align='center'>Weeks variable: $weeks </p>";
+echo "<p align='center'>Weeks POST data:" + intval($_POST['weeks']) + "</p>";
+
+// Read weeks from POST Form
+//if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if(!isset($_POST['weeks'])) {
+	// Default to 2 weeks
+	$weeks = 2;
+}
+else {
+	// Read from POST
+	$weeks = intval($_POST['weeks']);
+	// Display info 			
+	echo "<p align='center'>Weeks after reading POST: $weeks </p>";
 }
 
 // ---------------------
@@ -128,6 +133,9 @@ foreach($sql_data as $event){
 }
 echo "</table>";
 echo "<p align='center'>Event count: $event_count<br></p>";
+
+echo "<p align='center'>Weeks variable $weeks </p>";
+echo "<p align='center'>Weeks POST data" + intval($_POST['weeks']) + "</p>";
 
 ?>
 </body>
