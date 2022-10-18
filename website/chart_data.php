@@ -129,7 +129,7 @@ $chart_config = "{
                 type: 'time',
                 time: {
                     displayFormats: {
-                        day: 'DD MMM YYYY'
+                        day: 'd MMM'
                     }
                 },
             },
