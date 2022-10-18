@@ -150,7 +150,7 @@ $chart_config = "{
                 beginAtZero: false,
                 ticks: {
                     callback: value => {
-                        return new Date(epoch*1000).toISOString().match('T(.*).000Z')[1];
+                        return new Date(value*1000).toISOString().match('T(.*).000Z')[1];
                     }
                 },
                 grid: {
