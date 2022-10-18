@@ -143,7 +143,7 @@ $chart_config = "{
             y_duration: {
                 position: 'right',
                 display: true,
-                min:". min($data_fed_duration) .",
+                min:". min($now_unix) .",
                 max:". max($data_fed_duration) .",
                 type: 'linear',
                 beginAtZero: false,
