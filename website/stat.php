@@ -22,7 +22,6 @@ ini_set("html_errors", 1);
 include 'sql_data.php';
 
 // Read weeks from POST Form
-//if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if(!isset($_POST['weeks'])) {
 	// Default to 2 weeks
 	$weeks = 2;
@@ -129,7 +128,7 @@ foreach($sql_data as $event){
 echo "</table>\n";
 echo "<p align='center'>Event count: $event_count<br></p>\n";
 
-//echo "<p align='center'>Variable: $weeks --- is integer? ". is_int($weeks) ." POST value:". intval($_POST['weeks']) ."</p>";
+//echo "<p align='center'>Variable: $weeks --- is integer? ". is_int($weeks) ." POST value:". intval($_POST['weeks']) ."</p>\n";
 
 ?>
 </body>
