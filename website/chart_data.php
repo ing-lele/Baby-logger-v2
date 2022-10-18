@@ -32,7 +32,7 @@ echo "<pre>";
 print_r($chart_data);
 echo "</pre>";
 */
-$now_unix = date_format(date_create('2022-02-22'), 'U')*1000; // get baseline date and convert to UNIX TIMESTAMP *1000 milliseconds
+$now_unix = date_format(date_create('2022-02-22T00:00:00.000Z'), 'U')*1000; // get baseline date and convert to UNIX TIMESTAMP *1000 milliseconds
 
 // ---------------------
 // loop all the results from DB and save to individual array
