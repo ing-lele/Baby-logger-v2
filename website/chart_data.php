@@ -157,8 +157,8 @@ $chart_config = "{
                 },
             },
         },
-        plugin: {
-            tooltips: {
+        plugins: {
+            tooltip: {
                 callbacks: {
                     label: function(tooltipItem, data) {
                         return data.datasets[tooltipItem.datasetIndex].label + ': ' + new Date(tooltipItem.y_duration).toISOString().match('T(.*).000Z')[1];
