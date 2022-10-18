@@ -129,8 +129,8 @@ $chart_config = "{
                 type: 'time',
                 time: {
                     displayFormats: {
-                        day: 'd MMM'
-                    }
+                        day: 'd MMM yyyy',
+                    },
                 },
             },
             y_count: {
@@ -145,10 +145,9 @@ $chart_config = "{
                 type: 'time', 
                 time: {
                     displayFormats: {
-                        hour: 'HH:mm:ss'
-                    }
+                        hour: 'mm:ss',
+                    },
                 },
-                beginAtZero: true,
                 grid: {
                     drawOnChartArea: false,
                 },
