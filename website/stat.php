@@ -92,7 +92,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if(isset($_POST['weeks'])) {
 		// Get from FORM
 		$weeks = intval($_POST['weeks']);
-	}	
+	}
+	else {
+		$weeks = 2;
+	}
 }
 
 // ---------------------
