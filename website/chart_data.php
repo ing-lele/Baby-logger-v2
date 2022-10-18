@@ -32,6 +32,7 @@ echo "<pre>";
 print_r($chart_data);
 echo "</pre>";
 */
+$now_unix = gmdate('U', date('Y-m-d')); // get UNIX TIMESTAMP of Current date
 
 // ---------------------
 // loop all the results from DB and save to individual array
@@ -43,8 +44,6 @@ foreach($sql_data as $event){
     //  fed_count INT,
     //	fed_time [GMT Date Format]
     
-    $now_unix = gmdate('U'); // get UNIX TIMESTAMP of Current date
-
     try {
         $x_labels[] = ($event['day']*1000); //Keep UNIX_TIMESTAMP in milliseconds
         $data_pee_count[]  = $event['pee_count'];
