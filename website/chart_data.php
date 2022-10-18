@@ -129,7 +129,7 @@ $chart_config = "{
                 type: 'time',
                 time: {
                     displayFormats: {
-                        day: 'd MMM yyyy',
+                        day: 'd MMM',
                     },
                 },
             },
@@ -149,6 +149,7 @@ $chart_config = "{
                         minute: 'HH:mm:ss',
                     },
                 },
+                beginAtZero: true,
                 grid: {
                     drawOnChartArea: false,
                 },
