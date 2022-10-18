@@ -48,7 +48,7 @@ foreach($sql_data as $event){
         $data_pee_count[]  = $event['pee_count'];
         $data_poo_count[] = $event['poo_count'];
         $data_fed_count[] = $event['fed_count'];
-        $data_fed_duration[] = gmdate('U',$event['fed_duration']*1000); //Convert to GMT UNIX_TIMESTAMP in milliseconds
+        $data_fed_duration[] = gmdate('U',$event['fed_duration']); //Convert to GMT UNIX_TIMESTAMP
     }
     catch (Exception $ex) {
         echo "<h1><center>Failed to create table</center></h1>";
@@ -144,6 +144,7 @@ $chart_config = "{
                 display: true,
                 type: 'time', 
                 time: {
+                    unit: 'second',
                     displayFormats: {
                         second: 'HH:mm:ss',
                     },
