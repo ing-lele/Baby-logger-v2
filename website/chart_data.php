@@ -134,7 +134,7 @@ $chart_config = "{
                 },
                 adapters: { 
                     date: {
-                        locale: enUS, 
+                        locale: enUS
                     },
                 },
             },
