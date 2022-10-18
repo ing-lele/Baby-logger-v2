@@ -32,9 +32,8 @@ else {
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="baby_logger.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js">
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js">
         import 'chartjs-adapter-date-fns';
-        //import {format, fromUnixTime} from 'date-fns';-->
     </script>
 </head>
 
