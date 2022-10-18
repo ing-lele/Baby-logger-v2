@@ -10,6 +10,8 @@
  ini_set("html_errors", 1);
 */
 
+// default to 2 weeks
+$weeks = 2;
 
 ?>
 
