@@ -147,6 +147,11 @@ $chart_config = "{
                 max:". max($data_fed_duration) .",
                 type: 'linear',
                 beginAtZero: false,
+                time: {
+                    displayFormats: {
+                        second: 'HH:mm:ss'
+                    },
+                },
                 ticks: {
                     callback: value => {
                         return format(fromUnixTime(value), 'HH:mm:ss');
