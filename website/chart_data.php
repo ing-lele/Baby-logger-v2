@@ -32,7 +32,7 @@ echo "<pre>";
 print_r($chart_data);
 echo "</pre>";
 */
-$now_unix = gmdate('U', date('Y-m-d')); // get UNIX TIMESTAMP of Current date
+$now_unix = gmdate('U', date('dd mmm yyyy')); // get UNIX TIMESTAMP of Current date
 
 // ---------------------
 // loop all the results from DB and save to individual array
