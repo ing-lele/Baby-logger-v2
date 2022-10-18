@@ -32,7 +32,7 @@ else {
 	// Read from POST
 	$weeks = intval($_POST['weeks']);
 	// Display info 			
-	echo "<p align='center'>Weeks after reading POST: $weeks </p>";
+	echo "<p align='center'>Weeks after POST: $weeks , is integer? ". is_int($weeks) ."</p>";
 }
 
 ?>
