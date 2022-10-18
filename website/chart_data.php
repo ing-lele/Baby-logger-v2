@@ -154,8 +154,7 @@ $chart_config = "{
                 },
                 ticks: {
                     callback: value => {
-                        return format(fromUnixTime(value), 'HH:mm:ss');
-                        // return new Date(value).toISOString().match('T(.*).000Z')[1];
+                        return new Date(value).toISOString().match('T(.*).000Z')[1];
                     }
                 },
                 grid: {
@@ -167,7 +166,7 @@ $chart_config = "{
             tooltip: {
                 callbacks: {
                     label: function(tooltipItem, data) {
-                        return data.datasets[tooltipItem.datasetIndex].label + ': ' + format(fromUnixTime(value), 'HH:mm:ss');
+                        return data.datasets[tooltipItem.datasetIndex].label + ': ' + new Date(value).toISOString().match('T(.*).000Z')[1];
                     },
                 },
             },
