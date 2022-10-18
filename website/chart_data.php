@@ -145,7 +145,7 @@ $chart_config = "{
                 type: 'time', 
                 time: {
                     displayFormats: {
-                        hour: 'mm:ss',
+                        second: 'HH:mm:ss',
                     },
                 },
                 grid: {
