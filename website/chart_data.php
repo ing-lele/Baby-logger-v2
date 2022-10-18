@@ -41,10 +41,10 @@ foreach($sql_data as $event){
     //	pee_count INT,
     //	poo_count INT,
     //  fed_count INT,
-    //	fed_time TIME_TO_SEC]
+    //	fed_time [GMT Date Format]
     
     try {
-        $x_labels[] = date("d M Y", $event['day']);
+        $x_labels[] = $event['day']; //Keep UNIX_TIMESTAMP
         $data_pee_count[]  = $event['pee_count'];
         $data_poo_count[] = $event['poo_count'];
         $data_fed_count[] = $event['fed_count'];
@@ -123,23 +123,20 @@ $chart_config = "{
         // bezierCurveTension: 0,
         // stacked: false,
         responsive: true,
-        interaction: {
-            mode: 'index',
-            intersect: false,
-        },
-        plugins: {
-            title: {
-                display: true,
-                text: (ctx) => {
-                    const {axis = 'xy', intersect, mode} = ctx.chart.options.interaction;
-                    return 'Mode: ' + mode + ', axis: ' + axis + ', intersect: ' + intersect;
-                },
-            }
-        },
         scales: {
             x: {
                 display: true,
                 type: 'time',
+                time: {
+                    displayformat: {
+                        day: 'DD MMM YYYY'
+                    }
+                },
+                adapters: { 
+                    date: {
+                        locale: enUS, 
+                    },
+                },
             },
             y_count: {
                 position: 'left',
@@ -150,7 +147,12 @@ $chart_config = "{
             y_duration: {
                 position: 'right',
                 display: true,
-                type: 'time',                    
+                type: 'time', 
+                time: {
+                    displayformat: {
+                        day: 'DD MMM YYYY'
+                    }
+                },                   
                 beginAtZero: true,
                 grid: {
                     drawOnChartArea: false,
