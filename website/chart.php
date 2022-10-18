@@ -35,8 +35,6 @@ else {
     <script src="https://cdn.jsdelivr.net/npm/date-fns/index.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js">
         import 'chartjs-adapter-date-fns';
-        // import date-fns locale:
-        import {en-US} from 'date-fns/locale';
         import {format, fromUnixTime} from 'date-fns';
     </script>
 </head>
