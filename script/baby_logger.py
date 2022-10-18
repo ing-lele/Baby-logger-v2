@@ -52,17 +52,6 @@ pee_switch_pin = 17     #Green Switch
 fed_switch_pin = 27     #Blue Switch
 poo_switch_pin = 22     #Red Switch
 #            PIN#17     VCC +3.3V
-#----------------------------------------------------------
-
-#Setup DB
-if(debug_on): print("DEBUG - DB Connection settings:", mysql_variables.db_host, mysql_variables.db_user, mysql_variables.db_pass, mysql_variables.db_name)     # DEBUG - Print DB info
-
-try:
-    db = MySQLdb.connect(host=mysql_variables.db_host, user=mysql_variables.db_user, password=mysql_variables.db_pass, database=mysql_variables.db_name)
-    curs = db.cursor()
-except MySQLdb.Error as er:
-        print("ERROR - Error connecting to MariaDB Platform: {e}")
-        sys.exit(1)
 
 #----------------------------------------------------------
 #Setup GPIO
@@ -147,6 +136,15 @@ flash_led("starting","")
 def write_event(ts_start, ts_end, category):
     if(debug_on): print("DEBUG - Creating new entry in DB:", category.upper(), "- from", ts_start,"to", ts_end)      # DEBUG - Print DB info
 
+    # Connect to DB
+    try:
+        db = MySQLdb.connect(host=mysql_variables.db_host, user=mysql_variables.db_user, password=mysql_variables.db_pass, database=mysql_variables.db_name)
+        curs = db.cursor()
+    except MySQLdb.Error as er:
+            print("ERROR - Error connecting to MariaDB Platform: {e}")
+            sys.exit(1)
+
+    # Write entry to DB
     try:
         curs.execute("""INSERT INTO babylogger.switchdata (ts_start, ts_end, category) VALUES (%s,%s,%s)""", (ts_start, ts_end, category))
         db.commit()
@@ -156,6 +154,9 @@ def write_event(ts_start, ts_end, category):
         #Flash LED
         flash_led("Error writing DB")
         sys.exit(0)
+
+    # Close DB connection
+    db.close()
 
 #---------------------------------------------------------
 
@@ -243,8 +244,6 @@ try:
     #---------------------------------------------------------
 
 finally:
-    # Close DB connection
-    db.close()
 
     # Clean up GPIO configuration
     GPIO.cleanup()
