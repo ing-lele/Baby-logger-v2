@@ -48,7 +48,7 @@ foreach($sql_data as $event){
         $data_pee_count[]  = $event['pee_count'];
         $data_poo_count[] = $event['poo_count'];
         $data_fed_count[] = $event['fed_count'];
-        $data_fed_duration[] = gmdate("H:i:s", $event['fed_duration']);
+        $data_fed_duration[] = gmdate("H:i:s", $event['fed_duration'])*1000;
     }
     catch (Exception $ex) {
         echo "<h1><center>Failed to create table</center></h1>";
@@ -132,11 +132,6 @@ $chart_config = "{
                         day: 'DD MMM YYYY'
                     }
                 },
-                adapters: { 
-                    date: {
-                        locale: enUS
-                    },
-                },
             },
             y_count: {
                 position: 'left',
@@ -150,9 +145,9 @@ $chart_config = "{
                 type: 'time', 
                 time: {
                     displayformat: {
-                        day: 'DD MMM YYYY'
+                        second: 'HH:MM:SS'
                     }
-                },                   
+                },
                 beginAtZero: true,
                 grid: {
                     drawOnChartArea: false,
