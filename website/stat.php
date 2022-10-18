@@ -26,13 +26,12 @@ include 'sql_data.php';
 if(!isset($_POST['weeks'])) {
 	// Default to 2 weeks
 	$weeks = 2;
-	echo "<p align='center'>Set default weeks: $weeks </p>";
+	//echo "<p align='center'>Set default weeks: $weeks </p>\n";
 }
 else {
 	// Read from POST
 	$weeks = intval($_POST['weeks']);
-	// Display info 			
-	echo "<p align='center'>Weeks after POST: $weeks , is integer? ". is_int($weeks) ."</p>";
+	//echo "<p align='center'>Weeks after POST: $weeks , is integer? ". is_int($weeks) ."</p>\n";
 }
 
 ?>
@@ -88,23 +87,23 @@ echo ("</pre>");
 */
 
 // Table header
-echo "<br>";
+echo "<br>\n";
 
-echo "<table border='1' cellpadding='1' cellspacing='1' align='center'>";
-echo "<tr>";
-echo "<th>Day</th>";
-echo "<th class='pee'>&#128166; Count</th>";
-echo "<th class='poo'>&#128169; Count</th>";
-echo "<th class='fed'>&#x1f37c; Count</th>";
-echo "<th class='fed'>&#x1f37c; Duration</th>";
-echo "<tr>";
+echo "<table border='1' cellpadding='1' cellspacing='1' align='center'>\n";
+echo "<tr>\n";
+echo "<th>Day</th>\n";
+echo "<th class='pee'>&#128166; Count</th>\n";
+echo "<th class='poo'>&#128169; Count</th>\n";
+echo "<th class='fed'>&#x1f37c; Count</th>\n";
+echo "<th class='fed'>&#x1f37c; Duration</th>\n";
+echo "<tr>\n";
 
 // read JSON data
 $event_count = 0;
 // loop all the results from DB and create table
 foreach($sql_data as $event){
 	$event_count++;
-	echo "<tr>";
+	echo "<tr>\n";
 
 	// data_structure[
 	//	day UNIX_TIMESTAMP(DATE),
@@ -114,23 +113,23 @@ foreach($sql_data as $event){
 	//	fed_time TIME]
 
 	try {
-		echo "<td>". date("d M Y", $event['day']) ."</td>";		
-		echo "<td class='pee'>". $event['pee_count'] ."</td>";
-		echo "<td class='poo'>". $event['poo_count'] ."</td>";
-		echo "<td class='fed'>". $event['fed_count'] ."</td>";
-		echo "<td class='fed'>". gmdate("H:i:s", $event['fed_duration']) ."</td>";
+		echo "<td>". date("d M Y", $event['day']) ."</td>\n";		
+		echo "<td class='pee'>". $event['pee_count'] ."</td>\n";
+		echo "<td class='poo'>". $event['poo_count'] ."</td>\n";
+		echo "<td class='fed'>". $event['fed_count'] ."</td>\n";
+		echo "<td class='fed'>". gmdate("H:i:s", $event['fed_duration']) ."</td>\n";
 	}
 	catch (Exception $ex) {
-		echo "<td><center>Failed to create table</center></td>";
-		echo "<td><center>$ex</center></td>";
+		echo "<td><center>Failed to create table</center></td>\n";
+		echo "<td><center>$ex</center></td>\n";
 	}
 	
-	echo "</tr>";
+	echo "</tr>\n";
 }
-echo "</table>";
-echo "<p align='center'>Event count: $event_count<br></p>";
+echo "</table>\n";
+echo "<p align='center'>Event count: $event_count<br></p>\n";
 
-echo "<p align='center'>Variable: $weeks --- is integer? ". is_int($weeks) ." POST value:". intval($_POST['weeks']) ."</p>";
+//echo "<p align='center'>Variable: $weeks --- is integer? ". is_int($weeks) ." POST value:". intval($_POST['weeks']) ."</p>";
 
 ?>
 </body>
