@@ -141,8 +141,8 @@ def write_event(ts_start, ts_end, category):
         db = MySQLdb.connect(host=mysql_variables.db_host, user=mysql_variables.db_user, password=mysql_variables.db_pass, database=mysql_variables.db_name)
         curs = db.cursor()
     except MySQLdb.Error as er:
-            print("ERROR - Error connecting to MariaDB Platform: {e}")
-            sys.exit(1)
+        print("ERROR - Error connecting to MariaDB Platform: {e}")
+        sys.exit(1)
 
     # Write entry to DB
     try:
@@ -154,9 +154,9 @@ def write_event(ts_start, ts_end, category):
         #Flash LED
         flash_led("Error writing DB")
         sys.exit(0)
-
-    # Close DB connection
-    db.close()
+    finally:
+        # Close DB connection
+        db.close()
 
 #---------------------------------------------------------
 
@@ -177,7 +177,7 @@ try:
         now = datetime.datetime.now() #.strftime("%Y-%m-%d %H:%M:%S")
         
         #---------------------------------------------------------
-        #PEE - Start
+        #PEE - START
         if (GPIO.input(pee_switch_pin) == GPIO.LOW and (start_state_pee == 0)):
             if(debug_on): print("DEBUG - PEE start at", now)
             start_state_pee = 1         # Update Start State
@@ -185,7 +185,7 @@ try:
             flash_led("pee","start")    # Turn LED On
             
         #---------------------------------------------------------
-        #PEE - Stop
+        #PEE - STOP
         elif (GPIO.input(pee_switch_pin) == GPIO.HIGH and (start_state_pee == 1)):
             print("LOG - Event logged: PEE - from", ts_start_pee," to ", now)
             start_state_pee = 0                     # Start flag - OFF
@@ -203,7 +203,7 @@ try:
         #---------------------------------------------------------
         #FED - STOP
         if (GPIO.input(fed_switch_pin) == GPIO.HIGH and (start_state_fed == 1)):
-            print("LOG - Event logged: FED - from", ts_start_pee," to ", now)
+            print("LOG - Event logged: FED - from", ts_start_fed," to ", now)
             start_state_fed = 0                     # Update Start State
             write_event(ts_start_fed, now, "fed")   # Write DB
             flash_led("fed","stop")                 # Turn LED Off
@@ -219,7 +219,7 @@ try:
         #---------------------------------------------------------
         #POO - STOP
         if (GPIO.input(poo_switch_pin) == GPIO.HIGH and (start_state_poo == 1)):
-            print("LOG - Event logged: POO - from", ts_start_pee," to ", now)
+            print("LOG - Event logged: POO - from", ts_start_poo," to ", now)
             start_state_poo = 0                     # Update Start State
             write_event(ts_start_poo, now, "poo")   # Write DB
             flash_led("poo","stop")                 # Turn LED Off
