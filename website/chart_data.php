@@ -128,7 +128,7 @@ $chart_config = "{
                 display: true,
                 type: 'time',
                 time: {
-                    displayformat: {
+                    displayFormats: {
                         day: 'DD MMM YYYY'
                     }
                 },
@@ -144,8 +144,8 @@ $chart_config = "{
                 display: true,
                 type: 'time', 
                 time: {
-                    displayformat: {
-                        second: 'HH:MM:SS'
+                    displayFormats: {
+                        hour: 'HH:mm:ss'
                     }
                 },
                 beginAtZero: true,
