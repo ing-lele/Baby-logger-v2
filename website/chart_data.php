@@ -144,9 +144,9 @@ $chart_config = "{
                 display: true,
                 type: 'time', 
                 time: {
-                    unit: 'second',
+                    unit: 'minute',
                     displayFormats: {
-                        second: 'HH:mm:ss',
+                        minute: 'HH:mm:ss',
                     },
                 },
                 grid: {
