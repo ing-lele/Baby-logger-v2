@@ -25,30 +25,7 @@ $weeks = 2;
 <head>
     <title>Baby &#x1F476; Charts</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <style>
-    body{
-        background-color: #fff3f5; /* pink background */
-    }
-    table{
-        background-color: white;
-        border: 1px solid black;
-        border-spacing: 0px 0px;
-    }
-    th, td{
-        font-family: arial;
-    }
-    td{
-        text-align: center;
-        font-size: 32px;
-        padding: 2px;
-    }
-    .wrapper{
-        width: 500px;
-        text-align: center;
-        display: inline-block;
-    }
-    </style>
-
+    <link rel="stylesheet" href="baby_logger.css">
 </head>
 
 <body>
