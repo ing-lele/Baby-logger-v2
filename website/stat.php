@@ -21,9 +21,6 @@ ini_set("html_errors", 1);
 // Include sql data function
 include 'sql_data.php';
 
-// default to 2 weeks
-$weeks = 2;
-
 ?>
 
 <!DOCTYPE html>
@@ -59,9 +56,6 @@ $weeks = 2;
 </center>
 
 <?php
-echo "<p align='center'>Weeks variable: $weeks </p>";
-echo "<p align='center'>Weeks POST data:" + intval($_POST['weeks']) + "</p>";
-
 // Read weeks from POST Form
 //if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if(!isset($_POST['weeks'])) {
@@ -74,6 +68,9 @@ else {
 	// Display info 			
 	echo "<p align='center'>Weeks after reading POST: $weeks </p>";
 }
+
+echo "<p align='center'>Weeks variable: $weeks </p>";
+echo "<p align='center'>Weeks POST data:" + intval($_POST['weeks']) + "</p>";
 
 // ---------------------
 // Daily entry with:
@@ -133,9 +130,6 @@ foreach($sql_data as $event){
 }
 echo "</table>";
 echo "<p align='center'>Event count: $event_count<br></p>";
-
-echo "<p align='center'>Weeks variable $weeks </p>";
-echo "<p align='center'>Weeks POST data" + intval($_POST['weeks']) + "</p>";
 
 ?>
 </body>
