@@ -14,12 +14,12 @@
 if(!isset($_POST['weeks'])) {
     // Default to 2 weeks
     $weeks = 2;
-    echo "<p align='center'>Set default weeks: $weeks </p>\n";
+    //echo "<p align='center'>Set default weeks: $weeks </p>\n";
 }
 else {
     // Read from POST
     $weeks = intval($_POST['weeks']);
-    echo "<p align='center'>Weeks after POST: $weeks , is integer? ". is_int($weeks) ."</p>\n";
+    //echo "<p align='center'>Weeks after POST: $weeks , is integer? ". is_int($weeks) ."</p>\n";
 }
 
 ?>
