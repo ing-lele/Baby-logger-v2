@@ -161,7 +161,7 @@ $chart_config = "{
             tooltip: {
                 callbacks: {
                     label: function(tooltipItem, data) {
-                        return data.datasets[tooltipItem.datasetIndex].label + ': ' + new Date(data).toISOString().match('T(.*).000Z')[1];
+                        return data.datasets[tooltipItem.datasetIndex].label + ': ' + new Date(data.datasets[tooltipItem.datasetIndex].raw).toISOString().match('T(.*).000Z')[1];
                     },
                 },
             },
