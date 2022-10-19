@@ -53,10 +53,10 @@ foreach($sql_data as $event){
     }
 }
 
-
 /* print Chart data */
-echo json_encode($x_labels, JSON_PRETTY_PRINT);
-echo json_encode($data_start_end, JSON_PRETTY_PRINT);
+//echo json_encode($x_labels, JSON_PRETTY_PRINT);
+//echo json_encode($data_start_end, JSON_PRETTY_PRINT);
+
 
 /* --------------------------
 // --- Chart config - start
