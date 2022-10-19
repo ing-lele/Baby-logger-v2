@@ -35,7 +35,7 @@
 
                 // set first column settings
                 var firstColumn = dataGrid.column(1);
-                firstColumn.setColumnFormat().hAlign('left');
+                firstColumn.cellTextSettings().hAlign('left');
                 firstColumn.title('Duration')
                     .width(150)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
