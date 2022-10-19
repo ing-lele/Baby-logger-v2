@@ -7,7 +7,7 @@
     "collapsed": false,
     "periods": [{
         "id": "1_1",
-        "stroke": "none",
+        "stroke": "black",
         "fill": "white",
         "start": 1201795200000,
         "end": 1201934640000
@@ -160,7 +160,7 @@
         "connectTo": "1_3free",
         "connector": {
             "stroke": {
-                "color": "white",
+                "color": "black",
                 "dash": "2 2"
             },
             "fill": "white"
@@ -174,7 +174,7 @@
         "connectTo": "1_5free",
         "connector": {
             "stroke": {
-                "color": "white",
+                "color": "black",
                 "dash": "2 2"
             },
             "fill": "white"
@@ -188,7 +188,7 @@
         "connectTo": "1_7free",
         "connector": {
             "stroke": {
-                "color": "white",
+                "color": "black",
                 "dash": "2 2"
             },
             "fill": "white"
@@ -202,7 +202,7 @@
         "connectTo": "1_9free",
         "connector": {
             "stroke": {
-                "color": "white",
+                "color": "black",
                 "dash": "2 2"
             },
             "fill": "white"
