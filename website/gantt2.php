@@ -2,15 +2,9 @@
 <html lang="en">
 
 <head>
-    <style>
-        html, body, #container {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            }
-    </style>
-
+    <title>Baby &#x1F476; Gantt</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="baby_logger.css">
     <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-ui.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-exports.min.js"></script>
@@ -106,7 +100,7 @@
 </head>
 
 <body>
-    <div id="container"></div>
+    <div id="wrapper"></div>
 </body>
 
 </html>
