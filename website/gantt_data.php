@@ -77,7 +77,7 @@ foreach($sql_data as $event){
 // }
 // -------------------------- */
 $chart_config = "{
-    type: 'scatter',
+    type: 'bar',
     data: {
         labels:". json_encode($x_labels, JSON_PRETTY_PRINT) .",
         datasets: [
@@ -85,7 +85,6 @@ $chart_config = "{
             {
                 type: 'bar',
                 label: 'Milk Duration',
-                yAxisID: 'y_duration',
                 backgroundColor: '#add8e6',
                 borderColor: '##3a9fbf',
                 data:". json_encode($data_start_end, JSON_PRETTY_PRINT) ."
@@ -110,11 +109,6 @@ $chart_config = "{
                         hour: 'HH:mm',
                     },
                 },
-                //ticks: {
-                //    callback: value => {
-                //        return new Date(value).toISOString().match('T(.*).000Z')[1];
-                //    },
-                //},
             },
             y: {
                 position: 'left',
@@ -123,6 +117,11 @@ $chart_config = "{
                 beginAtZero: false,
                 grid: {
                     drawOnChartArea: false,
+                },
+                ticks: {
+                    callback: value => {
+                        return new Date(value).toISOString().match('T(.*).000Z')[1];
+                    },
                 },
             },
         },
