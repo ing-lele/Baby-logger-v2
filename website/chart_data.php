@@ -168,7 +168,7 @@ $chart_config = "{
                         if (context.parsed.y > 160000000) {
                             // Convert UNIX to hh:mm:ss
                             label += new Date(context.parsed.y).toISOString().match('T(.*).000Z')[1];
-                        else {
+                        } else {
                             // Return count
                             label += context.parsed.y;
                         }
