@@ -15,7 +15,7 @@
         anychart.onDocumentReady(function () {
             // The data used in this sample can be obtained from the CDN
             // https://cdn.anychart.com/samples-data/gantt-charts/server-status-list/data.json
-            anychart.data.loadJsonFile('https://cdn.anychart.com/samples-data/gantt-charts/server-status-list/data.json', function (data) {
+            anychart.data.loadJsonFile('gantt_data.json', function (data) {
                 // create data tree on our data
                 var treeData = anychart.data.tree(data, 'as-table');
 
@@ -36,8 +36,8 @@
                 // set first column settings
                 var firstColumn = dataGrid.column(1);
                 firstColumn.cellTextSettings().hAlign('left');
-                firstColumn.title('Server')
-                    .width(140)
+                firstColumn.title('Duration')
+                    .width(200)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
                     .format(function (item) {
                         return item.get('name');

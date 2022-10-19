@@ -1,0 +1,218 @@
+[{
+    "id": "1",
+    "name": "Milk Duration",
+    "milk": "20%",
+    "free": "69%",
+    "rowHeight": 22,
+    "collapsed": false,
+    "periods": [{
+        "id": "1_1",
+        "stroke": "none",
+        "fill": "white",
+        "start": 1201795200000,
+        "end": 1201934640000
+    }, {
+        "id": "1_2",
+        "stroke": "none",
+        "fill": "blue",
+        "start": 1201934640000,
+        "end": 1201997160000
+    }, {
+        "id": "1_3",
+        "stroke": "none",
+        "fill": "white",
+        "start": 1201997160000,
+        "end": 1202304480000
+    }, {
+        "id": "1_4",
+        "stroke": "none",
+        "fill": "blue",
+        "start": 1202304480000,
+        "end": 1202345220000
+    }, {
+        "id": "1_5",
+        "stroke": "none",
+        "fill": "white",
+        "start": 1202345220000,
+        "end": 1202480280000
+    }, {
+        "id": "1_6",
+        "stroke": "none",
+        "fill": "blue",
+        "start": 1202480280000,
+        "end": 1202560560000
+    }, {
+        "id": "1_7",
+        "stroke": "none",
+        "fill": "white",
+        "start": 1202560560000,
+        "end": 1202630280000
+    }, {
+        "id": "1_8",
+        "stroke": "none",
+        "fill": "red",
+        "start": 1202630280000,
+        "end": 1202700360000
+    }, {
+        "id": "1_9",
+        "stroke": "none",
+        "fill": "white",
+        "start": 1202700360000,
+        "end": 1202757600000
+    }, {
+        "id": "1_10",
+        "stroke": "none",
+        "fill": "blue",
+        "start": 1202757600000,
+        "end": 1203021360000
+    }]
+}, {
+    "id": "1free",
+    "name": "Free",
+    "free": "69%",
+    "parent": "1",
+    "type": "free",
+    "rowHeight": 30,
+    "periods": [{
+        "id": "1_1free",
+        "stroke": "none",
+        "fill": "white .4",
+        "start": 1201795200000,
+        "end": 1201934640000,
+        "connectTo": "1_2milk",
+        "connector": {
+            "stroke": {
+                "color": "blue",
+                "dash": "2 2"
+            },
+            "fill": "blue"
+        }
+    }, {
+        "id": "1_3free",
+        "stroke": "none",
+        "fill": "white .4",
+        "start": 1201997160000,
+        "end": 1202304480000,
+        "connectTo": "1_4milk",
+        "connector": {
+            "stroke": {
+                "color": "blue",
+                "dash": "2 2"
+            },
+            "fill": "blue"
+        }
+    }, {
+        "id": "1_5free",
+        "stroke": "none",
+        "fill": "white .4",
+        "start": 1202345220000,
+        "end": 1202480280000,
+        "connectTo": "1_6milk",
+        "connector": {
+            "stroke": {
+                "color": "blue",
+                "dash": "2 2"
+            },
+            "fill": "blue"
+        }
+    }, {
+        "id": "1_7free",
+        "stroke": "none",
+        "fill": "white .4",
+        "start": 1202560560000,
+        "end": 1202630280000,
+        "connectTo": "1_8milk",
+        "connector": {
+            "stroke": {
+                "color": "red",
+                "dash": "2 2"
+            },
+            "fill": "red"
+        }
+    }, {
+        "id": "1_9free",
+        "stroke": "none",
+        "fill": "white .4",
+        "start": 1202700360000,
+        "end": 1202757600000,
+        "connectTo": "1_10milk",
+        "connector": {
+            "stroke": {
+                "color": "blue",
+                "dash": "2 2"
+            },
+            "fill": "blue"
+        }
+    }]
+}, {
+    "id": "1milk",
+    "name": "milk",
+    "milk": "20%",
+    "parent": "1",
+    "type": "milk",
+    "rowHeight": 30,
+    "periods": [{
+        "id": "1_2milk",
+        "stroke": "none",
+        "fill": "blue .4",
+        "start": 1201934640000,
+        "end": 1201997160000,
+        "connectTo": "1_3free",
+        "connector": {
+            "stroke": {
+                "color": "white",
+                "dash": "2 2"
+            },
+            "fill": "white"
+        }
+    }, {
+        "id": "1_4milk",
+        "stroke": "none",
+        "fill": "blue .4",
+        "start": 1202304480000,
+        "end": 1202345220000,
+        "connectTo": "1_5free",
+        "connector": {
+            "stroke": {
+                "color": "white",
+                "dash": "2 2"
+            },
+            "fill": "white"
+        }
+    }, {
+        "id": "1_6milk",
+        "stroke": "none",
+        "fill": "blue .4",
+        "start": 1202480280000,
+        "end": 1202560560000,
+        "connectTo": "1_7free",
+        "connector": {
+            "stroke": {
+                "color": "white",
+                "dash": "2 2"
+            },
+            "fill": "white"
+        }
+    }, {
+        "id": "1_8milk",
+        "stroke": "none",
+        "fill": "blue .4",
+        "start": 1202630280000,
+        "end": 1202700360000,
+        "connectTo": "1_9free",
+        "connector": {
+            "stroke": {
+                "color": "white",
+                "dash": "2 2"
+            },
+            "fill": "white"
+        }
+    }, {
+        "id": "1_10milk",
+        "stroke": "none",
+        "fill": "blue .4",
+        "start": 1202757600000,
+        "end": 1203058980000
+        }
+    }]
+}]
