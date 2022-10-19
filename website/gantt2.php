@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="width: 90%; height: 90%;">
+<html lang="en" style="width: 100%; height: 100%;">
 
 <head>
     <title>Baby &#x1F476; Gantt</title>
@@ -99,7 +99,7 @@
     </script>
 </head>
 
-<body style="width: 90%; height: 90%;">
+<body style="width: 90%; height: 90%; text-align: center;">
     <div id="BabyStatChart"></div>
 </body>
 
