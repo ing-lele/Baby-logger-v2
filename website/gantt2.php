@@ -74,7 +74,7 @@
                     });
 
                 // set container id for the chart
-                chart.container('wrapper');
+                chart.container('BabyStatChart');
 
                 chart.draw();
 
@@ -100,7 +100,7 @@
 </head>
 
 <body>
-    <div id="wrapper"></div>
+    <div id="BabyStatChart"></div>
 </body>
 
 </html>
