@@ -66,7 +66,7 @@ Creating canvas -->
 <script>
 
 // Get Data
-chart_config = <?php require 'chart_data.php' ?>;
+chart_config = <?php require 'gantt_data.php' ?>;
 
 // Get context
 ctx = document.getElementById("BabyStatChart").getContext("2d");
