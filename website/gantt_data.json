@@ -19,7 +19,7 @@
         "end": 1201997160000
     }, {
         "id": "1_3",
-        "stroke": "none",
+        "stroke": "black",
         "fill": "white",
         "start": 1201997160000,
         "end": 1202304480000
@@ -31,7 +31,7 @@
         "end": 1202345220000
     }, {
         "id": "1_5",
-        "stroke": "none",
+        "stroke": "black",
         "fill": "white",
         "start": 1202345220000,
         "end": 1202480280000
@@ -43,19 +43,19 @@
         "end": 1202560560000
     }, {
         "id": "1_7",
-        "stroke": "none",
+        "stroke": "black",
         "fill": "white",
         "start": 1202560560000,
         "end": 1202630280000
     }, {
         "id": "1_8",
         "stroke": "none",
-        "fill": "red",
+        "fill": "blue",
         "start": 1202630280000,
         "end": 1202700360000
     }, {
         "id": "1_9",
-        "stroke": "none",
+        "stroke": "black",
         "fill": "white",
         "start": 1202700360000,
         "end": 1202757600000
@@ -75,7 +75,7 @@
     "rowHeight": 30,
     "periods": [{
         "id": "1_1free",
-        "stroke": "none",
+        "stroke": "black",
         "fill": "white .4",
         "start": 1201795200000,
         "end": 1201934640000,
@@ -89,7 +89,7 @@
         }
     }, {
         "id": "1_3free",
-        "stroke": "none",
+        "stroke": "black",
         "fill": "white .4",
         "start": 1201997160000,
         "end": 1202304480000,
@@ -103,7 +103,7 @@
         }
     }, {
         "id": "1_5free",
-        "stroke": "none",
+        "stroke": "black",
         "fill": "white .4",
         "start": 1202345220000,
         "end": 1202480280000,
@@ -117,21 +117,21 @@
         }
     }, {
         "id": "1_7free",
-        "stroke": "none",
+        "stroke": "black",
         "fill": "white .4",
         "start": 1202560560000,
         "end": 1202630280000,
         "connectTo": "1_8milk",
         "connector": {
             "stroke": {
-                "color": "red",
+                "color": "blue",
                 "dash": "2 2"
             },
-            "fill": "red"
+            "fill": "blue"
         }
     }, {
         "id": "1_9free",
-        "stroke": "none",
+        "stroke": "black",
         "fill": "white .4",
         "start": 1202700360000,
         "end": 1202757600000,
