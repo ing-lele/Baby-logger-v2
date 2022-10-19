@@ -35,17 +35,19 @@
 
                 // set first column settings
                 var firstColumn = dataGrid.column(1);
-                firstColumn.cellTextSettings().hAlign('left');
+                //firstColumn.setColumnFormat().hAlign('right');
                 firstColumn.title('Duration')
                     .width(150)
-                    .cellTextSettingsOverrider(labelTextSettingsOverrider)
+                    .hAlign('left')
+                    //.cellTextSettingsOverrider(labelTextSettingsOverrider)
+                    .labelsOverrider()
                     .format(function (item) {
                         return item.get('name');
                     });
 
                 // set first column settings
                 var secondColumn = dataGrid.column(2);
-                secondColumn.cellTextSettings().hAlign('right');
+                //secondColumn.cellTextSettings().hAlign('right');
                 secondColumn.title('Free')
                     .width(60)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
@@ -55,7 +57,7 @@
 
                 // set first column settings
                 var thirdColumn = dataGrid.column(3);
-                thirdColumn.cellTextSettings().hAlign('right');
+                //thirdColumn.cellTextSettings().hAlign('right');
                 thirdColumn.title('Milk')
                     .width(60)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
