@@ -45,14 +45,18 @@ foreach($sql_data as $event){
 
     try {
         $x_labels[] = $event['ts_start']*1000;   // Keep UNIX_TIMESTAMP in milliseconds
-        $data_start[] = $event['ts_start']*1000;
-        $data_end[] = $event['ts_end']*1000;
+        $data_start_end[] = [$event['ts_start']*1000 , $data_end[] = $event['ts_end']*1000];
     }
     catch (Exception $ex) {
         echo "<h1><center>Failed to create table</center></h1>";
         echo "<p><center>$ex</center></p>";
     }
 }
+
+
+/* print Chart data */
+echo json_encode($x_labels, JSON_PRETTY_PRINT);
+echo json_encode($data_start_end, JSON_PRETTY_PRINT);
 
 /* --------------------------
 // --- Chart config - start
@@ -84,7 +88,7 @@ $chart_config = "{
                 yAxisID: 'y_duration',
                 backgroundColor: '#add8e6',
                 borderColor: '##3a9fbf',
-                data:". json_encode($data_fed_duration, JSON_PRETTY_PRINT) ."
+                data:". json_encode($data_start_end, JSON_PRETTY_PRINT) ."
             }
         ]
     },
@@ -98,20 +102,19 @@ $chart_config = "{
             x: {
                 display: true,
                 type: 'time',
-                min:". $start_unix .",
-                max:". $end_unix .",
+                //min:". $start_unix .",
+                //max:". $end_unix .",
                 time: {
                     unit: 'hour',
                     displayFormats: {
                         hour: 'HH:mm',
                     },
                 },
-                ticks: {
-                    callback: value => {
-                        return new Date(value).toISOString().match('T(.*).000Z')[1];
-                    },
-                },
-
+                //ticks: {
+                //    callback: value => {
+                //        return new Date(value).toISOString().match('T(.*).000Z')[1];
+                //    },
+                //},
             },
             y: {
                 position: 'left',
