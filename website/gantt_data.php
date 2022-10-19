@@ -45,7 +45,7 @@ foreach($sql_data as $event){
 
     try {
         $x_labels[] = $event['ts_start']*1000;   // Keep UNIX_TIMESTAMP in milliseconds
-        $data_start_end[] = [$event['ts_start']*1000 , $data_end[] = $event['ts_end']*1000];
+        $data_start_end[] = [$event['ts_start']*1000 , $event['ts_end']*1000];
     }
     catch (Exception $ex) {
         echo "<h1><center>Failed to create table</center></h1>";
