@@ -129,6 +129,7 @@ $chart_config = "{
                 display: true,
                 type: 'time',
                 time: {
+                    unit: 'day',
                     displayFormats: {
                         day: 'd MMM',
                     },
