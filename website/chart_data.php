@@ -160,8 +160,9 @@ $chart_config = "{
         plugins: {
             tooltip: {
                 callbacks: {
-                    label: function(tooltipItem, data) {
-                        return data.datasets[tooltipItem.datasetIndex].label + ': ' + new Date(data.datasets[tooltipItem.datasetIndex].raw).toISOString().match('T(.*).000Z')[1];
+                    label: function(context) {
+                        //return data.datasets[tooltipItem.datasetIndex].label + ': ' + new Date(data.datasets[tooltipItem.datasetIndex].raw).toISOString().match('T(.*).000Z')[1];
+                        return context.dataset.label + ': ' + new Date(context.parsed.y_duration).toISOString().match('T(.*).000Z')[1];
                     },
                 },
             },
