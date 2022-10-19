@@ -146,7 +146,7 @@
     }]
 }, {
     "id": "1milk",
-    "name": "milk",
+    "name": "Milk",
     "milk": "20%",
     "parent": "1",
     "type": "milk",

@@ -37,7 +37,7 @@
                 var firstColumn = dataGrid.column(1);
                 firstColumn.cellTextSettings().hAlign('left');
                 firstColumn.title('Duration')
-                    .width(200)
+                    .width(100)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
                     .format(function (item) {
                         return item.get('name');
@@ -46,31 +46,21 @@
                 // set first column settings
                 var secondColumn = dataGrid.column(2);
                 secondColumn.cellTextSettings().hAlign('right');
-                secondColumn.title('Online')
+                secondColumn.title('Free')
                     .width(60)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
                     .format(function (item) {
-                        return item.get('online') || '';
+                        return item.get('free') || '';
                     });
 
                 // set first column settings
                 var thirdColumn = dataGrid.column(3);
                 thirdColumn.cellTextSettings().hAlign('right');
-                thirdColumn.title('Maintenance')
+                thirdColumn.title('Milk')
                     .width(60)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
                     .format(function (item) {
-                        return item.get('maintenance') || '';
-                    });
-
-                // set first column settings
-                var fourthColumn = dataGrid.column(4);
-                fourthColumn.cellTextSettings().hAlign('right');
-                fourthColumn.title('Offline')
-                    .width(60)
-                    .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                    .format(function (item) {
-                        return item.get('offline') || '';
+                        return item.get('milk') || '';
                     });
 
                 // set container id for the chart
@@ -85,14 +75,11 @@
 
         function labelTextSettingsOverrider(label, item) {
             switch (item.get('type')) {
-                case 'online':
-                    label.fontColor('green').fontWeight('bold');
+                case 'free':
+                    label.fontColor('black').fontWeight('bold');
                     break;
-                case 'offline':
-                    label.fontColor('red').fontWeight('bold');
-                    break;
-                case 'maintenance':
-                    label.fontColor('orange').fontWeight('bold');
+                case 'milk':
+                    label.fontColor('blue').fontWeight('bold');
                     break;
             }
         }
