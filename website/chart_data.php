@@ -161,10 +161,7 @@ $chart_config = "{
             tooltip: {
                 callbacks: {
                     label: function(context) {
-                        //return data.datasets[tooltipItem.datasetIndex].label + ': ' + new Date(data.datasets[tooltipItem.datasetIndex].raw).toISOString().match('T(.*).000Z')[1];
-                        console.log(context.parsed.y_duration);
-                        console.log(context.parsed);
-                        return context.dataset.label + ': ' + new Date(context.parsed.y_duration).toISOString().match('T(.*).000Z')[1];
+                        return context.dataset.label + ': ' + new Date(context.parsed.y).toISOString().match('T(.*).000Z')[1];
                     },
                 },
             },
