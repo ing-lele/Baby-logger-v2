@@ -39,7 +39,6 @@
                 firstColumn.title('Duration')
                     .width(150)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                    .labelsOverrider()
                     .format(function (item) {
                         return item.get('name');
                     });
