@@ -5,11 +5,11 @@
     <title>Baby &#x1F476; Gantt</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="baby_logger.css">
-    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-exports.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-ui.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-gantt.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-data-adapter.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-ui.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-exports.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-gantt.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-data-adapter.min.js"></script>
     
     <script>
         anychart.onDocumentReady(function () {
@@ -35,11 +35,11 @@
 
                 // set first column settings
                 var firstColumn = dataGrid.column(1);
-                //firstColumn.setColumnFormat().hAlign('right');
+                firstColumn.setColumnFormat().hAlign('right');
                 firstColumn.title('Duration')
                     .width(150)
                     .hAlign('left')
-                    //.cellTextSettingsOverrider(labelTextSettingsOverrider)
+                    .cellTextSettingsOverrider(labelTextSettingsOverrider)
                     .labelsOverrider()
                     .format(function (item) {
                         return item.get('name');
@@ -47,7 +47,7 @@
 
                 // set first column settings
                 var secondColumn = dataGrid.column(2);
-                //secondColumn.cellTextSettings().hAlign('right');
+                secondColumn.cellTextSettings().hAlign('right');
                 secondColumn.title('Free')
                     .width(60)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
@@ -57,7 +57,7 @@
 
                 // set first column settings
                 var thirdColumn = dataGrid.column(3);
-                //thirdColumn.cellTextSettings().hAlign('right');
+                thirdColumn.cellTextSettings().hAlign('right');
                 thirdColumn.title('Milk')
                     .width(60)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
