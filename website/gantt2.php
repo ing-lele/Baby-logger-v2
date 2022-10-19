@@ -26,7 +26,7 @@
                 chart.data(treeData);
 
                 // set start splitter position settings
-                chart.splitterPosition(320);
+                chart.splitterPosition(270);
 
                 // get chart data grid link to set column settings
                 var dataGrid = chart.dataGrid();
@@ -37,7 +37,7 @@
                 var firstColumn = dataGrid.column(1);
                 firstColumn.cellTextSettings().hAlign('left');
                 firstColumn.title('Duration')
-                    .width(100)
+                    .width(150)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
                     .format(function (item) {
                         return item.get('name');
