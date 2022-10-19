@@ -64,10 +64,8 @@ else {
 https://www.chartjs.org/docs/latest/getting-started/
 
 Creating canvas -->
-<div style="text-align: center">
-    <div class="wrapper">
-        <canvas id='BabyStatChart'></canvas>
-    </div>
+<div class="wrapper">
+    <canvas id='BabyStatChart'></canvas>
 </div>
 
 <script>
