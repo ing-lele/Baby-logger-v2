@@ -76,12 +76,12 @@ foreach($sql_data as $event){
 //          scales { }
 // }
 // -------------------------- */
-$chart_config = "{
+$gantt_config = "{
     type: 'bar',
     data: {
         labels:". json_encode($x_labels, JSON_PRETTY_PRINT) .",
         datasets: [
-            // Chart -> Config -> Data -> Dataset #1 -> Milk duration
+            // Chart -> Config -> Data -> Dataset #1 -> [Milk start, Milk end]
             {
                 type: 'bar',
                 label: 'Milk Duration',
@@ -153,5 +153,5 @@ $chart_config = "{
 // --------------------------
 
 // Return chart_config
-echo($chart_config);
+echo($gantt_config);
 ?>
