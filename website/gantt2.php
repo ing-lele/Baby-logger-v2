@@ -74,7 +74,7 @@
                     });
 
                 // set container id for the chart
-                chart.container('container');
+                chart.container('wrapper');
 
                 chart.draw();
 
