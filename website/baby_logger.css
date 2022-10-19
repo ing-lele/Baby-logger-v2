@@ -25,6 +25,7 @@ td{
 }
 .wrapper{
     width: 90%;
+    height: 90%;
     text-align: center;
     display: inline-block;
 }
