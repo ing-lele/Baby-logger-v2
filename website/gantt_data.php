@@ -40,11 +40,12 @@ $end_unix = date_format(date_create('2022-02-23T00:00:00.000Z'), 'U')*1000;   //
 // loop all the results from DB and save to individual array
 foreach($sql_data as $event){
     // data_structure[
-    //	ts_start UNIX_TIMESTAMP(DATE),
-    //	ts_end UNIX_TIMESTAMP(DATE),
+    //  day UNIX_TIMESTAMP(DATE),
+    //	ts_start UNIX_TIMESTAMP(DATE+TIME),
+    //	ts_end UNIX_TIMESTAMP(DATE+TIME),
 
     try {
-        $x_days[] = $event['ts_start']*1000;   // Keep UNIX_TIMESTAMP in milliseconds
+        $x_days[] = $event['day']*1000;   // Keep UNIX_TIMESTAMP in milliseconds
         $data_start_end[] = [$event['ts_start']*1000 , $event['ts_end']*1000];
     }
     catch (Exception $ex) {
