@@ -44,7 +44,7 @@ foreach($sql_data as $event){
     //	ts_end UNIX_TIMESTAMP(DATE),
 
     try {
-        $x_labels[] = $event['ts_start']*1000;   // Keep UNIX_TIMESTAMP in milliseconds
+        $x_days[] = $event['ts_start']*1000;   // Keep UNIX_TIMESTAMP in milliseconds
         $data_start_end[] = [$event['ts_start']*1000 , $event['ts_end']*1000];
     }
     catch (Exception $ex) {
@@ -79,7 +79,7 @@ foreach($sql_data as $event){
 $gantt_config = "{
     type: 'bar',
     data: {
-        labels:". json_encode($x_labels, JSON_PRETTY_PRINT) .",
+        labels:". json_encode($x_days, JSON_PRETTY_PRINT) .",
         datasets: [
             // Chart -> Config -> Data -> Dataset #1 -> [Milk start, Milk end]
             {
@@ -101,12 +101,9 @@ $gantt_config = "{
             x: {
                 display: true,
                 type: 'time',
-                //min:". $start_unix .",
-                //max:". $end_unix .",
                 time: {
-                    unit: 'hour',
                     displayFormats: {
-                        hour: 'HH:mm',
+                        day: 'd MMM',
                     },
                 },
             },
