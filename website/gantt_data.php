@@ -93,7 +93,7 @@ $gantt_config = "{
     },
     options: {
         responsive: true,
-        indexAxis: 'y',
+        //indexAxis: 'y',
         legend: {
             display: false
           },
