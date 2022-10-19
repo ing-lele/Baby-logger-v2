@@ -27,11 +27,11 @@ $sql_json_data = get_raw_data($weeks,"ASC");
 // decode JSON to array
 $sql_data = json_decode($sql_json_data, true);
 
-/* print Chart data */
+/* print Chart data 
 echo "<pre>";
 print_r($sql_data);
 echo "</pre>";
-
+*/
 
 $start_unix = date_format(date_create('2022-02-22T00:00:00.000Z'), 'U')*1000; // 1645488000 *1000
 $end_unix = date_format(date_create('2022-02-23T00:00:00.000Z'), 'U')*1000;   // 1645574399 *1000
