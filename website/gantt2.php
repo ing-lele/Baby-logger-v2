@@ -5,12 +5,12 @@
     <title>Baby &#x1F476; Gantt</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="baby_logger.css">
-    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-ui.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-exports.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-gantt.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-data-adapter.min.js"></script>
-
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-exports.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-ui.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-gantt.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-data-adapter.min.js"></script>
+    
     <script>
         anychart.onDocumentReady(function () {
             // The data used in this sample can be obtained from the CDN
@@ -26,7 +26,7 @@
                 chart.data(treeData);
 
                 // set start splitter position settings
-                chart.splitterPosition(270);
+                chart.splitterPosition(280);
 
                 // get chart data grid link to set column settings
                 var dataGrid = chart.dataGrid();
