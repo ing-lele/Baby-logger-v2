@@ -32,8 +32,9 @@ function get_raw_data(int $weeks, string $sort) {
 
     // Return Start / End for FED entries
     $sql_query = "SELECT 
-        UNIX_TIMESTAMP(DATE(ts_start)) AS ts_start,
-        UNIX_TIMESTAMP(DATE(ts_end)) AS ts_end
+        UNIX_TIMESTAMP(DATE(ts_start)) AS day,
+        UNIX_TIMESTAMP(ts_start) AS ts_start,
+        UNIX_TIMESTAMP(ts_end) AS ts_end
         FROM switchdata
         WHERE category = 'fed' AND ts_start>= CURRENT_DATE() - INTERVAL ".($weeks)." WEEK 
         ORDER BY DATE(ts_start) ".($sort).";";
