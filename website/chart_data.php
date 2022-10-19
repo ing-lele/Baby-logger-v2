@@ -161,7 +161,18 @@ $chart_config = "{
             tooltip: {
                 callbacks: {
                     label: function(context) {
-                        return context.dataset.label + ': ' + new Date(context.parsed.y).toISOString().match('T(.*).000Z')[1];
+                        let label = context.dataset.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        if (context.parsed.y > 160000000) {
+                            // Convert UNIX to hh:mm:ss
+                            label += new Date(context.parsed.y).toISOString().match('T(.*).000Z')[1];
+                        else {
+                            // Return count
+                            label += context.parsed.y;
+                        }
+                        return label;
                     },
                 },
             },
