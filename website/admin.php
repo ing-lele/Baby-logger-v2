@@ -7,6 +7,11 @@
 </head>
 
 <body>
+<?php
+	// Include Navigation bar
+	include_once 'navigation.php';
+?>
+
 <table width="50%" border="0" cellpadding="30" align="center">
     <tr><td><hr size=1></td></tr>	
     <tr><td><a href='export_data.php'>Export DB data</a></td></tr>
