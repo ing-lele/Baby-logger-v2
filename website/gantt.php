@@ -9,8 +9,8 @@
     
     <script>
         anychart.onDocumentReady(function () {
-            //anychart.data.loadJsonFile('gantt_data.json', function (data) {
-            anychart.data.loadJsonFile(<?php require 'gantt_data.php' ?>;, function (data) {
+            anychart.data.loadJsonFile('gantt_data.json', function (data) {
+            //anychart.data.loadJsonFile('<?php require 'gantt_data.php' ?>', function (data) {
 
                 // create data tree on our data
                 var treeData = anychart.data.tree(data, 'as-table');
