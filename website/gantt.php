@@ -35,33 +35,30 @@
                 // Set labels for first column
                 // DEPRECATED: firstColumn.cellTextSettings().hAlign('left');
                 firstColumn.labels().hAlign('left');
-
-                firstColumn.title('Duration')
-                    .width(150)
-                    .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                    .format(function (item) {
-                        return item.get('name');
-                    });
+                firstColumn.title('Duration');
+                firstColumn.width(150);
+                //DEPRECATED: .cellTextSettingsOverrider(labelTextSettingsOverrider)
+                firstColumn.labelsOverrider(function (label, dataItem) {
+                    return dataItem.get('name');
+                });
 
                 // set first column settings
                 var secondColumn = dataGrid.column(2);
                 secondColumn.labels().hAlign('right');
-                secondColumn.title('Free')
-                    .width(60)
-                    .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                    .format(function (item) {
-                        return item.get('free') || '';
-                    });
+                secondColumn.title('Free');
+                secondColumn.width(60);
+                secondColumn.labelsOverrider(function (label, dataItem) {
+                    return dataItem.get('free') || '';
+                });
 
                 // set first column settings
                 var thirdColumn = dataGrid.column(3);
                 thirdColumn.labels().hAlign('right');
-                thirdColumn.title('Milk')
-                    .width(60)
-                    .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                    .format(function (item) {
-                        return item.get('milk') || '';
-                    });
+                thirdColumn.title('Milk');
+                thirdColumn.width(60);
+                thirdColumn.format(function (label, dataItem) {
+                    return dataItem.get('milk') || '';
+                });
 
                 // set container id for the chart
                 chart.container('BabyStatChart');
