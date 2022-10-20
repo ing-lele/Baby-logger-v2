@@ -5,11 +5,7 @@
     <title>Baby &#x1F476; Gantt</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="baby_logger.css">
-    <script src="https://cdn.anychart.com/releases/8.8.0/js/anychart-base.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.8.0/js/anychart-ui.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.8.0/js/anychart-exports.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.8.0/js/anychart-gantt.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.8.0/js/anychart-data-adapter.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.8.0/js/anychart-bundle.min.js"></script>
     
     <script>
         anychart.onDocumentReady(function () {
