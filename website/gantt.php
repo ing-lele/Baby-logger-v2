@@ -38,8 +38,8 @@
                 firstColumn.title('Duration');
                 firstColumn.width(150);
                 //DEPRECATED: .cellTextSettingsOverrider(labelTextSettingsOverrider)
-                firstColumn.labelsOverrider(function (label, dataItem) {
-                    return dataItem.get('name');
+                firstColumn.labelsOverrider(function (label, item) {
+                    return item.get('name');
                 });
 
                 // set first column settings
@@ -47,8 +47,8 @@
                 secondColumn.labels().hAlign('right');
                 secondColumn.title('Free');
                 secondColumn.width(60);
-                secondColumn.labelsOverrider(function (label, dataItem) {
-                    return dataItem.get('free') || '';
+                secondColumn.labelsOverrider(function (label, item) {
+                    return item.get('free') || '';
                 });
 
                 // set first column settings
@@ -56,8 +56,8 @@
                 thirdColumn.labels().hAlign('right');
                 thirdColumn.title('Milk');
                 thirdColumn.width(60);
-                thirdColumn.labelsOverrider(function (label, dataItem) {
-                    return dataItem.get('milk') || '';
+                thirdColumn.labelsOverrider(function (label, item) {
+                    return item.get('milk') || '';
                 });
 
                 // set container id for the chart
