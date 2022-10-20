@@ -5,7 +5,7 @@
     <title>Baby &#x1F476; Gantt</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="baby_logger.css">
-    <script src="https://cdn.anychart.com/releases/8.8.0/js/anychart-bundle.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-bundle.min.js"></script>
     
     <script>
         anychart.onDocumentReady(function () {
@@ -56,7 +56,7 @@
                 thirdColumn.labels().hAlign('right');
                 thirdColumn.title('Milk');
                 thirdColumn.width(60);
-                thirdColumn.format(function (label, dataItem) {
+                thirdColumn.labelsOverrider(function (label, dataItem) {
                     return dataItem.get('milk') || '';
                 });
 
