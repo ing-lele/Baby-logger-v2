@@ -33,11 +33,9 @@
                 var firstColumn = dataGrid.column(1);
                 
                 // Set labels for first column
-                // DEPRECATED: firstColumn.cellTextSettings().hAlign('left');
                 firstColumn.labels().hAlign('left');
                 firstColumn.title('Duration');
                 firstColumn.width(150);
-                //DEPRECATED: .cellTextSettingsOverrider(labelTextSettingsOverrider)
                 firstColumn.labelsOverrider(function (label, item) {
                     return item.get('name');
                 });
