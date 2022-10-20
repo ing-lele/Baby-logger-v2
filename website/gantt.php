@@ -31,7 +31,11 @@
 
                 // set first column settings
                 var firstColumn = dataGrid.column(1);
-                firstColumn.cellTextSettings().hAlign('left');
+                
+                // Set labels for first column
+                // DEPRECATED: firstColumn.cellTextSettings().hAlign('left');
+                firstColumn.labels().hAlign('left');
+
                 firstColumn.title('Duration')
                     .width(150)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
@@ -41,7 +45,7 @@
 
                 // set first column settings
                 var secondColumn = dataGrid.column(2);
-                secondColumn.cellTextSettings().hAlign('right');
+                secondColumn.labels().hAlign('right');
                 secondColumn.title('Free')
                     .width(60)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
@@ -51,7 +55,7 @@
 
                 // set first column settings
                 var thirdColumn = dataGrid.column(3);
-                thirdColumn.cellTextSettings().hAlign('right');
+                thirdColumn.labels().hAlign('right');
                 thirdColumn.title('Milk')
                     .width(60)
                     .cellTextSettingsOverrider(labelTextSettingsOverrider)
