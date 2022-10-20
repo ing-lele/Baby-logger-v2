@@ -64,7 +64,7 @@ else {
 https://www.chartjs.org/docs/latest/getting-started/
 
 Creating canvas -->
-<div class="wrapper">
+<div>
     <canvas id='BabyStatChart'></canvas>
 </div>
 

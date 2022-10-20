@@ -9,9 +9,9 @@
     
     <script>
         anychart.onDocumentReady(function () {
-            // The data used in this sample can be obtained from the CDN
-            // https://cdn.anychart.com/samples-data/gantt-charts/server-status-list/data.json
-            anychart.data.loadJsonFile('gantt_data.json', function (data) {
+            //anychart.data.loadJsonFile('gantt_data.json', function (data) {
+            anychart.data.loadJsonFile(<?php require 'gantt_data.php' ?>;, function (data) {
+
                 // create data tree on our data
                 var treeData = anychart.data.tree(data, 'as-table');
 
@@ -82,7 +82,34 @@
 </head>
 
 <body style="width: 90%; height: 90%; text-align: center;">
-    <div id="BabyStatChart"></div>
+
+<?php
+	// Include Navigation bar
+	include_once 'navigation.php';
+?>
+
+<center>
+    <form method='POST' action=<?php echo $_SERVER['PHP_SELF'];?>>
+        <?php echo "<P>Baby's stats for last <b>$weeks weeks</b> since ". date("d M Y", strtotime('-'.$weeks.' weeks')) .".</P>"; ?>
+
+		Show stats for past <select name='weeks' id='weeks'>
+		<option value=2 <?php ($weeks==2) ? print('selected') : ''; ?>>2</option>
+		<option value=4 <?php ($weeks==4) ? print('selected') : ''; ?>>4</option> 
+		<option value=9 <?php ($weeks==9) ? print('selected') : ''; ?>>9</option>
+		<option value=13 <?php ($weeks==13) ? print('selected') : ''; ?>>13</option>
+		<option value=26 <?php ($weeks==26) ? print('selected') : ''; ?>>26</option>
+		<option value=52 <?php ($weeks==52) ? print('selected') : ''; ?>>52</option>
+		</select> weeks.
+        <input type='submit' value='Update'>
+    </form>
+</center>
+
+<!-- AnyChart.js to create chart
+https://www.anychart.com/products/anygantt/overview/
+
+Creating canvas -->
+<div id="BabyStatChart"></div>
+
 </body>
 
 </html>
